@@ -56,15 +56,33 @@ public sealed class CalcularScoreRebanho
         }
         catch (OverflowException)
         {
-            return FalhaNumerica();
+            return FalhaNumerica<AnaliseCompletaDto>();
         }
         catch (DivideByZeroException)
         {
-            return FalhaNumerica();
+            return FalhaNumerica<AnaliseCompletaDto>();
         }
     }
 
-    private static Result<AnaliseCompletaDto> FalhaNumerica() =>
-        Result.Fail<AnaliseCompletaDto>(new Error("Os valores informados não permitem um cálculo válido. Revise a escala dos dados.")
+    internal Result<ConferenciaOcupacaoDto> Conferir(EntradaSimulacaoDto entrada)
+    {
+        var preparacao = PrepararSimulacao.Criar(entrada);
+        if (preparacao.IsFailed)
+            return Result.Fail<ConferenciaOcupacaoDto>(preparacao.Errors);
+        try
+        {
+            var lotacao = new ScoreRebanho.Domain.Pastagens.CalculadoraLotacao(premissas.Lotacao)
+                .Calcular(preparacao.Value.Lotacao);
+            return Result.Ok(new ConferenciaOcupacaoDto(premissas.Versao,
+                new(lotacao.UaLote, lotacao.MultiplicadorRotacao, lotacao.CapacidadeSemRotacaoUa,
+                    lotacao.CapacidadeUa, lotacao.OcupacaoDecimal, lotacao.QuantidadeMaximaAnimaisSemRotacao,
+                    lotacao.QuantidadeMaximaAnimais)));
+        }
+        catch (OverflowException) { return FalhaNumerica<ConferenciaOcupacaoDto>(); }
+        catch (DivideByZeroException) { return FalhaNumerica<ConferenciaOcupacaoDto>(); }
+    }
+
+    private static Result<T> FalhaNumerica<T>() =>
+        Result.Fail<T>(new Error("Os valores informados não permitem um cálculo válido. Revise a escala dos dados.")
             .WithMetadata("Codigo", "LIMITE_NUMERICO"));
 }
