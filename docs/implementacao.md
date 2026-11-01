@@ -80,3 +80,11 @@ Verificação: 78 testes de domínio aprovados, incluindo limites de aplicaçõe
 Implementados receita, lucro/prejuízo, margem sobre custo e preço de equilíbrio por kg vivo. A conversão para arroba reutiliza as premissas de produção. O cenário adverso reduz somente o preço em 10%, preservando peso e custo.
 
 Divisões sem denominador retornam indicador indisponível com explicação, sem inventar margem ou preço de equilíbrio. Valores negativos de entrada são recusados e prejuízo é preservado. Verificação: 88 testes de domínio aprovados. Próximo incremento: componentes e classificação do score.
+
+## Incremento 6 — componentes e classificação do score
+
+Implementados os quatro componentes com premissas centralizadas: lotação, sanidade, resultado financeiro e manejo/custos fixos. O total é limitado a 0–100, arredondado com empate para cima e somente então classificado nas faixas 80+, 60–79, 40–59 e 0–39. Componentes preservam precisão e justificativas; a coleção de saída não permite alterações.
+
+Verificação completa: build da solução em .local/verificacao sem avisos ou erros; 134 testes aprovados (116 Domain, 6 Application e 12 Web). Nenhuma alteração de fórmulas aprovadas ou de permissões.
+
+Ainda falta integrar as calculadoras no caso de uso de análise, gerar alertas/recomendações e registrar as premissas completas na resposta antes da persistência/histórico. Os valores derivados recebidos pelas calculadoras de domínio deverão ser produzidos pelo servidor; não são contratos HTTP. A camada Application ainda deverá traduzir entradas inválidas e estouro numérico em FluentResults. CRUD, telas de rebanhos e relatórios por perfil permanecem pendentes; a referência de interface docs/ideias-prototipo-v6.md continua ausente.
