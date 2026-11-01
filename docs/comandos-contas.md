@@ -47,4 +47,4 @@ Código de saída 0 indica sucesso (incluindo atribuição já existente e ajuda
 
 Build sem avisos ou erros e 266 testes MSTest aprovados: 129 Domain, 53 Application, 13 Infrastructure e 71 Web. Foram adicionados 16 cenários: interpretação estrita, perfis conhecidos, argumentos/e-mails inválidos, idempotência, independência de perfil/papel, históricos inalterados, perfil vigente com cookie existente, ausência/duplicidade de perfil e recusa de contas inexistentes. Três cenários executam o DLL real em processo separado e verificam códigos de saída e persistência no SQLite isolado. Os testes não alteram contas reais.
 
-A consulta administrativa global de scores foi implementada em [administracao-scores.md](administracao-scores.md). Preferência de tema, inspeção visual e referência docs/ideias-prototipo-v6.md continuam pendentes.
+A consulta administrativa global de scores foi implementada em [administracao-scores.md](administracao-scores.md). Preferência de tema implementada conforme [temas.md](temas.md). Inspeção visual e referência docs/ideias-prototipo-v6.md continuam pendentes.

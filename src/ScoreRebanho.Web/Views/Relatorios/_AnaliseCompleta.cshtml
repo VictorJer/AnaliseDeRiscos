@@ -1,8 +1,8 @@
 @model AnaliseCompletaViewModel
 @{ var analise = Model; }
 <section class="card border-success mb-4"><div class="card-body">
-    <p class="small text-secondary">@F.Data(analise.CalculadaEmUtc)</p>
-    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@analise.Score.Total<span class="fs-5 text-secondary">/100</span></p>
+    <p class="small text-body-secondary">@F.Data(analise.CalculadaEmUtc)</p>
+    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@analise.Score.Total<span class="fs-5 text-body-secondary">/100</span></p>
     <p class="h5">@F.Risco(analise.Score.Classificacao)</p><p class="mb-0">@analise.ExplicacaoResumida</p>
 </div></section>
 <partial name="~/Views/Relatorios/_Alertas.cshtml" model="analise.Alertas" />
@@ -14,7 +14,7 @@
         <tr><th scope="row">@componente.Nome</th><td>@F.Numero(componente.Pontos)</td><td>@componente.Justificativa</td></tr>
     }
     </tbody></table></div>
-    <p class="small text-secondary">O score total é inteiro. A exibição arredondada dos componentes pode diferir visualmente do total.</p>
+    <p class="small text-body-secondary">O score total é inteiro. A exibição arredondada dos componentes pode diferir visualmente do total.</p>
 </section>
 <section class="card my-4"><div class="card-body">
     <h2 class="h4">Capacidade e produção estimadas</h2>
@@ -42,7 +42,7 @@
         }
         </tbody><tfoot><tr><th>Total</th><td>@F.Moeda(analise.Custos.CustoTotalReais)</td><td>@F.Moeda(analise.Custos.CapitalInicialReais)</td></tr></tfoot>
     </table></div>
-    <p class="small text-secondary">Formação e rotação aparecem com investimento integral no capital e parcela econômica no custo da operação.</p>
+    <p class="small text-body-secondary">Formação e rotação aparecem com investimento integral no capital e parcela econômica no custo da operação.</p>
 </section>
 <section id="produtos-detalhados" class="my-4">
     <h2 class="h4">Produtos, doses e embalagens</h2>

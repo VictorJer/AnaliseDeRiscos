@@ -162,3 +162,7 @@ Implementados comandos explícitos para definir Pecuarista/Cooperativa e concede
 ## Incremento 17 — consulta administrativa global de scores
 
 Implementadas listagem global paginada em 20 e consulta completa de histórico, exclusivamente para Administrador. Autorização vigente no servidor nas camadas Web/Application; CRUD continua restrito ao autor. Relatórios reutilizam o corpo de apresentação da Cooperativa sem recalcular. Detalhes em [administracao-scores.md](administracao-scores.md). Build sem avisos/erros e 284 testes aprovados (129 Domain, 61 Application, 16 Infrastructure e 78 Web), sem alteração de dados reais. Permanecem tema, inspeção visual e referência do protótipo ausente.
+
+## Incremento 18 — preferência de tema
+
+Implementadas opções Sistema, Claro e Escuro com Bootstrap existente e preferência local ao navegador. Adaptadas cores, navegação e rodapé; sem mudanças de banco, cálculos ou autorização. Decisões e limites da verificação em [temas.md](temas.md). Sintaxe JavaScript válida, build sem avisos/erros e 284 testes existentes aprovados. Persistem a inspeção visual/dinâmica em navegador e a referência ausente do protótipo.

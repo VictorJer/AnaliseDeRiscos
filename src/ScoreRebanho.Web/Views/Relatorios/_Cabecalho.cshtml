@@ -1,6 +1,6 @@
 @model CabecalhoRelatorioViewModel
 <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 my-4">
-    <div><h1>@(Model.Historico ? "Análise histórica" : "Análise do rebanho")</h1><h2 class="h4">@Model.Nome</h2><p class="text-secondary mb-0">@Model.Propriedade</p></div>
+    <div><h1>@(Model.Historico ? "Análise histórica" : "Análise do rebanho")</h1><h2 class="h4">@Model.Nome</h2><p class="text-body-secondary mb-0">@Model.Propriedade</p></div>
     <div class="d-flex gap-2 flex-wrap">
         <a asp-controller="Rebanhos" asp-action="Index" class="btn btn-outline-secondary">Meus rebanhos</a>
         @if (Model.Id is { } id)

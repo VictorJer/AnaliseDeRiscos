@@ -2,8 +2,8 @@
 @{ ViewData["Title"] = "Resumo da análise"; var resumo = Model.Resumo; }
 <partial name="~/Views/Relatorios/_Cabecalho.cshtml" model="Model" />
 <section class="card border-success mb-4"><div class="card-body">
-    <p class="small text-secondary">@F.Data(resumo.CalculadaEmUtc) · Premissas @resumo.VersaoPremissas</p>
-    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@resumo.Score<span class="fs-5 text-secondary">/100</span></p>
+    <p class="small text-body-secondary">@F.Data(resumo.CalculadaEmUtc) · Premissas @resumo.VersaoPremissas</p>
+    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@resumo.Score<span class="fs-5 text-body-secondary">/100</span></p>
     <p class="h5">@F.Risco(resumo.Classificacao)</p><p class="mb-0">@resumo.ExplicacaoResumida</p>
 </div></section>
 <partial name="~/Views/Relatorios/_Alertas.cshtml" model="resumo.Alertas" />

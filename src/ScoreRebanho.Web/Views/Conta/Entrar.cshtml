@@ -1,4 +1,4 @@
-﻿@model ScoreRebanho.Web.ViewModels.Conta.EntrarViewModel
+@model ScoreRebanho.Web.ViewModels.Conta.EntrarViewModel
 @{
     ViewData["Title"] = "Entrar";
 }
@@ -7,19 +7,19 @@
         <div class="card shadow-sm">
             <div class="card-body p-4">
                 <h1 class="h3 mb-2">Entre na sua conta</h1>
-                <p class="text-secondary">Acesse o Score do Rebanho com seu e-mail e senha.</p>
+                <p class="text-body-secondary">Acesse o Score do Rebanho com seu e-mail e senha.</p>
                 <form asp-controller="Conta" asp-action="Entrar" method="post">
                     <input asp-for="ReturnUrl" type="hidden" />
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger-emphasis" role="alert"></div>
                     <div class="mb-3">
                         <label asp-for="Email" class="form-label"></label>
                         <input asp-for="Email" class="form-control" type="email" autocomplete="username" maxlength="256" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger-emphasis"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Senha" class="form-label"></label>
                         <input asp-for="Senha" class="form-control" autocomplete="current-password" maxlength="128" value="" />
-                        <span asp-validation-for="Senha" class="text-danger"></span>
+                        <span asp-validation-for="Senha" class="text-danger-emphasis"></span>
                     </div>
                     <div class="form-check mb-4">
                         <input asp-for="ManterConectado" class="form-check-input" />

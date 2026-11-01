@@ -3,11 +3,11 @@
 <div class="row justify-content-center my-4">
     <div class="col-lg-7">
         <h1>Excluir rebanho</h1>
-        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        <div asp-validation-summary="All" class="text-danger-emphasis" role="alert"></div>
         <div class="card"><div class="card-body">
             <h2 class="h5">@Model.Nome</h2><p>@Model.Propriedade</p>
             <p>Deseja excluir este cadastro? Ele será removido da sua lista.</p>
-            <p class="text-secondary">Os scores históricos e suas análises serão preservados.</p>
+            <p class="text-body-secondary">Os scores históricos e suas análises serão preservados.</p>
             @if (Context.Response.StatusCode == 409)
             {
                 <p class="alert alert-warning">O cadastro mudou desde a confirmação. <a asp-action="Excluir" asp-route-id="@Model.Id">Recarregue os dados antes de confirmar novamente.</a></p>

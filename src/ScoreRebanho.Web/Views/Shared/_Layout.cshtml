@@ -1,45 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="~/js/tema.js" asp-append-version="true"></script>
     <title>@ViewData["Title"] - Score do Rebanho</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ScoreRebanho.Web.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Score do Rebanho</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navegacao-principal" aria-controls="navegacao-principal"
                         aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div id="navegacao-principal" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div id="navegacao-principal" class="navbar-collapse collapse d-lg-inline-flex justify-content-between flex-wrap gap-3">
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Rebanhos" asp-action="Index">Meus rebanhos</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Simulacoes" asp-action="Nova">Nova simulação</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Rebanhos" asp-action="Index">Meus rebanhos</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Simulacoes" asp-action="Nova">Nova simulação</a></li>
                             @if (User.IsInRole(PapeisContas.Administrador))
                             {
-                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="AdministracaoScores" asp-action="Index">Administração de scores</a></li>
+                                <li class="nav-item"><a class="nav-link" asp-controller="AdministracaoScores" asp-action="Index">Administração de scores</a></li>
                             }
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
                         </li>
                     </ul>
                     <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <div id="preferencia-tema" hidden>
+                            <div class="d-flex gap-2 align-items-center">
+                                <label for="tema" class="small">Tema</label>
+                                <select id="tema" class="form-select form-select-sm w-auto">
+                                    <option value="system">Sistema</option>
+                                    <option value="light">Claro</option>
+                                    <option value="dark">Escuro</option>
+                                </select>
+                            </div>
+                        </div>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <span class="small text-secondary text-break">Olá, @User.Identity.Name</span>
+                            <span class="small text-body-secondary text-break">Olá, @User.Identity.Name</span>
                             <a asp-controller="Conta" asp-action="AlterarSenha" class="btn btn-outline-success btn-sm">Alterar senha</a>
                             <form asp-controller="Conta" asp-action="Sair" method="post">
                                 <button type="submit" class="btn btn-outline-success btn-sm">Sair</button>
@@ -55,20 +66,20 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top text-body-secondary mt-auto py-3">
+        <div class="container flex-grow-1">
             &copy; 2026 - Score do Rebanho - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

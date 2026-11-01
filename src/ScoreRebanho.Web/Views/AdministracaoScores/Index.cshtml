@@ -16,7 +16,7 @@ else
             {
                 <tr data-score-id="@item.Id">
                     <td>@F.Data(item.CalculadoEmUtc)</td><td>@(item.AutorEmail ?? item.AutorId)</td>
-                    <td>@(item.NomeRebanho ?? "Simulação avulsa")<br /><span class="small text-secondary">@item.Propriedade</span></td>
+                    <td>@(item.NomeRebanho ?? "Simulação avulsa")<br /><span class="small text-body-secondary">@item.Propriedade</span></td>
                     <td>@item.Score / 100<br /><span class="small">@F.Risco(item.Classificacao)</span></td>
                     <td>@item.VersaoPremissas</td>
                     <td><a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">Abrir relatório</a></td>

@@ -1,12 +1,12 @@
 @model ListaRebanhosViewModel
 @{ ViewData["Title"] = "Meus rebanhos"; }
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4">
-    <div><h1>Meus rebanhos</h1><p class="text-secondary mb-0">Cadastre seu lote e acompanhe a análise estimada da operação.</p></div>
+    <div><h1>Meus rebanhos</h1><p class="text-body-secondary mb-0">Cadastre seu lote e acompanhe a análise estimada da operação.</p></div>
     <a asp-action="Cadastrar" class="btn btn-success">Cadastrar rebanho</a>
 </div>
 @if (Model.Total == 0)
 {
-    <div class="border rounded-3 bg-light p-4 text-center">
+    <div class="border rounded-3 bg-body-tertiary p-4 text-center">
         <h2 class="h5">Você ainda não tem rebanhos cadastrados</h2>
         <p>Informe os dados do terreno, do lote e do manejo para gerar sua primeira análise.</p>
         <a asp-action="Cadastrar" class="btn btn-success">Cadastrar meu primeiro rebanho</a>
@@ -40,4 +40,4 @@ else
         @if (Model.Pagina < Model.Paginas) { <a asp-action="Index" asp-route-pagina="@(Model.Pagina + 1)" class="btn btn-outline-secondary">Próxima</a> }
     </nav>
 }
-<p class="small text-secondary mt-4">O score é uma estimativa e não garante lucro ou aprovação de crédito.</p>
+<p class="small text-body-secondary mt-4">O score é uma estimativa e não garante lucro ou aprovação de crédito.</p>

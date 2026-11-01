@@ -29,4 +29,4 @@ Web recebe ViewModels, mapeia com AdministracaoScoresProfile e apresenta página
 
 Build sem avisos/erros e 284 testes aprovados: 129 Domain, 61 Application, 16 Infrastructure e 78 Web. Os 18 novos cenários verificam autorização na Application, independência do perfil, cancelamento, preservação do snapshot, paginação/ordenação/desempate, autores distintos, histórico após exclusão do cadastro, acessos diretos HTTP, ausência de ações de escrita, perfil sem papel, remoção do papel com cookie existente e configuração AutoMapper. As suítes anteriores também passaram. Os testes usam SQLite isolado; não foram alterados banco ou contas reais.
 
-A aparência ainda precisa de inspeção visual em navegador. Preferência de tema e a referência docs/ideias-prototipo-v6.md continuam pendentes. Nenhuma fórmula ou premissa de cálculo foi alterada.
+A aparência ainda precisa de inspeção visual em navegador. Preferência de tema implementada conforme [temas.md](temas.md). A referência docs/ideias-prototipo-v6.md continua ausente. Nenhuma fórmula ou premissa de cálculo foi alterada.
