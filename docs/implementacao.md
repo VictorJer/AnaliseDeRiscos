@@ -108,3 +108,11 @@ O conjunto de premissas usa objetos de valor de domínio imutáveis dentro do DT
 Verificação: build da solução sem avisos ou erros e 157 testes aprovados (126 Domain, 19 Application, 12 Web). Foram verificados totais integrados, precisão, alertas, serialização/recuperação de entradas e premissas, configuração personalizada, coleções somente leitura, falhas numéricas e propagação de defeitos inesperados.
 
 Não foi adicionado endpoint de cálculo nesta etapa. A análise completa é um contrato interno para persistência e composição; a exposição HTTP dependerá de autoria e projeções distintas por perfil. Próximo incremento: entidades/contratos de persistência de rebanhos e scores históricos, migrations e transação atômica. As telas CRUD e relatórios por perfil continuam pendentes. Nenhuma fórmula ou permissão aprovada foi alterada.
+
+## Incremento 9 — modelo do rebanho e contratos de persistência
+
+Rebanho encapsula autoria, identificação, último score, datas UTC e versão de concorrência. Criar gera identificadores; atualizar troca o score e a versão, preservando autor e data de criação. As entradas e o resultado ficam no snapshot completo apontado pelo cadastro, evitando duas cópias divergentes da mesma análise.
+
+Application define IRepositorioRebanhos e IRepositorioScores com operações assíncronas e CancellationToken, sem DbSet, IQueryable, EF Core ou Identity. As saídas são DTOs internos; os estados esperados de escrita são sucesso, não encontrado e conflito. A futura orquestração da Application os traduzirá para FluentResults e aplicará autoria/perfil obtidos no servidor.
+
+Verificação: 129 testes de domínio aprovados, incluindo criação, atualização e proteção de autoria/versão. A autorização por perfil e as ações MVC continuam pendentes.
