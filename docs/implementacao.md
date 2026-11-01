@@ -52,3 +52,9 @@ DadosSimulacao reúne lotação, posse, arrendamento, pasto pronto, preço de co
 Convenção explícita: terreno próprio não tem despesa de arrendamento; um valor residual não negativo é normalizado para zero. Valores negativos são recusados. Arrendado exige valor informado, permitindo zero. Preço de compra e dias devem ser positivos, conforme SPEC 13.
 
 Verificação: restauração autorizada concluída; dotnet test no projeto Domain.Tests passou com 48 testes. A compilação geral encontrou arquivos bloqueados pela aplicação Web aberta; a aplicação não foi encerrada.
+
+## Incremento 3 — produção
+
+Adicionados ganho médio diário, fator de superlotação, peso de venda, mortalidade, animais vendidos, peso total e arrobas vivas, com premissas imutáveis da versão 1.0. O cálculo reutiliza a lotação; os perfis não interferem no motor. Mortalidade reduz somente vendas e preserva as entradas originais.
+
+Verificação: 56 testes do Domain aprovados, incluindo limites de ocupação, piso do fator de GMD, teto de mortalidade, bônus de manejo/raça, determinismo e precisão fracionária. Custos, resultado financeiro e score ainda estão pendentes.
