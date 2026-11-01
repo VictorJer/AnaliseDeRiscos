@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ScoreRebanho.Application/ScoreRebanho.Application.csproj" />
+    <ProjectReference Include="../ScoreRebanho.Infrastructure/ScoreRebanho.Infrastructure.csproj" />
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+    <PackageReference Include="FluentResults" Version="4.0.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Início";
+}
+
+<section class="py-5" aria-labelledby="apresentacao-titulo">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="bg-light border rounded-4 p-4 p-md-5 text-center shadow-sm">
+                <span class="badge bg-success mb-3">Planejamento para a pecuária de corte</span>
+                <h1 id="apresentacao-titulo" class="display-5 fw-bold mb-3">Score do Rebanho</h1>
+                <p class="lead mb-3">Mais clareza para planejar o seu rebanho.</p>
+                <p class="text-secondary mb-4">
+                    Uma aplicação para pecuaristas e cooperativas avaliarem operações de gado de corte.
+                    Com os dados do terreno, dos animais e do manejo, você poderá estimar a capacidade
+                    do pasto, os custos e o resultado financeiro, além de entender os principais riscos
+                    por meio de um score de 0 a 100.
+                </p>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="alert alert-success mb-0" role="status">Você está conectado. O cadastro de rebanhos estará disponível em breve.</div>
+                }
+                else
+                {
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                        <a asp-controller="Conta" asp-action="Cadastrar" class="btn btn-success btn-lg px-5">Cadastrar</a>
+                        <a asp-controller="Conta" asp-action="Entrar" class="btn btn-outline-success btn-lg px-5">Entrar</a>
+                    </div>
+                }
+            </div>
+            <p class="small text-secondary text-center mt-4 mb-0">
+                O score é uma estimativa para apoiar o planejamento.
+                Não garante lucro, segurança da operação ou aprovação de crédito.
+            </p>
+        </div>
+    </div>
+</section>

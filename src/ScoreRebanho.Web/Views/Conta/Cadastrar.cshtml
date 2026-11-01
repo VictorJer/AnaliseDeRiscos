@@ -1,0 +1,38 @@
+﻿@model ScoreRebanho.Web.ViewModels.Conta.CadastrarViewModel
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h3 mb-2">Crie sua conta</h1>
+                <p class="text-secondary">Comece seu planejamento com o Score do Rebanho.</p>
+                <form asp-controller="Conta" asp-action="Cadastrar" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" type="email" autocomplete="email" maxlength="256" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Senha" class="form-label"></label>
+                        <input asp-for="Senha" class="form-control" autocomplete="new-password" maxlength="128" aria-describedby="regras-senha" value="" />
+                        <div id="regras-senha" class="form-text">Use de 8 a 128 caracteres, com letra maiúscula, minúscula, número e caractere especial.</div>
+                        <span asp-validation-for="Senha" class="text-danger"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ConfirmarSenha" class="form-label"></label>
+                        <input asp-for="ConfirmarSenha" class="form-control" autocomplete="new-password" maxlength="128" value="" />
+                        <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+                </form>
+                <p class="mt-3 mb-0 text-center">Já tem uma conta? <a asp-action="Entrar">Entrar</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
