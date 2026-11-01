@@ -58,3 +58,11 @@ Verificação: restauração autorizada concluída; dotnet test no projeto Domai
 Adicionados ganho médio diário, fator de superlotação, peso de venda, mortalidade, animais vendidos, peso total e arrobas vivas, com premissas imutáveis da versão 1.0. O cálculo reutiliza a lotação; os perfis não interferem no motor. Mortalidade reduz somente vendas e preserva as entradas originais.
 
 Verificação: 56 testes do Domain aprovados, incluindo limites de ocupação, piso do fator de GMD, teto de mortalidade, bônus de manejo/raça, determinismo e precisão fracionária. Custos, resultado financeiro e score ainda estão pendentes.
+
+## Verificação completa após incrementos 2 e 3
+
+A solução compilou usando --artifacts-path .local/verificacao, evitando arquivos em uso pela aplicação aberta. A suíte completa passou: 56 testes de Domain, 6 de Application e 12 de Web (74 no total). Cadastro, login, logout e migration de Identity agora foram validados pelos testes de integração.
+
+Foi corrigida a expectativa do teste de logout: a rota MVC convencional retorna 404 para GET /Conta/Sair. O teste verifica que esse GET não encerra a sessão; o POST com CSRF continua encerrando. A paralelização dos projetos de teste foi declarada explicitamente. Não houve alteração de permissões ou comportamento de produção.
+
+Próximo incremento na ordem aprovada: cálculo de custos, seguido de indicadores financeiros e score. Persistência de rebanhos, casos de uso, telas, relatórios por perfil e demais contas/administração continuam pendentes.

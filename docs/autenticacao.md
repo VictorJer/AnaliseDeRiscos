@@ -41,3 +41,7 @@ Foram adicionados testes MSTest da Application e de integração Web para cadast
 Neste ambiente, a restauração com APPDATA e cache de pacotes locais superou o erro de leitura da configuração do Windows, mas a conexão HTTPS ao NuGet foi bloqueada com NU1301. Build, execução das migrations, testes e inspeção visual em navegador dependem da restauração dos pacotes; não foram validados em execução.
 
 Permanecem fora desta entrega: alteração de senha, comandos locais de habilitação de Cooperativa/Administrador, CRUD de rebanhos e relatórios. Esses itens continuam previstos na SPEC.
+
+## Atualização da verificação
+
+Com restauração autorizada e saída de compilação isolada em .local/verificacao, os 12 testes de integração Web e 6 testes da Application passaram, incluindo cadastro, autenticação, perfil fixo, migration e logout. A limitação de NuGet registrada anteriormente foi superada. A inspeção visual em navegador permanece pendente.

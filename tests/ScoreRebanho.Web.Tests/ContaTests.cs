@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Text.RegularExpressions;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +34,7 @@ public sealed class ContaTests
         var claims = await usuarios.GetClaimsAsync(usuario);
         Assert.AreEqual(1, claims.Count(c => c.Type == PerfisNegocio.TipoClaim));
         Assert.IsTrue(claims.Any(c => c.Type == PerfisNegocio.TipoClaim && c.Value == PerfisNegocio.Pecuarista));
-        Assert.AreEqual(0, (await usuarios.GetRolesAsync(usuario)).Count);
+        Assert.IsEmpty(await usuarios.GetRolesAsync(usuario));
         StringAssert.Contains(await cliente.GetStringAsync("/"), "Você está conectado");
     }
 
@@ -99,11 +99,13 @@ public sealed class ContaTests
         var resposta = await EntrarAsync(cliente, Senha, "https://example.org/fora");
         Assert.AreEqual(HttpStatusCode.Redirect, resposta.StatusCode);
         Assert.AreEqual("/", resposta.Headers.Location?.OriginalString);
+        Assert.AreEqual(HttpStatusCode.NotFound, (await cliente.GetAsync("/Conta/Sair")).StatusCode);
+        StringAssert.Contains(await cliente.GetStringAsync("/"), "Você está conectado");
         var token = await ObterTokenAsync(cliente, "/");
         var logout = await cliente.PostAsync("/Conta/Sair", new FormUrlEncodedContent(new Dictionary<string, string> { ["__RequestVerificationToken"] = token }));
         Assert.AreEqual(HttpStatusCode.Redirect, logout.StatusCode);
         StringAssert.Contains(await cliente.GetStringAsync("/"), "Cadastrar");
-        Assert.AreEqual(HttpStatusCode.MethodNotAllowed, (await cliente.GetAsync("/Conta/Sair")).StatusCode);
+
     }
 
     [TestMethod]
@@ -185,4 +187,3 @@ public sealed class ContaTests
         return WebUtility.HtmlDecode(Regex.Match(campo.Value, "value=\"([^\"]+)\"").Groups[1].Value);
     }
 }
-
