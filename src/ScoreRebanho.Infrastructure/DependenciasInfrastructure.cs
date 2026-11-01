@@ -1,3 +1,4 @@
+using ScoreRebanho.Application.Administracao;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ public static class DependenciasInfrastructure
         servicos.AddScoped<ICadastroContas, CadastroContas>();
         servicos.AddScoped<IRepositorioRebanhos, RepositorioRebanhos>();
         servicos.AddScoped<IRepositorioScores, RepositorioScores>();
+        servicos.AddScoped<IConsultaScoresAdministrativos, ConsultaScoresAdministrativos>();
         return servicos.AddIdentity<IdentityUser, IdentityRole>(configurarIdentity)
             .AddEntityFrameworkStores<ContasDbContext>();
     }
