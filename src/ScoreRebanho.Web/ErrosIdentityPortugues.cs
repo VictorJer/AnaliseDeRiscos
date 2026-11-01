@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace ScoreRebanho.Web;
 
 public sealed class ErrosIdentityPortugues : IdentityErrorDescriber
 {
+    public override IdentityError PasswordMismatch() => new() { Code = nameof(PasswordMismatch), Description = "A senha atual está incorreta." };
+    public override IdentityError ConcurrencyFailure() => new() { Code = nameof(ConcurrencyFailure), Description = "Sua conta foi atualizada em outra sessão. Tente novamente." };
     public override IdentityError DefaultError() => new() { Code = nameof(DefaultError), Description = "Não foi possível concluir a operação." };
     public override IdentityError DuplicateEmail(string email) => new() { Code = nameof(DuplicateEmail), Description = "Não foi possível cadastrar este e-mail. Tente entrar com sua conta." };
     public override IdentityError DuplicateUserName(string userName) => DuplicateEmail(userName);

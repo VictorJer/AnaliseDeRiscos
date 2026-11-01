@@ -25,4 +25,4 @@ SimulacaoFormularioViewModel é exclusivo da Web e mapeado por SimulacoesProfile
 
 Build sem avisos ou erros. Suíte completa: 241 testes aprovados (129 Domain, 53 Application, 13 Infrastructure e 46 Web). Os novos testes verificam geração/recálculo para ambos os perfis, snapshot original imutável, ausência de cadastro de rebanho, edição própria, inputs inválidos, conferência sem persistência, CSRF, autenticação, cancelamento e recusa de acesso alheio, incluindo administrador. Os testes anteriores do CRUD também continuam aprovados após a extração dos campos.
 
-Ainda pendentes: alteração de senha, atribuição local de Cooperativa/Administrador, consulta administrativa global, preferência de tema e validação visual em navegador. O documento docs/ideias-prototipo-v6.md continua ausente.
+Alteração de senha implementada conforme [autenticacao.md](autenticacao.md). Ainda pendentes: atribuição local de Cooperativa/Administrador, consulta administrativa global, preferência de tema e validação visual em navegador. O documento docs/ideias-prototipo-v6.md continua ausente.

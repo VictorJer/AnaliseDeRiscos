@@ -1,0 +1,41 @@
+@model ScoreRebanho.Web.ViewModels.Conta.AlterarSenhaViewModel
+@{
+    ViewData["Title"] = "Alterar senha";
+}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h3 mb-3">Alterar senha</h1>
+                @if (TempData["SenhaAlterada"] is true)
+                {
+                    <div class="alert alert-success" role="status">Senha alterada com sucesso.</div>
+                }
+                <form asp-controller="Conta" asp-action="AlterarSenha" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="mb-3">
+                        <label asp-for="SenhaAtual" class="form-label"></label>
+                        <input asp-for="SenhaAtual" class="form-control" autocomplete="current-password" value="" />
+                        <span asp-validation-for="SenhaAtual" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NovaSenha" class="form-label"></label>
+                        <input asp-for="NovaSenha" class="form-control" autocomplete="new-password" maxlength="128" aria-describedby="regras-senha" value="" />
+                        <div id="regras-senha" class="form-text">Use de 8 a 128 caracteres, com letra maiúscula, minúscula, número e caractere especial.</div>
+                        <span asp-validation-for="NovaSenha" class="text-danger"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ConfirmarNovaSenha" class="form-label"></label>
+                        <input asp-for="ConfirmarNovaSenha" class="form-control" autocomplete="new-password" maxlength="128" value="" />
+                        <span asp-validation-for="ConfirmarNovaSenha" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Alterar senha</button>
+                    <a asp-controller="Rebanhos" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Voltar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

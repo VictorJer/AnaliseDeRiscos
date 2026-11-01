@@ -36,6 +36,7 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <span class="small text-secondary text-break">Olá, @User.Identity.Name</span>
+                            <a asp-controller="Conta" asp-action="AlterarSenha" class="btn btn-outline-success btn-sm">Alterar senha</a>
                             <form asp-controller="Conta" asp-action="Sair" method="post">
                                 <button type="submit" class="btn btn-outline-success btn-sm">Sair</button>
                             </form>

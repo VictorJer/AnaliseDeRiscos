@@ -1,4 +1,4 @@
-﻿# Cadastro e acesso
+# Cadastro e acesso
 
 A tela inicial direciona para /Conta/Cadastrar e /Conta/Entrar. O cadastro pede e-mail, senha e confirmação; após criar a conta, inicia uma sessão. Entrar valida as credenciais e permite manter a sessão. Sair é um POST autenticado com token CSRF.
 
@@ -40,8 +40,20 @@ Foram adicionados testes MSTest da Application e de integração Web para cadast
 
 Neste ambiente, a restauração com APPDATA e cache de pacotes locais superou o erro de leitura da configuração do Windows, mas a conexão HTTPS ao NuGet foi bloqueada com NU1301. Build, execução das migrations, testes e inspeção visual em navegador dependem da restauração dos pacotes; não foram validados em execução.
 
-Permanecem fora desta entrega: alteração de senha, comandos locais de habilitação de Cooperativa/Administrador, CRUD de rebanhos e relatórios. Esses itens continuam previstos na SPEC.
+CRUD, relatórios e simulações avulsas foram implementados em incrementos posteriores. A alteração de senha está descrita abaixo. Comandos locais de habilitação de Cooperativa/Administrador continuam pendentes.
 
 ## Atualização da verificação
 
 Com restauração autorizada e saída de compilação isolada em .local/verificacao, os 12 testes de integração Web e 6 testes da Application passaram, incluindo cadastro, autenticação, perfil fixo, migration e logout. A limitação de NuGet registrada anteriormente foi superada. A inspeção visual em navegador permanece pendente.
+
+## Alteração de senha
+
+GET /Conta/AlterarSenha oferece senha atual, nova senha e confirmação. O link está disponível na navegação autenticada. POST na mesma rota exige autenticação e antiforgery; valida confirmação e tamanho de 8–128 caracteres, mantendo a política Identity de maiúscula, minúscula, número e caractere especial.
+
+ContaController resolve o usuário a partir do principal autenticado e usa UserManager.ChangePasswordAsync, que verifica a senha atual, aplica validadores e atualiza hash/security stamp. Nenhum identificador de conta, perfil ou papel é aceito como entrada. Como gestão de credenciais pertence à Web/Identity, não há caso de uso de negócio, DTO ou dependência nova na Application/Domain.
+
+Após sucesso, SignInManager.RefreshSignInAsync renova a sessão atual, preservando suas propriedades, e o redirect apresenta uma confirmação de uso único. As outras sessões seguem a validação periódica do security stamp do Identity; não se promete encerramento imediato. Senhas não são armazenadas em TempData, cookies próprios ou logs; os campos Razor usam password e value vazio também em erros. Respostas permanecem NoStore. Não há redefinição sem senha atual ou envio de e-mail nesta entrega.
+
+Mensagens de senha atual incorreta e conflito de atualização foram traduzidas para português. Falhas esperadas do Identity aparecem junto aos campos ou no resumo. Exceções inesperadas seguem o tratamento global.
+
+Verificação: build sem avisos/erros e 250 testes aprovados (129 Domain, 53 Application, 13 Infrastructure e 55 Web). Os nove cenários HTTP novos cobrem alteração válida, renovação da sessão, senha antiga recusada/nova aceita no login, manipulação de conta/perfil/papel, senha atual incorreta, política de senha, confirmação, campos vazios, limites de tamanho, acesso anônimo, CSRF, GET sem mutação e ausência de senhas nos campos de resposta. Banco de teste SQLite isolado; nenhuma conta real foi alterada. Inspeção visual em navegador permanece pendente.

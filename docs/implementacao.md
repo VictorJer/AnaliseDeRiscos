@@ -150,3 +150,7 @@ Implementadas listagem, cadastro, conferência da ocupação, edição, confirma
 ## Incremento 14 — simulações avulsas
 
 Implementados geração de score sem cadastro de rebanho, conferência, edição das entradas e recálculo em novo histórico. O formulário compartilha EditorTemplate com o CRUD e os relatórios respeitam o perfil vigente. Detalhes e decisão sobre edição exclusivamente avulsa em [simulacoes-avulsas.md](simulacoes-avulsas.md). Verificação: build sem avisos/erros e 241 testes aprovados (129 Domain, 53 Application, 13 Infrastructure e 46 Web). Permanecem as pendências administrativas, senha, tema e inspeção visual.
+
+## Incremento 15 — alteração de senha
+
+Implementada a tela autenticada com senha atual, nova senha e confirmação, usando UserManager.ChangePasswordAsync e renovação da sessão via Identity. Sem mudanças de schema ou regras de cálculo. Detalhes em [autenticacao.md](autenticacao.md). Build sem avisos/erros e 250 testes aprovados. Permanecem pendentes comandos locais de Cooperativa/Administrador, consulta administrativa global, tema e inspeção visual; a referência do protótipo continua ausente.

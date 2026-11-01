@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +66,40 @@ public sealed class ContaController(
             ? "Acesso temporariamente bloqueado por tentativas sem sucesso. Tente novamente em alguns minutos."
             : "E-mail ou senha inválidos.");
         return View(model);
+    }
+
+    [Authorize, HttpGet]
+    public IActionResult AlterarSenha() => View(new AlterarSenhaViewModel());
+
+    [Authorize, HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> AlterarSenha(AlterarSenhaViewModel model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var usuario = await usuarios.GetUserAsync(User);
+        if (usuario is null)
+        {
+            await sessoes.SignOutAsync();
+            return RedirectToAction(nameof(Entrar));
+        }
+
+        var resultado = await usuarios.ChangePasswordAsync(usuario, model.SenhaAtual, model.NovaSenha);
+        if (!resultado.Succeeded)
+        {
+            foreach (var erro in resultado.Errors)
+            {
+                var campo = erro.Code == nameof(IdentityErrorDescriber.PasswordMismatch)
+                    ? nameof(model.SenhaAtual)
+                    : erro.Code.StartsWith("Password", StringComparison.Ordinal) ? nameof(model.NovaSenha) : "";
+                ModelState.AddModelError(campo, erro.Description);
+            }
+            return View(model);
+        }
+
+        await sessoes.RefreshSignInAsync(usuario);
+        TempData["SenhaAlterada"] = true;
+        return RedirectToAction(nameof(AlterarSenha));
     }
 
     [Authorize, HttpPost, ValidateAntiForgeryToken]
