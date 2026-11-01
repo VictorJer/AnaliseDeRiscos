@@ -1,3 +1,4 @@
+using ScoreRebanho.Application.Administracao;
 using ScoreRebanho.Web.Comandos;
 using Microsoft.AspNetCore.Identity;
 using ScoreRebanho.Application.Contas;
@@ -50,6 +51,8 @@ builder.Services.AddScoped<ConsultarEdicaoRebanho>();
 builder.Services.AddScoped<AtualizarRebanho>();
 builder.Services.AddScoped<ExcluirRebanho>();
 builder.Services.AddScoped<ConsultarHistoricoProprio>();
+builder.Services.AddScoped<ListarScoresAdministrativos>();
+builder.Services.AddScoped<ConsultarScoreAdministrativo>();
 builder.Services.AddSingleton(new CalcularScoreRebanho(TimeProvider.System));
 builder.Services.AdicionarPersistenciaContas(
     builder.Configuration.GetConnectionString("Contas") ?? "Data Source=contas.db",

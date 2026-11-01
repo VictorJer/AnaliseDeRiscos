@@ -4,7 +4,7 @@
 
 A Application possui CriarRebanho, ListarRebanhos, ConsultarRebanho, ConsultarEdicaoRebanho, AtualizarRebanho e ExcluirRebanho. Cada operação recebe seu DTO e retorna FluentResults. Os DTOs não contêm autoria, perfil ou resultados calculados como entradas.
 
-IUsuarioAtual fornece somente identificador e perfil de negócio da conta autenticada. AcessoRebanhos aplica o filtro de autoria antes de consultar dados, editar ou excluir. Criação e atualização usam o mesmo CalcularScoreRebanho, validam a identificação no Domain e passam o resultado completo ao repositório para gravação atômica. Versão desatualizada é recusada; conflitos ou desaparecimento do registro durante a gravação são traduzidos para falhas esperadas.
+IUsuarioAtual fornece identificador, perfil de negócio e indicador administrativo da conta autenticada, resolvidos no servidor. O indicador administrativo não amplia as permissões do CRUD. AcessoRebanhos aplica o filtro de autoria antes de consultar dados, editar ou excluir. Criação e atualização usam o mesmo CalcularScoreRebanho, validam a identificação no Domain e passam o resultado completo ao repositório para gravação atômica. Versão desatualizada é recusada; conflitos ou desaparecimento do registro durante a gravação são traduzidos para falhas esperadas.
 
 Listar usa paginação e autoria do repositório existente. Consultar e consultar dados de edição não recalculam. O contrato de edição contém apenas identificação, versão e entradas; não leva resultados restritos ao formulário.
 
@@ -24,7 +24,7 @@ A memória textual das fórmulas passa a ser registrada no snapshot no momento d
 
 As rotas e telas compartilhadas foram implementadas com ViewModels, AutoMapper, FluentResults, POST, CSRF e confirmação de exclusão. Os testes HTTP verificam autoria e conteúdo autorizado. Consulte [telas-crud.md](telas-crud.md) para rotas e verificações.
 
-A referência docs/ideias-prototipo-v6.md continua ausente. Os comandos locais de Cooperativa/Administrador foram implementados em [comandos-contas.md](comandos-contas.md). A administração global de scores continua pendente.
+A referência docs/ideias-prototipo-v6.md continua ausente. Os comandos locais de Cooperativa/Administrador foram implementados em [comandos-contas.md](comandos-contas.md). A consulta administrativa global foi implementada em [administracao-scores.md](administracao-scores.md), separada dos casos de uso de autoria própria.
 
 ## Resolvedor da Web
 

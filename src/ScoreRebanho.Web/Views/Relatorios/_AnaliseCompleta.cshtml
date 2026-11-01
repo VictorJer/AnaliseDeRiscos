@@ -1,0 +1,101 @@
+@model AnaliseCompletaViewModel
+@{ var analise = Model; }
+<section class="card border-success mb-4"><div class="card-body">
+    <p class="small text-secondary">@F.Data(analise.CalculadaEmUtc)</p>
+    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@analise.Score.Total<span class="fs-5 text-secondary">/100</span></p>
+    <p class="h5">@F.Risco(analise.Score.Classificacao)</p><p class="mb-0">@analise.ExplicacaoResumida</p>
+</div></section>
+<partial name="~/Views/Relatorios/_Alertas.cshtml" model="analise.Alertas" />
+<section id="componentes-score" class="my-4">
+    <h2 class="h4">Componentes do score</h2>
+    <div class="table-responsive"><table class="table"><thead><tr><th>Componente</th><th>Pontos</th><th>Justificativa</th></tr></thead><tbody>
+    @foreach (var componente in analise.Score.Componentes)
+    {
+        <tr><th scope="row">@componente.Nome</th><td>@F.Numero(componente.Pontos)</td><td>@componente.Justificativa</td></tr>
+    }
+    </tbody></table></div>
+    <p class="small text-secondary">O score total é inteiro. A exibição arredondada dos componentes pode diferir visualmente do total.</p>
+</section>
+<section class="card my-4"><div class="card-body">
+    <h2 class="h4">Capacidade e produção estimadas</h2>
+    <dl class="row mb-0">
+        <dt class="col-md-7">UA do lote</dt><dd class="col-md-5">@F.Numero(analise.Lotacao.UaLote) UA</dd>
+        <dt class="col-md-7">Ocupação</dt><dd class="col-md-5">@F.Percentual(analise.Lotacao.OcupacaoDecimal)</dd>
+        <dt class="col-md-7">Multiplicador de rotação</dt><dd class="col-md-5">@F.Numero(analise.Lotacao.MultiplicadorRotacao)</dd>
+        <dt class="col-md-7">Capacidade com o manejo informado</dt><dd class="col-md-5">@F.Numero(analise.Lotacao.CapacidadeUa) UA · @F.Numero(analise.Lotacao.QuantidadeMaximaAnimais, 0) animais</dd>
+        <dt class="col-md-7">Capacidade sem rotação</dt><dd class="col-md-5">@F.Numero(analise.Lotacao.CapacidadeSemRotacaoUa) UA · @F.Numero(analise.Lotacao.QuantidadeMaximaAnimaisSemRotacao, 0) animais</dd>
+        <dt class="col-md-7">GMD ajustado</dt><dd class="col-md-5">@F.Numero(analise.Producao.GmdKgDia, 3) kg/dia</dd>
+        <dt class="col-md-7">Fator de GMD</dt><dd class="col-md-5">@F.Numero(analise.Producao.FatorGmd)</dd>
+        <dt class="col-md-7">Mortalidade estimada</dt><dd class="col-md-5">@F.Percentual(analise.Producao.MortalidadeDecimal)</dd>
+        <dt class="col-md-7">Animais vendidos estimados</dt><dd class="col-md-5">@F.Numero(analise.Producao.AnimaisVendidosEstimados)</dd>
+        <dt class="col-md-7">Peso de venda por animal</dt><dd class="col-md-5">@F.Numero(analise.Producao.PesoVendaPorAnimalKg) kg</dd>
+        <dt class="col-md-7">Produção total vendida</dt><dd class="col-md-5">@F.Numero(analise.Producao.PesoTotalVendidoKg) kg · @F.Numero(analise.Producao.ArrobasVivasVendidas) arrobas vivas</dd>
+    </dl>
+</div></section>
+<section id="custos-detalhados" class="my-4">
+    <h2 class="h4">Composição de custos e capital</h2>
+    <div class="table-responsive"><table class="table">
+        <thead><tr><th>Item</th><th>Custo da operação</th><th>Capital inicial</th></tr></thead><tbody>
+        @foreach (var item in analise.Custos.Itens)
+        {
+            <tr><th scope="row">@item.Descricao</th><td>@F.Moeda(item.CustoOperacaoReais)</td><td>@F.Moeda(item.CapitalInicialReais)</td></tr>
+        }
+        </tbody><tfoot><tr><th>Total</th><td>@F.Moeda(analise.Custos.CustoTotalReais)</td><td>@F.Moeda(analise.Custos.CapitalInicialReais)</td></tr></tfoot>
+    </table></div>
+    <p class="small text-secondary">Formação e rotação aparecem com investimento integral no capital e parcela econômica no custo da operação.</p>
+</section>
+<section id="produtos-detalhados" class="my-4">
+    <h2 class="h4">Produtos, doses e embalagens</h2>
+    <div class="table-responsive"><table class="table">
+        <thead><tr><th>Produto</th><th>Dose</th><th>Aplicações / dias</th><th>Consumo total</th><th>Embalagens</th><th>Custo</th></tr></thead><tbody>
+        @foreach (var produto in analise.Custos.Produtos)
+        {
+            <tr><th scope="row">@produto.Produto</th><td>@F.Numero(produto.DosePorAnimal) @produto.UnidadeDose</td>
+                <td>@F.Numero(produto.Aplicacoes, 0)</td><td>@F.Numero(produto.QuantidadeNecessaria) @(produto.UnidadeDose.StartsWith("kg") ? "kg" : "ml")</td>
+                <td>@F.Numero(produto.QuantidadeEmbalagens, 0)</td><td>@F.Moeda(produto.CustoReais)</td></tr>
+        }
+        </tbody>
+    </table></div>
+</section>
+<section class="my-4">
+    <h2 class="h4">Indicadores financeiros e cenário adverso</h2>
+    <div class="table-responsive"><table class="table"><thead><tr><th>Indicador</th><th>Referência</th><th>Queda no preço de venda</th></tr></thead>
+        <tbody>
+            <tr><th scope="row">Preço por arroba viva</th><td>@F.Moeda(analise.Financeiro.Referencia.PrecoArrobaVivaReais)</td><td>@F.Moeda(analise.Financeiro.Adverso.PrecoArrobaVivaReais)</td></tr>
+            <tr><th scope="row">Receita</th><td>@F.Moeda(analise.Financeiro.Referencia.ReceitaReais)</td><td>@F.Moeda(analise.Financeiro.Adverso.ReceitaReais)</td></tr>
+            <tr><th scope="row">Lucro / prejuízo</th><td>@F.Moeda(analise.Financeiro.Referencia.LucroReais)</td><td>@F.Moeda(analise.Financeiro.Adverso.LucroReais)</td></tr>
+            <tr><th scope="row">Margem sobre custo</th><td>@F.Percentual(analise.Financeiro.Referencia.MargemDecimal)</td><td>@F.Percentual(analise.Financeiro.Adverso.MargemDecimal)</td></tr>
+        </tbody>
+    </table></div>
+    <p>Preço de equilíbrio: <strong>@F.Moeda(analise.Financeiro.PrecoEquilibrioPorKgReais) por kg vivo</strong>.</p>
+    @if (analise.Financeiro.MotivoEquilibrioIndisponivel is { } motivo) { <p>@motivo</p> }
+</section>
+<section id="entradas-consolidadas" class="card my-4"><div class="card-body">
+    <h2 class="h4">Dados informados</h2>
+    <dl class="row mb-0">
+        <dt class="col-md-7">Área de pastagem</dt><dd class="col-md-5">@F.Numero(analise.Entradas.AreaHectares) ha</dd>
+        <dt class="col-md-7">Pastagem / posse</dt><dd class="col-md-5">@(analise.Entradas.Pastagem == 1 ? "Verão" : "Inverno") / @(analise.Entradas.Posse == 1 ? "Próprio" : "Arrendado")</dd>
+        <dt class="col-md-7">Arrendamento mensal</dt><dd class="col-md-5">@F.Moeda(analise.Entradas.ArrendamentoMensalReais)</dd>
+        <dt class="col-md-7">Pasto pronto / rotação</dt><dd class="col-md-5">@F.SimNao(analise.Entradas.PastoPronto) / @F.SimNao(analise.Entradas.RotacaoAtiva)</dd>
+        <dt class="col-md-7">Piquetes</dt><dd class="col-md-5">@analise.Entradas.NumeroPiquetes</dd>
+        <dt class="col-md-7">Animais / dias na pastagem</dt><dd class="col-md-5">@analise.Entradas.QuantidadeAnimais / @analise.Entradas.DiasPastagem dias</dd>
+        <dt class="col-md-7">Peso médio / preço de compra por kg</dt><dd class="col-md-5">@F.Numero(analise.Entradas.PesoCompraKg) kg / @F.Moeda(analise.Entradas.PrecoCompraPorKgReais)</dd>
+        <dt class="col-md-7">Raça pura para corte</dt><dd class="col-md-5">@F.SimNao(analise.Entradas.RacaPuraCorte)</dd>
+        <dt class="col-md-7">Vacina carbúnculo / controle carrapato</dt><dd class="col-md-5">@F.SimNao(analise.Entradas.VacinaCarbunculo) / @F.SimNao(analise.Entradas.ControleCarrapato)</dd>
+        <dt class="col-md-7">Vermífugo / modificador orgânico</dt><dd class="col-md-5">@F.SimNao(analise.Entradas.Vermifugo) / @F.SimNao(analise.Entradas.ModificadorOrganico)</dd>
+    </dl>
+</div></section>
+<section id="premissas-detalhadas" class="my-4">
+    <h2 class="h4">Premissas utilizadas</h2>
+    <div class="table-responsive"><table class="table table-sm"><thead><tr><th>Parâmetro e unidade</th><th>Valor utilizado</th></tr></thead><tbody>
+    @foreach (var parametro in analise.Premissas) { <tr><th scope="row">@parametro.Nome</th><td>@parametro.Valor</td></tr> }
+    </tbody></table></div>
+</section>
+<section id="memoria-calculo" class="my-4">
+    <h2 class="h4">Fórmulas e memória de cálculo</h2>
+    @if (analise.Formulas.Count == 0) { <p>Este histórico não contém a memória textual das fórmulas.</p> }
+    <dl>
+        @foreach (var formula in analise.Formulas) { <dt>@formula.Indicador</dt><dd>@formula.Expressao</dd> }
+    </dl>
+</section>
+<aside class="alert alert-secondary"><h2 class="h5">Limites da estimativa</h2><ul class="mb-0">@foreach (var aviso in analise.Avisos) { <li>@aviso</li> }</ul></aside>

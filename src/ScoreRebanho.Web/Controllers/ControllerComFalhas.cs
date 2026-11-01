@@ -9,7 +9,7 @@ public abstract class ControllerComFalhas : Controller
     {
         var codigos = erros.Select(e => e.Metadata.GetValueOrDefault("Codigo") as string).ToArray();
         if (codigos.Contains("NAO_AUTENTICADO")) return Challenge();
-        if (codigos.Contains("PERFIL_INVALIDO")) return Forbid();
+        if (codigos.Contains("PERFIL_INVALIDO") || codigos.Contains("NAO_AUTORIZADO")) return Forbid();
         if (codigos.Contains("NAO_ENCONTRADO")) return NotFound();
         if (codigos.Contains("CONFLITO")) Response.StatusCode = StatusCodes.Status409Conflict;
         return null;

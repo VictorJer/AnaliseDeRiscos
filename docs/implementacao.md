@@ -158,3 +158,7 @@ Implementada a tela autenticada com senha atual, nova senha e confirmação, usa
 ## Incremento 16 — comandos locais de contas
 
 Implementados comandos explícitos para definir Pecuarista/Cooperativa e conceder Administrador a conta existente. Usam Identity, preservam a separação entre perfil e papel e não iniciam HTTP nem migrations. Instruções, códigos de saída e decisões em [comandos-contas.md](comandos-contas.md). Build sem avisos/erros e 266 testes aprovados, incluindo execução do DLL real sobre banco isolado. Nenhuma conta real foi alterada. Próxima etapa: consulta administrativa global de scores; tema, inspeção visual e referência do protótipo continuam pendentes.
+
+## Incremento 17 — consulta administrativa global de scores
+
+Implementadas listagem global paginada em 20 e consulta completa de histórico, exclusivamente para Administrador. Autorização vigente no servidor nas camadas Web/Application; CRUD continua restrito ao autor. Relatórios reutilizam o corpo de apresentação da Cooperativa sem recalcular. Detalhes em [administracao-scores.md](administracao-scores.md). Build sem avisos/erros e 284 testes aprovados (129 Domain, 61 Application, 16 Infrastructure e 78 Web), sem alteração de dados reais. Permanecem tema, inspeção visual e referência do protótipo ausente.

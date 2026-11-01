@@ -18,6 +18,8 @@ public sealed class UsuarioAtual(IHttpContextAccessor contexto, UserManager<Iden
         var claims = await usuarios.GetClaimsAsync(usuario);
         cancellationToken.ThrowIfCancellationRequested();
         var perfis = claims.Where(c => c.Type == PerfisNegocio.TipoClaim).ToArray();
-        return new(usuario.Id, perfis.Length == 1 ? perfis[0].Value : null);
+        var administrador = await usuarios.IsInRoleAsync(usuario, PapeisContas.Administrador);
+        cancellationToken.ThrowIfCancellationRequested();
+        return new(usuario.Id, perfis.Length == 1 ? perfis[0].Value : null, administrador);
     }
 }

@@ -1,0 +1,13 @@
+@model RelatorioScoreAdministrativoViewModel
+@{ ViewData["Title"] = "Score histórico administrativo"; }
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 my-4">
+    <div>
+        <h1>Score histórico administrativo</h1>
+        <h2 class="h4">@(Model.NomeRebanho ?? "Simulação avulsa")</h2>
+        <p>@Model.Propriedade</p>
+        <dl><dt>Autor</dt><dd>@(Model.AutorEmail ?? Model.AutorId)</dd><dt>Identificador do autor</dt><dd>@Model.AutorId</dd></dl>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">Voltar aos scores</a>
+</div>
+<p class="alert alert-info">Consulta administrativa. Entradas, resultados e premissas preservam o cálculo original. Este histórico não pode ser editado ou excluído.</p>
+<partial name="~/Views/Relatorios/_AnaliseCompleta.cshtml" model="Model.Analise" />

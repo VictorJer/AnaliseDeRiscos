@@ -7,7 +7,7 @@ namespace ScoreRebanho.Web.Comandos;
 public sealed class ExecutarComandoContaLocal(UserManager<IdentityUser> usuarios,
     RoleManager<IdentityRole> papeis, ILogger<ExecutarComandoContaLocal> logger)
 {
-    private const string Administrador = "Administrador";
+    private const string Administrador = PapeisContas.Administrador;
 
     public async Task<ResultadoComandoLocal> ExecutarAsync(ComandoContaLocal comando)
     {
