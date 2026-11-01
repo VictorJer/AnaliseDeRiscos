@@ -6,7 +6,12 @@ namespace ScoreRebanho.Application.Simulacoes;
 public sealed record AnaliseCompletaDto(DateTimeOffset CalculadaEmUtc, EntradaSimulacaoDto Entradas,
     PremissasUtilizadasDto Premissas, LotacaoAnaliseDto Lotacao, ProducaoAnaliseDto Producao,
     CustosAnaliseDto Custos, FinanceiroAnaliseDto Financeiro, ScoreAnaliseDto Score,
-    IReadOnlyList<AlertaAnaliseDto> Alertas, string ExplicacaoResumida, IReadOnlyList<string> Avisos);
+    IReadOnlyList<AlertaAnaliseDto> Alertas, string ExplicacaoResumida, IReadOnlyList<string> Avisos)
+{
+    public IReadOnlyList<FormulaAnaliseDto> Formulas { get; init; } = Array.Empty<FormulaAnaliseDto>();
+}
+
+public sealed record FormulaAnaliseDto(string Indicador, string Expressao);
 
 public sealed record LotacaoAnaliseDto(decimal UaLote, decimal MultiplicadorRotacao,
     decimal CapacidadeSemRotacaoUa, decimal CapacidadeUa, decimal OcupacaoDecimal,

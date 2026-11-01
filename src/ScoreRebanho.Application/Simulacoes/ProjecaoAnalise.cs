@@ -41,7 +41,7 @@ internal static class ProjecaoAnalise
                 "O capital inicial não inclui manutenção do pasto, arrendamento ou suplementação; planeje essas despesas durante a operação.",
                 "Medicamentos e modificador usam a quantidade inicial de animais; embalagens são arredondadas para cima.",
                 "O cenário adverso altera somente o preço de venda e os indicadores financeiros, preservando produção e custos."
-            }));
+            })) { Formulas = FormulasAnalise.Todas };
     }
 
     private static IReadOnlyList<T> SomenteLeitura<T>(IEnumerable<T> valores) => Array.AsReadOnly(valores.ToArray());

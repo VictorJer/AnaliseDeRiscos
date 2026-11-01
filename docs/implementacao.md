@@ -126,3 +126,11 @@ Decisões técnicas e comandos de migrations estão em docs/persistencia.md: sna
 Verificação: build da solução sem avisos ou erros e 173 testes aprovados (129 Domain, 19 Application, 13 Infrastructure, 12 Web). Migrations foram testadas somente em bancos isolados, inclusive preservando contas Identity existentes. O banco real da aplicação aberta não foi alterado nesta execução.
 
 Próximo incremento: casos de uso CRUD na Application, com identidade confiável, FluentResults e testes de autorização; depois telas e relatórios por perfil. A referência visual docs/ideias-prototipo-v6.md continua ausente.
+
+## Incremento 11 — casos de uso CRUD e relatórios autorizados
+
+Application implementa criar, listar, consultar, consultar dados de edição, atualizar e excluir com IUsuarioAtual, autoria no servidor e FluentResults. Autorização ocorre antes de validar/recalcular registros existentes; IDs alheios retornam não encontrado. Os perfis compartilham o mesmo motor e a mesma persistência. Entradas inválidas ou versões obsoletas não gravam novos históricos.
+
+ResumoPecuaristaDto e RelatorioCooperativaDto possuem contratos distintos, inclusive na serialização. A consulta de histórico próprio usa o perfil vigente sobre o snapshot original. Fórmulas textuais são armazenadas no momento do cálculo; snapshots anteriores sem esse campo continuam legíveis sem gerar memória atual retroativamente.
+
+Verificação: 45 testes de Application aprovados, cobrindo autoria, ambos os perfis, payloads com campos indevidos, validações, concorrência, cancelamento, propagação de falhas inesperadas e ausência de dados restritos no JSON atual/histórico. Os 129 testes Domain e 13 testes Infrastructure também passaram. Detalhes em docs/crud-autorizacao.md.
