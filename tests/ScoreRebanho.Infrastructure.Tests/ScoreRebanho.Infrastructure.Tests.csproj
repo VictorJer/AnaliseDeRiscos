@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../../src/ScoreRebanho.Web/appsettings.json" Link="premissas-padrao.json" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="MSTest" Version="4.0.2" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <ProjectReference Include="../../src/ScoreRebanho.Infrastructure/ScoreRebanho.Infrastructure.csproj" />

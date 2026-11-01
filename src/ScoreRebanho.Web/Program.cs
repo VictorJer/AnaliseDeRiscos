@@ -7,6 +7,7 @@ using ScoreRebanho.Application.Rebanhos;
 using ScoreRebanho.Application.Historico;
 using ScoreRebanho.Web.Autorizacao;
 using ScoreRebanho.Infrastructure;
+using ScoreRebanho.Infrastructure.Configuracao;
 using ScoreRebanho.Web;
 using ScoreRebanho.Web.Mapeamentos;
 
@@ -53,7 +54,8 @@ builder.Services.AddScoped<ExcluirRebanho>();
 builder.Services.AddScoped<ConsultarHistoricoProprio>();
 builder.Services.AddScoped<ListarScoresAdministrativos>();
 builder.Services.AddScoped<ConsultarScoreAdministrativo>();
-builder.Services.AddSingleton(new CalcularScoreRebanho(TimeProvider.System));
+var premissas = CarregarPremissas.DaConfiguracao(builder.Configuration);
+builder.Services.AddSingleton(new CalcularScoreRebanho(premissas, TimeProvider.System));
 builder.Services.AdicionarPersistenciaContas(
     builder.Configuration.GetConnectionString("Contas") ?? "Data Source=contas.db",
     options =>

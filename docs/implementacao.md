@@ -166,3 +166,9 @@ Implementadas listagem global paginada em 20 e consulta completa de histórico, 
 ## Incremento 18 — preferência de tema
 
 Implementadas opções Sistema, Claro e Escuro com Bootstrap existente e preferência local ao navegador. Adaptadas cores, navegação e rodapé; sem mudanças de banco, cálculos ou autorização. Decisões e limites da verificação em [temas.md](temas.md). Sintaxe JavaScript válida, build sem avisos/erros e 284 testes existentes aprovados. Persistem a inspeção visual/dinâmica em navegador e a referência ausente do protótipo.
+
+## Incremento 19 — configuração externa de premissas
+
+Implementada a leitura estrita da seção Premissas no início da aplicação, com os valores aprovados preservados no appsettings.json. A Infrastructure usa as validações do Domain, recusa versões divergentes, chaves desconhecidas e conversões inválidas; novos resultados registram o conjunto carregado no snapshot. Detalhes de operação e versionamento em [premissas.md](premissas.md).
+
+Verificação: build isolado em .local/verificacao sem avisos/erros e 297 testes aprovados (129 Domain, 61 Application, 29 Infrastructure e 78 Web). A primeira tentativa de build padrão encontrou arquivos bloqueados pela aplicação aberta; a compilação isolada passou. As verificações incluem todos os valores do arquivo distribuído, alterações decimais e preservação de resultados anteriores. Nenhuma fórmula ou valor aprovado foi alterado.
