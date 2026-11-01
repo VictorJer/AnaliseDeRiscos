@@ -1,0 +1,18 @@
+@model SimulacaoFormularioViewModel
+@{
+    ViewData["Title"] = "Simulação avulsa";
+}
+<h1 class="my-4">Simulação avulsa</h1>
+<p>Informe os dados para estimar a operação sem cadastrar um rebanho. Cada cálculo válido gera uma nova análise histórica.</p>
+<form asp-controller="Simulacoes" asp-action="Gerar" method="post" class="pb-4">
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    @Html.EditorFor(m => m.Entradas)
+    <partial name="_ConferenciaOcupacao" model="Model.Conferencia" />
+    <div class="d-flex flex-wrap gap-3">
+        <button type="submit" asp-action="Conferir" class="btn btn-outline-success">Conferir ocupação</button>
+        <button type="submit" class="btn btn-success">Gerar score</button>
+        <a asp-action="Nova" class="btn btn-outline-secondary">Novo score</a>
+        <a asp-controller="Rebanhos" asp-action="Index" class="btn btn-outline-secondary">Meus rebanhos</a>
+    </div>
+    <p class="small text-secondary mt-3">Os resultados são estimativas. Não garantem lucro, segurança da operação ou aprovação de crédito.</p>
+</form>

@@ -45,9 +45,11 @@ public sealed class RebanhosProfile : Profile
 
         CreateMap<RelatorioRebanhoDto, RelatorioPecuaristaViewModel>()
             .ForMember(d => d.Resumo, o => o.MapFrom(s => (ResumoPecuaristaDto)s.Relatorio))
+            .ForMember(d => d.SimulacaoId, o => o.Ignore())
             .ForMember(d => d.Historico, o => o.Ignore());
         CreateMap<RelatorioRebanhoDto, RelatorioCooperativaViewModel>()
             .ForMember(d => d.Analise, o => o.MapFrom(s => ((RelatorioCooperativaDto)s.Relatorio).Analise))
+            .ForMember(d => d.SimulacaoId, o => o.Ignore())
             .ForMember(d => d.Historico, o => o.Ignore());
         CreateMap<RelatorioHistoricoDto, RelatorioPecuaristaViewModel>()
             .ForMember(d => d.Id, o => o.Ignore())
@@ -55,6 +57,7 @@ public sealed class RebanhosProfile : Profile
             .ForMember(d => d.Nome, o => o.MapFrom(s => s.NomeRebanho ?? "Simulação avulsa"))
             .ForMember(d => d.Propriedade, o => o.MapFrom(s => s.Propriedade ?? "Não informada"))
             .ForMember(d => d.Resumo, o => o.MapFrom(s => (ResumoPecuaristaDto)s.Relatorio))
+            .ForMember(d => d.SimulacaoId, o => o.Ignore())
             .ForMember(d => d.Historico, o => o.MapFrom(_ => true));
         CreateMap<RelatorioHistoricoDto, RelatorioCooperativaViewModel>()
             .ForMember(d => d.Id, o => o.Ignore())
@@ -62,6 +65,7 @@ public sealed class RebanhosProfile : Profile
             .ForMember(d => d.Nome, o => o.MapFrom(s => s.NomeRebanho ?? "Simulação avulsa"))
             .ForMember(d => d.Propriedade, o => o.MapFrom(s => s.Propriedade ?? "Não informada"))
             .ForMember(d => d.Analise, o => o.MapFrom(s => ((RelatorioCooperativaDto)s.Relatorio).Analise))
+            .ForMember(d => d.SimulacaoId, o => o.Ignore())
             .ForMember(d => d.Historico, o => o.MapFrom(_ => true));
     }
 }

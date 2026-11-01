@@ -1,0 +1,13 @@
+@model ConferenciaOcupacaoViewModel
+    @if (Model is { } resumo)
+    {
+        <section class="alert alert-info" aria-labelledby="conferencia-titulo">
+            <h2 id="conferencia-titulo" class="h5">Conferência da ocupação</h2>
+            <dl class="row mb-0">
+                <dt class="col-sm-6">Ocupação estimada do pasto</dt><dd class="col-sm-6">@F.Percentual(resumo.OcupacaoDecimal)</dd>
+                <dt class="col-sm-6">Capacidade da área</dt><dd class="col-sm-6">@F.Numero(resumo.CapacidadeUa) UA</dd>
+                <dt class="col-sm-6">Animais compatíveis com a área</dt><dd class="col-sm-6">@F.Numero(resumo.QuantidadeMaximaAnimais, 0)</dd>
+            </dl>
+            <p class="small mb-0">Premissas @resumo.VersaoPremissas · Esta conferência não salva dados nem gera score.</p>
+        </section>
+    }

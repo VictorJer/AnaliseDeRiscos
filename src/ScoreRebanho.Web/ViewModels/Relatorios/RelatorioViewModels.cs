@@ -5,6 +5,7 @@ namespace ScoreRebanho.Web.ViewModels.Relatorios;
 public abstract class CabecalhoRelatorioViewModel
 {
     public Guid? Id { get; set; }
+    public Guid? SimulacaoId { get; set; }
     public Guid UltimoScoreId { get; set; }
     public string Nome { get; set; } = "";
     public string Propriedade { get; set; } = "";

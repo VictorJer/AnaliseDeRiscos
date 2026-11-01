@@ -17,11 +17,17 @@ public sealed class HistoricoController(ConsultarHistoricoProprio consultar, IMa
         var resultado = await consultar.ExecutarAsync(new(id), cancellationToken);
         if (resultado.IsFailed)
             return TratarAcesso(resultado.Errors) ?? BadRequest("Não foi possível consultar o histórico.");
-        return resultado.Value.Relatorio switch
+        CabecalhoRelatorioViewModel model = resultado.Value.Relatorio switch
         {
-            ResumoPecuaristaDto => View("~/Views/Relatorios/Pecuarista.cshtml", mapper.Map<RelatorioPecuaristaViewModel>(resultado.Value)),
-            RelatorioCooperativaDto => View("~/Views/Relatorios/Cooperativa.cshtml", mapper.Map<RelatorioCooperativaViewModel>(resultado.Value)),
+            ResumoPecuaristaDto => mapper.Map<RelatorioPecuaristaViewModel>(resultado.Value),
+            RelatorioCooperativaDto => mapper.Map<RelatorioCooperativaViewModel>(resultado.Value),
             _ => throw new InvalidOperationException("Representação de relatório não suportada.")
+        };
+        if (resultado.Value.RebanhoOrigemId is null) model.SimulacaoId = resultado.Value.Id;
+        return model switch
+        {
+            RelatorioPecuaristaViewModel => View("~/Views/Relatorios/Pecuarista.cshtml", model),
+            _ => View("~/Views/Relatorios/Cooperativa.cshtml", model)
         };
     }
 }

@@ -146,3 +146,7 @@ Verificação final: build da solução sem avisos ou erros e 203 testes aprovad
 ## Incremento 13 — telas MVC e integração HTTP
 
 Implementadas listagem, cadastro, conferência da ocupação, edição, confirmação de exclusão e relatórios atuais/históricos por perfil. Documentação: [telas-crud.md](telas-crud.md) e [conferencia-ocupacao.md](conferencia-ocupacao.md). Build sem avisos/erros e 230 testes aprovados. A inspeção visual foi bloqueada pelo Computer Use; não foi declarada validada. As pendências externas a este CRUD estão registradas no documento das telas.
+
+## Incremento 14 — simulações avulsas
+
+Implementados geração de score sem cadastro de rebanho, conferência, edição das entradas e recálculo em novo histórico. O formulário compartilha EditorTemplate com o CRUD e os relatórios respeitam o perfil vigente. Detalhes e decisão sobre edição exclusivamente avulsa em [simulacoes-avulsas.md](simulacoes-avulsas.md). Verificação: build sem avisos/erros e 241 testes aprovados (129 Domain, 53 Application, 13 Infrastructure e 46 Web). Permanecem as pendências administrativas, senha, tema e inspeção visual.

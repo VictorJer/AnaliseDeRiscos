@@ -26,6 +26,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUsuarioAtual, UsuarioAtual>();
 builder.Services.AddScoped<CriarRebanho>();
 builder.Services.AddScoped<ConferirOcupacao>();
+builder.Services.AddScoped<GerarSimulacao>();
+builder.Services.AddScoped<ConsultarEdicaoSimulacao>();
 builder.Services.AddScoped<ListarRebanhos>();
 builder.Services.AddScoped<ConsultarRebanho>();
 builder.Services.AddScoped<ConsultarEdicaoRebanho>();

@@ -32,4 +32,4 @@ A inspeção visual não foi concluída: o Computer Use encerrou a automação p
 
 ## Pendências de outras etapas
 
-Continuam pendentes o fluxo de simulação avulsa, alteração de senha, comandos locais de atribuição de Cooperativa/Administrador, consulta administrativa global e preferência de tema. A referência docs/ideias-prototipo-v6.md permanece ausente; a ordem visual do protótipo precisa ser conferida quando disponível. Fórmulas e permissões aprovadas não foram alteradas.
+O fluxo de simulação avulsa foi implementado no incremento seguinte, documentado em [simulacoes-avulsas.md](simulacoes-avulsas.md). Continuam pendentes alteração de senha, comandos locais de atribuição de Cooperativa/Administrador, consulta administrativa global e preferência de tema. A referência docs/ideias-prototipo-v6.md permanece ausente; a ordem visual do protótipo precisa ser conferida quando disponível. Fórmulas e permissões aprovadas não foram alteradas.

@@ -8,6 +8,11 @@
             <a asp-controller="Rebanhos" asp-action="Editar" asp-route-id="@id" class="btn btn-outline-success">Editar dados</a>
             <a asp-controller="Historico" asp-action="Detalhes" asp-route-id="@Model.UltimoScoreId" class="btn btn-outline-secondary">Abrir análise histórica</a>
         }
+        @if (Model.SimulacaoId is { } simulacaoId)
+        {
+            <a asp-controller="Simulacoes" asp-action="Editar" asp-route-id="@simulacaoId" class="btn btn-outline-success">Editar dados e recalcular</a>
+        }
+        <a asp-controller="Simulacoes" asp-action="Nova" class="btn btn-outline-success">Novo score</a>
         <a asp-controller="Rebanhos" asp-action="Cadastrar" class="btn btn-success">Novo rebanho</a>
     </div>
 </div>
