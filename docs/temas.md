@@ -21,3 +21,9 @@ O seletor usa label associado e select nativo, acessível por teclado. As escolh
 Essas verificações não substituem a execução do seletor em navegador. Não foi declarada validação visual ou validação dinâmica de localStorage/matchMedia. Ainda é necessário conferir persistência ao navegar/reabrir, mudança automática do sistema, navegação por teclado, telas estreitas e legibilidade dos formulários/relatórios nos dois temas.
 
 A inspeção visual geral permanece pendente; a tentativa anterior de Computer Use foi encerrada por falta de confirmação da URL do navegador. A referência docs/ideias-prototipo-v6.md continua ausente, portanto não é possível conferir a ordem e os detalhes do protótipo.
+
+## Verificação complementar em 01/11/2026
+
+Após a configuração externa de premissas, a solução compilou sem avisos/erros. A sintaxe de tema.js foi novamente verificada; 11 cenários de lógica de tema passaram em VM Node com APIs simuladas. Isso não valida renderização nem comportamento das APIs reais do navegador. Testes MSTest HTTP adicionais verificam que CSS e JavaScript referenciados pelo layout público/autenticado são servidos com tipo correto e conteúdo não vazio.
+
+A nova tentativa de inspeção foi bloqueada pela indisponibilidade do host de navegador e do canal nativo de Computer Use, antes de abrir qualquer página. Evidências e roteiro para concluir a inspeção estão em [verificacao-interface.md](verificacao-interface.md). A validação visual/dinâmica real continua pendente.

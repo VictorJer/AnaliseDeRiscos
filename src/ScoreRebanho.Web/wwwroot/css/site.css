@@ -22,3 +22,7 @@ html {
   --bs-btn-active-bg: var(--bs-success-bg-subtle);
   --bs-btn-active-border-color: var(--bs-success-text-emphasis);
 }
+
+.navbar-brand {
+  white-space: normal;
+}

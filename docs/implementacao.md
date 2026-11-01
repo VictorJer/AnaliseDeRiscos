@@ -172,3 +172,11 @@ Implementadas opções Sistema, Claro e Escuro com Bootstrap existente e prefer�
 Implementada a leitura estrita da seção Premissas no início da aplicação, com os valores aprovados preservados no appsettings.json. A Infrastructure usa as validações do Domain, recusa versões divergentes, chaves desconhecidas e conversões inválidas; novos resultados registram o conjunto carregado no snapshot. Detalhes de operação e versionamento em [premissas.md](premissas.md).
 
 Verificação: build isolado em .local/verificacao sem avisos/erros e 297 testes aprovados (129 Domain, 61 Application, 29 Infrastructure e 78 Web). A primeira tentativa de build padrão encontrou arquivos bloqueados pela aplicação aberta; a compilação isolada passou. As verificações incluem todos os valores do arquivo distribuído, alterações decimais e preservação de resultados anteriores. Nenhuma fórmula ou valor aprovado foi alterado.
+
+## Incremento 20 — recursos de interface e verificação complementar
+
+Novos testes HTTP públicos/autenticados identificaram HTTP 500 na folha gerada ScoreRebanho.Web.styles.css referenciada pelo layout. A única regra útil foi movida para site.css e a referência/folha isolada removidas. Os testes validam todos os CSS/JavaScript locais referenciados, incluindo tema, Bootstrap e jQuery.
+
+Build isolado sem avisos/erros; 80 testes Web aprovados após a correção. Com os 129 Domain, 61 Application e 29 Infrastructure aprovados na etapa anterior, são 299 testes aprovados. Verificação de sintaxe e 11 cenários simulados de tema também passaram, sem substituir validação de navegador.
+
+A inspeção visual real continua pendente: o host do navegador e o canal nativo de Computer Use estão indisponíveis nesta sessão. Evidências, distinção entre testes HTTP/simulação e inspeção visual e roteiro para retomada em [verificacao-interface.md](verificacao-interface.md). Nenhuma conta ou banco real foi usado nessa verificação.
