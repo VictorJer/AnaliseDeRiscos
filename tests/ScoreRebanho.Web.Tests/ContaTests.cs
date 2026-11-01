@@ -153,7 +153,7 @@ public sealed class ContaTests
         using var escopo = app.Services.CreateScope();
         var contexto = escopo.ServiceProvider.GetRequiredService<ContasDbContext>();
         Assert.IsFalse(contexto.Database.HasPendingModelChanges());
-        Assert.AreEqual(1, (await contexto.Database.GetAppliedMigrationsAsync()).Count());
+        Assert.HasCount(2, (await contexto.Database.GetAppliedMigrationsAsync()).ToArray());
     }
 
     private static async Task<HttpResponseMessage> CadastrarAsync(HttpClient cliente, Dictionary<string, string>? substituicoes = null)

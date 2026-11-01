@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ScoreRebanho.Application.Contas;
+using ScoreRebanho.Application.Rebanhos;
+using ScoreRebanho.Application.Historico;
+using ScoreRebanho.Infrastructure.Persistencia.Rebanhos;
+using ScoreRebanho.Infrastructure.Persistencia.Historico;
 using ScoreRebanho.Infrastructure.Identidade;
 using ScoreRebanho.Infrastructure.Persistencia;
 
@@ -14,6 +18,8 @@ public static class DependenciasInfrastructure
     {
         servicos.AddDbContext<ContasDbContext>(options => options.UseSqlite(conexao));
         servicos.AddScoped<ICadastroContas, CadastroContas>();
+        servicos.AddScoped<IRepositorioRebanhos, RepositorioRebanhos>();
+        servicos.AddScoped<IRepositorioScores, RepositorioScores>();
         return servicos.AddIdentity<IdentityUser, IdentityRole>(configurarIdentity)
             .AddEntityFrameworkStores<ContasDbContext>();
     }

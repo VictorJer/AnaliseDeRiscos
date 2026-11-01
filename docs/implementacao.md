@@ -116,3 +116,13 @@ Rebanho encapsula autoria, identificação, último score, datas UTC e versão d
 Application define IRepositorioRebanhos e IRepositorioScores com operações assíncronas e CancellationToken, sem DbSet, IQueryable, EF Core ou Identity. As saídas são DTOs internos; os estados esperados de escrita são sucesso, não encontrado e conflito. A futura orquestração da Application os traduzirá para FluentResults e aplicará autoria/perfil obtidos no servidor.
 
 Verificação: 129 testes de domínio aprovados, incluindo criação, atualização e proteção de autoria/versão. A autorização por perfil e as ações MVC continuam pendentes.
+
+## Incremento 10 — EF Core, SQLite e histórico atômico
+
+Implementados repositórios técnicos de rebanhos e histórico, mapeamentos e migration PersistirRebanhosEScores. Criar/atualizar salvam cadastro e análise completa na mesma transação; versões desatualizadas são recusadas. Excluir mantém scores imutáveis, inclusive nome/propriedade originais. A listagem filtra autor, pagina em 20 e ordena por atualização. Histórico avulso permanece separado de rebanhos.
+
+Decisões técnicas e comandos de migrations estão em docs/persistencia.md: snapshot JSON versionado, datas em ticks UTC, vínculo composto do último score com o autor, origem histórica sem FK ao cadastro, token GUID também na exclusão e proteção de histórico por DbContext/triggers.
+
+Verificação: build da solução sem avisos ou erros e 173 testes aprovados (129 Domain, 19 Application, 13 Infrastructure, 12 Web). Migrations foram testadas somente em bancos isolados, inclusive preservando contas Identity existentes. O banco real da aplicação aberta não foi alterado nesta execução.
+
+Próximo incremento: casos de uso CRUD na Application, com identidade confiável, FluentResults e testes de autorização; depois telas e relatórios por perfil. A referência visual docs/ideias-prototipo-v6.md continua ausente.
