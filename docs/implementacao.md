@@ -33,3 +33,14 @@ O comando dotnet test --no-restore terminou sem saída de testes; isso não comp
 
 O documento docs/ideias-prototipo-v6.md citado pela SPEC não está disponível. A ordem detalhada do relatório depende dessa referência.
 
+
+## Incremento 1 do CRUD — identificação do rebanho
+
+- Adicionado IdentificacaoRebanho ao Domain, compartilhado por ambos os perfis.
+- Nome e propriedade obrigatórios, com limites de 100 e 150 caracteres; identificações repetidas são permitidas.
+- Convenção de normalização: remover apenas espaços das extremidades antes de validar o tamanho. Não alterar espaços internos ou capitalização. Coberta por testes.
+- Tipo imutável, sem dependência de banco ou apresentação.
+- Build do Domain executado com sucesso, sem avisos ou erros.
+- Testes MSTest adicionados, mas a execução foi impedida na restauração com NU1301 por bloqueio de rede ao NuGet.
+- Próximo incremento: completar os dados de entrada da simulação e suas validações; em seguida integrar cálculo e persistência antes de disponibilizar operações de salvar na interface.
+- As telas de listar, cadastrar, editar e excluir rebanhos permanecem pendentes. Não foram modificadas fórmulas ou permissões.
