@@ -66,3 +66,11 @@ A solução compilou usando --artifacts-path .local/verificacao, evitando arquiv
 Foi corrigida a expectativa do teste de logout: a rota MVC convencional retorna 404 para GET /Conta/Sair. O teste verifica que esse GET não encerra a sessão; o POST com CSRF continua encerrando. A paralelização dos projetos de teste foi declarada explicitamente. Não houve alteração de permissões ou comportamento de produção.
 
 Próximo incremento na ordem aprovada: cálculo de custos, seguido de indicadores financeiros e score. Persistência de rebanhos, casos de uso, telas, relatórios por perfil e demais contas/administração continuam pendentes.
+
+## Incremento 4 — custos e capital inicial
+
+Implementada a composição de compra, manutenção, formação por insumo, rotação, arrendamento, suplementação e produtos sanitários. As premissas ficam centralizadas e são validadas na construção da calculadora. Coleções de saída são somente leitura.
+
+Preservadas as convenções da SPEC 13: despesas usam animais iniciais; frascos sobre o volume total; aplicações incluem dia zero e último dia coincidente; verão aloca 1/5 da formação; capital inclui formação/rotação integrais e modificador; manutenção/arrendamento/suplementação ficam fora do capital. Rotação com menos de três piquetes continua gerando custo.
+
+Verificação: 78 testes de domínio aprovados, incluindo limites de aplicações, embalagens, suplementação, premissas inválidas, precisão e estouro numérico. Próximo incremento: indicadores financeiros e cenário adverso.
