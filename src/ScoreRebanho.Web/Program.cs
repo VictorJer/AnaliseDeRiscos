@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using ScoreRebanho.Application.Contas;
 using ScoreRebanho.Application.Simulacoes;
+using ScoreRebanho.Application.Rebanhos;
+using ScoreRebanho.Application.Historico;
+using ScoreRebanho.Web.Autorizacao;
 using ScoreRebanho.Infrastructure;
 using ScoreRebanho.Web;
 using ScoreRebanho.Web.Mapeamentos;
@@ -15,6 +18,15 @@ builder.Services.AddAutoMapper(config =>
         config.LicenseKey = chave;
 }, typeof(ContaProfile));
 builder.Services.AddScoped<CadastrarConta>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUsuarioAtual, UsuarioAtual>();
+builder.Services.AddScoped<CriarRebanho>();
+builder.Services.AddScoped<ListarRebanhos>();
+builder.Services.AddScoped<ConsultarRebanho>();
+builder.Services.AddScoped<ConsultarEdicaoRebanho>();
+builder.Services.AddScoped<AtualizarRebanho>();
+builder.Services.AddScoped<ExcluirRebanho>();
+builder.Services.AddScoped<ConsultarHistoricoProprio>();
 builder.Services.AddSingleton(new CalcularScoreRebanho(TimeProvider.System));
 builder.Services.AdicionarPersistenciaContas(
     builder.Configuration.GetConnectionString("Contas") ?? "Data Source=contas.db",

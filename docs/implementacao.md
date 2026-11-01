@@ -134,3 +134,11 @@ Application implementa criar, listar, consultar, consultar dados de edição, at
 ResumoPecuaristaDto e RelatorioCooperativaDto possuem contratos distintos, inclusive na serialização. A consulta de histórico próprio usa o perfil vigente sobre o snapshot original. Fórmulas textuais são armazenadas no momento do cálculo; snapshots anteriores sem esse campo continuam legíveis sem gerar memória atual retroativamente.
 
 Verificação: 45 testes de Application aprovados, cobrindo autoria, ambos os perfis, payloads com campos indevidos, validações, concorrência, cancelamento, propagação de falhas inesperadas e ausência de dados restritos no JSON atual/histórico. Os 129 testes Domain e 13 testes Infrastructure também passaram. Detalhes em docs/crud-autorizacao.md.
+
+## Incremento 12 — identidade vigente na Web
+
+UsuarioAtual implementa o contrato da Application usando o principal autenticado apenas para identificar a conta. A existência do usuário e seu perfil ativo são lidos do Identity; claims antigos do cookie não escolhem a abrangência do relatório. Ausência ou duplicidade de perfis é recusada, sem conceder Cooperativa por fallback. O papel Administrador continua independente do perfil de negócio e não cria exceção de autoria no CRUD.
+
+Os casos de uso, o resolvedor de identidade e o contrato IUsuarioAtual foram registrados no composition root. Testes com Identity e SQLite isolado verificam mudanças de perfil, conta inexistente, perfis ambíguos e administrador tentando consultar/editar/excluir o rebanho de outro autor.
+
+Verificação final: build da solução sem avisos ou erros e 203 testes aprovados (129 Domain, 45 Application, 13 Infrastructure e 16 Web). Os testes novos da Web exercitam o resolvedor e os serviços integrados; ainda não existem endpoints CRUD de rebanhos para testar respostas HTTP/HTML. Essa cobertura será adicionada junto às telas MVC, POST, CSRF e confirmação de exclusão.

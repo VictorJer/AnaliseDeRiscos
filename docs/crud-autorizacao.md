@@ -25,3 +25,9 @@ A memória textual das fórmulas passa a ser registrada no snapshot no momento d
 Ainda não há rotas ou telas CRUD de rebanhos. Os controllers receberão ViewModels, usarão AutoMapper, interpretarão FluentResults e entregarão apenas o ViewModel autorizado. Escritas precisarão de POST e CSRF; exclusão precisará de confirmação. Os testes diretos desses endpoints e a verificação de HTML pertencem a essa entrega.
 
 A referência docs/ideias-prototipo-v6.md continua ausente. Ficam pendentes também comandos locais de Cooperativa/Administrador, alteração de senha e administração global de scores.
+
+## Resolvedor da Web
+
+UsuarioAtual usa o principal autenticado para localizar a conta no Identity e busca os claims de perfil no store a cada operação. Um cookie com claim antigo de Cooperativa não mantém esse acesso após a conta voltar a Pecuarista. Contas inexistentes ou perfis ausentes, ambíguos ou desconhecidos não obtêm acesso pelo contrato. Administrador não substitui perfil de negócio nem autoria.
+
+Verificação desta entrega: 203 testes aprovados e build sem avisos/erros. A integração da Web cobre resolução de identidade e chamada dos casos de uso com Identity/SQLite isolados; as rotas e a verificação de conteúdo HTML continuam pendentes com as telas.
