@@ -180,3 +180,11 @@ Novos testes HTTP públicos/autenticados identificaram HTTP 500 na folha gerada 
 Build isolado sem avisos/erros; 80 testes Web aprovados após a correção. Com os 129 Domain, 61 Application e 29 Infrastructure aprovados na etapa anterior, são 299 testes aprovados. Verificação de sintaxe e 11 cenários simulados de tema também passaram, sem substituir validação de navegador.
 
 A inspeção visual real continua pendente: o host do navegador e o canal nativo de Computer Use estão indisponíveis nesta sessão. Evidências, distinção entre testes HTTP/simulação e inspeção visual e roteiro para retomada em [verificacao-interface.md](verificacao-interface.md). Nenhuma conta ou banco real foi usado nessa verificação.
+
+## Incremento 21 — referência de interface reconstruída
+
+Criado [ideias-prototipo-v6.md](ideias-prototipo-v6.md), citado pela SPEC 15 e ausente tanto dos arquivos quanto do histórico Git. O documento reconstrói a referência a partir da SPEC e das Views atuais, explicita essa origem e não declara recuperação ou fidelidade ao protótipo original. Registra fluxo compartilhado, ordem dos relatórios por perfil, prioridade de alertas, temas, histórico e evoluções fora do escopo; não altera fórmulas, permissões ou funcionalidades.
+
+A SPEC recebeu somente uma nota de rastreabilidade sobre a origem dessa referência e a situação independente da inspeção visual. Os registros anteriores de documento ausente descrevem as etapas passadas; a referência agora existe com essa limitação explícita. A validação visual em navegador permanece pendente pelos motivos documentados em verificacao-interface.md.
+
+Verificação desta etapa documental: links relativos conferidos, diff revisado e nenhuma mudança de código após o build e os 299 testes aprovados das etapas anteriores. A correspondência com o protótipo original depende de recuperar a fonte original.

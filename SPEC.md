@@ -278,6 +278,8 @@ O formulário oferece terreno, lote, manejo e conferência da ocupação no serv
 
 O relatório destaca score, componentes, indicadores principais e recomendações na ordem de atenção documentada em `docs/ideias-prototipo-v6.md`. Fórmulas, limites e premissas da versão 1.0 permanecem vigentes. Tema claro/escuro acompanha o sistema ou a preferência escolhida. Localização, propriedades, comparação/exclusão, clima, mercado e IA ainda dependem das decisões de produto desse documento.
 
+Nota de rastreabilidade da referência visual: `docs/ideias-prototipo-v6.md` foi reconstruído a partir desta SPEC e das Views existentes, pois o protótipo original não foi localizado. O documento registra a organização atual e suas limitações; não declara fidelidade visual ao original nem altera fórmulas, permissões ou escopo. A inspeção em navegador tem situação própria em `docs/verificacao-interface.md`.
+
 ## 16. Home e CRUD de rebanhos
 
 A home autenticada lista somente os rebanhos do usuário, em páginas de 20, ordenados pela última atualização. Cada cadastro tem nome (obrigatório, até 100 caracteres), propriedade (identificação textual obrigatória, até 150), entradas da simulação e último resultado. Nomes repetidos são permitidos; propriedade não é um cadastro separado nesta entrega.

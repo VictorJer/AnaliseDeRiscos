@@ -1,4 +1,4 @@
-﻿# Verificação da interface
+# Verificação da interface
 
 ## Situação em 01/11/2026
 
@@ -42,4 +42,3 @@ Os dois testes novos inicialmente falharam: a requisição a /ScoreRebanho.Web.s
 A regra white-space: normal foi movida para site.css, a folha isolada foi removida e o layout deixou de solicitar o bundle gerado. O comportamento de quebra de linha da marca foi preservado com uma regra específica. Os testes percorrem os recursos efetivamente referenciados no HTML e cobrem a regressão nas páginas pública e autenticada. Isso corrige a falha HTTP observada, sem declarar validação visual.
 
 Resultado após a correção: build isolado sem avisos/erros e 80 testes Web aprovados. Somados às demais camadas já verificadas nesta execução, 299 testes MSTest aprovados. A inspeção visual permanece pendente.
-

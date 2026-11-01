@@ -27,3 +27,5 @@ A inspeção visual geral permanece pendente; a tentativa anterior de Computer U
 Após a configuração externa de premissas, a solução compilou sem avisos/erros. A sintaxe de tema.js foi novamente verificada; 11 cenários de lógica de tema passaram em VM Node com APIs simuladas. Isso não valida renderização nem comportamento das APIs reais do navegador. Testes MSTest HTTP adicionais verificam que CSS e JavaScript referenciados pelo layout público/autenticado são servidos com tipo correto e conteúdo não vazio.
 
 A nova tentativa de inspeção foi bloqueada pela indisponibilidade do host de navegador e do canal nativo de Computer Use, antes de abrir qualquer página. Evidências e roteiro para concluir a inspeção estão em [verificacao-interface.md](verificacao-interface.md). A validação visual/dinâmica real continua pendente.
+
+A referência antes ausente agora está documentada em [ideias-prototipo-v6.md](ideias-prototipo-v6.md), reconstruída da SPEC e das Views atuais. Sua origem está explícita; não comprova correspondência com o protótipo original nem encerra a validação visual.
