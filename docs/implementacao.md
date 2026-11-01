@@ -96,3 +96,15 @@ PremissasAnalise reúne as cinco partes da configuração e recusa versões dive
 Decisão localizada de apresentação dos alertas: prejuízo, superlotação, vacina/carrapato/vermífugo, margem, cenário adverso, subocupação e rotação. Essa ordem está coberta por testes. A referência docs/ideias-prototipo-v6.md está ausente, portanto a ordem visual detalhada do protótipo ainda deve ser conferida quando ela estiver disponível.
 
 Verificação: 126 testes de domínio passaram, incluindo 10 cenários de alertas.
+
+## Incremento 8 — caso de uso completo da análise
+
+CalcularScoreRebanho recebe um DTO imutável contendo somente entradas, constrói os valores de domínio e executa produção, custos, financeiro, score e alertas no servidor. O resultado interno completo reúne DTOs de indicadores, entradas normalizadas, data UTC via TimeProvider, versão, valores de todas as premissas e convenções de arredondamento/aplicações. A resposta é serializável para o futuro histórico; não recebe valores calculados, autoria ou perfil do cliente.
+
+Entrada inválida retorna FluentResults com Codigo=ENTRADA_INVALIDA e Campo. Estouro ou divisão numérica impossível retorna LIMITE_NUMERICO; margem indisponível retorna MARGEM_INDISPONIVEL. Falhas não entregam análise parcial. A captura de ArgumentException fica restrita à construção das entradas; configuração inválida e defeitos inesperados não são convertidos em erros normais.
+
+O conjunto de premissas usa objetos de valor de domínio imutáveis dentro do DTO de snapshot; não contém EF Core, Identity ou tipos de apresentação. Limites de classificação e convenções também são copiados como valores para rastreabilidade. O registro de DI ocorre no composition root e valida a configuração na inicialização.
+
+Verificação: build da solução sem avisos ou erros e 157 testes aprovados (126 Domain, 19 Application, 12 Web). Foram verificados totais integrados, precisão, alertas, serialização/recuperação de entradas e premissas, configuração personalizada, coleções somente leitura, falhas numéricas e propagação de defeitos inesperados.
+
+Não foi adicionado endpoint de cálculo nesta etapa. A análise completa é um contrato interno para persistência e composição; a exposição HTTP dependerá de autoria e projeções distintas por perfil. Próximo incremento: entidades/contratos de persistência de rebanhos e scores históricos, migrations e transação atômica. As telas CRUD e relatórios por perfil continuam pendentes. Nenhuma fórmula ou permissão aprovada foi alterada.

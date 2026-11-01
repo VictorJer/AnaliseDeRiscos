@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using ScoreRebanho.Application.Contas;
+using ScoreRebanho.Application.Simulacoes;
 using ScoreRebanho.Infrastructure;
 using ScoreRebanho.Web;
 using ScoreRebanho.Web.Mapeamentos;
@@ -14,6 +15,7 @@ builder.Services.AddAutoMapper(config =>
         config.LicenseKey = chave;
 }, typeof(ContaProfile));
 builder.Services.AddScoped<CadastrarConta>();
+builder.Services.AddSingleton(new CalcularScoreRebanho(TimeProvider.System));
 builder.Services.AdicionarPersistenciaContas(
     builder.Configuration.GetConnectionString("Contas") ?? "Data Source=contas.db",
     options =>
