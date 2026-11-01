@@ -1,0 +1,147 @@
+@model RebanhoFormularioViewModel
+@{
+    var acaoSalvar = (string)ViewData["AcaoSalvar"]!;
+    var acaoConferir = (string)ViewData["AcaoConferir"]!;
+    Guid? id = Model.Id == Guid.Empty ? null : Model.Id;
+}
+<form asp-controller="Rebanhos" asp-action="@acaoSalvar" asp-route-id="@id" method="post" class="pb-4">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Versao" type="hidden" />
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    <fieldset class="card mb-4">
+        <legend class="card-header h5 mb-0">Identificação</legend>
+        <div class="card-body row g-3">
+            <div class="col-md-6">
+                <label asp-for="Nome" class="form-label"></label>
+                <input asp-for="Nome" class="form-control" maxlength="100" autocomplete="off" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Propriedade" class="form-label"></label>
+                <input asp-for="Propriedade" class="form-control" maxlength="150" autocomplete="off" />
+                <span asp-validation-for="Propriedade" class="text-danger"></span>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="card mb-4">
+        <legend class="card-header h5 mb-0">1. Terreno e pastagem</legend>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label asp-for="Entradas.Posse" class="form-label"></label>
+                <select asp-for="Entradas.Posse" class="form-select"><option value="">Selecione</option><option value="1">Próprio</option><option value="2">Arrendado</option></select>
+                <span asp-validation-for="Entradas.Posse" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.Pastagem" class="form-label"></label>
+                <select asp-for="Entradas.Pastagem" class="form-select"><option value="">Selecione</option><option value="1">Verão</option><option value="2">Inverno</option></select>
+                <span asp-validation-for="Entradas.Pastagem" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.AreaHectares" class="form-label"></label>
+                <input asp-for="Entradas.AreaHectares" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Entradas.AreaHectares" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.ArrendamentoMensalReais" class="form-label"></label>
+                <input asp-for="Entradas.ArrendamentoMensalReais" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Entradas.ArrendamentoMensalReais" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.NumeroPiquetes" class="form-label"></label>
+                <input asp-for="Entradas.NumeroPiquetes" class="form-control" type="number" inputmode="numeric" />
+                <span asp-validation-for="Entradas.NumeroPiquetes" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.PastoPronto" class="form-check-input" />
+                    <label asp-for="Entradas.PastoPronto" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.RotacaoAtiva" class="form-check-input" />
+                    <label asp-for="Entradas.RotacaoAtiva" class="form-check-label"></label>
+                </div>
+            </div>
+            <p class="form-text mb-0">Use vírgula nos valores decimais. Informe arrendamento apenas para terreno arrendado e piquetes quando houver rotação.</p>
+        </div>
+    </fieldset>
+    <fieldset class="card mb-4">
+        <legend class="card-header h5 mb-0">2. Lote</legend>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label asp-for="Entradas.QuantidadeAnimais" class="form-label"></label>
+                <input asp-for="Entradas.QuantidadeAnimais" class="form-control" type="number" inputmode="numeric" />
+                <span asp-validation-for="Entradas.QuantidadeAnimais" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.PesoCompraKg" class="form-label"></label>
+                <input asp-for="Entradas.PesoCompraKg" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Entradas.PesoCompraKg" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.PrecoCompraPorKgReais" class="form-label"></label>
+                <input asp-for="Entradas.PrecoCompraPorKgReais" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Entradas.PrecoCompraPorKgReais" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Entradas.DiasPastagem" class="form-label"></label>
+                <input asp-for="Entradas.DiasPastagem" class="form-control" type="number" inputmode="numeric" />
+                <span asp-validation-for="Entradas.DiasPastagem" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.RacaPuraCorte" class="form-check-input" />
+                    <label asp-for="Entradas.RacaPuraCorte" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="card mb-4">
+        <legend class="card-header h5 mb-0">3. Saúde e manejo</legend>
+        <div class="card-body row g-3">
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.VacinaCarbunculo" class="form-check-input" />
+                    <label asp-for="Entradas.VacinaCarbunculo" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.ControleCarrapato" class="form-check-input" />
+                    <label asp-for="Entradas.ControleCarrapato" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.Vermifugo" class="form-check-input" />
+                    <label asp-for="Entradas.Vermifugo" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input asp-for="Entradas.ModificadorOrganico" class="form-check-input" />
+                    <label asp-for="Entradas.ModificadorOrganico" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    @if (Model.Conferencia is { } resumo)
+    {
+        <section class="alert alert-info" aria-labelledby="conferencia-titulo">
+            <h2 id="conferencia-titulo" class="h5">Conferência da ocupação</h2>
+            <dl class="row mb-0">
+                <dt class="col-sm-6">Ocupação estimada do pasto</dt><dd class="col-sm-6">@F.Percentual(resumo.OcupacaoDecimal)</dd>
+                <dt class="col-sm-6">Capacidade da área</dt><dd class="col-sm-6">@F.Numero(resumo.CapacidadeUa) UA</dd>
+                <dt class="col-sm-6">Animais compatíveis com a área</dt><dd class="col-sm-6">@F.Numero(resumo.QuantidadeMaximaAnimais, 0)</dd>
+            </dl>
+            <p class="small mb-0">Premissas @resumo.VersaoPremissas · Esta conferência não salva o cadastro nem gera score.</p>
+        </section>
+    }
+    <div class="d-flex flex-wrap gap-3">
+        <button type="submit" asp-action="@acaoConferir" asp-route-id="@id" class="btn btn-outline-success">Conferir ocupação</button>
+        <button type="submit" class="btn btn-success">Salvar e gerar score</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+    <p class="small text-secondary mt-3">Os resultados são estimativas. Não garantem lucro, segurança da operação ou aprovação de crédito.</p>
+</form>

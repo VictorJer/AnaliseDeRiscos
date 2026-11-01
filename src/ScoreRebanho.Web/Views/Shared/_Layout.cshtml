@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
@@ -20,6 +20,10 @@
                 </button>
                 <div id="navegacao-principal" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Rebanhos" asp-action="Index">Meus rebanhos</a></li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
@@ -62,5 +66,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-

@@ -1,0 +1,17 @@
+@model CabecalhoRelatorioViewModel
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 my-4">
+    <div><h1>@(Model.Historico ? "Análise histórica" : "Análise do rebanho")</h1><h2 class="h4">@Model.Nome</h2><p class="text-secondary mb-0">@Model.Propriedade</p></div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-controller="Rebanhos" asp-action="Index" class="btn btn-outline-secondary">Meus rebanhos</a>
+        @if (Model.Id is { } id)
+        {
+            <a asp-controller="Rebanhos" asp-action="Editar" asp-route-id="@id" class="btn btn-outline-success">Editar dados</a>
+            <a asp-controller="Historico" asp-action="Detalhes" asp-route-id="@Model.UltimoScoreId" class="btn btn-outline-secondary">Abrir análise histórica</a>
+        }
+        <a asp-controller="Rebanhos" asp-action="Cadastrar" class="btn btn-success">Novo rebanho</a>
+    </div>
+</div>
+@if (Model.Historico)
+{
+    <p class="alert alert-info">Esta análise preserva os resultados e as premissas do cálculo original. A consulta não recalcula os valores.</p>
+}

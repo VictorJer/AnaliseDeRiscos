@@ -1,0 +1,41 @@
+@model RelatorioPecuaristaViewModel
+@{ ViewData["Title"] = "Resumo da análise"; var resumo = Model.Resumo; }
+<partial name="~/Views/Relatorios/_Cabecalho.cshtml" model="Model" />
+<section class="card border-success mb-4"><div class="card-body">
+    <p class="small text-secondary">@F.Data(resumo.CalculadaEmUtc) · Premissas @resumo.VersaoPremissas</p>
+    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@resumo.Score<span class="fs-5 text-secondary">/100</span></p>
+    <p class="h5">@F.Risco(resumo.Classificacao)</p><p class="mb-0">@resumo.ExplicacaoResumida</p>
+</div></section>
+<partial name="~/Views/Relatorios/_Alertas.cshtml" model="resumo.Alertas" />
+<div class="row g-4 mb-4">
+    <section class="col-lg-6"><div class="card h-100"><div class="card-body">
+        <h2 class="h4">Pasto e animais</h2>
+        <dl class="row mb-0">
+            <dt class="col-sm-7">Ocupação estimada</dt><dd class="col-sm-5">@F.Percentual(resumo.Capacidade.OcupacaoDecimal)</dd>
+            <dt class="col-sm-7">Capacidade da área</dt><dd class="col-sm-5">@F.Numero(resumo.Capacidade.CapacidadeUa) UA</dd>
+            <dt class="col-sm-7">Animais compatíveis com a área</dt><dd class="col-sm-5">@F.Numero(resumo.Capacidade.QuantidadeMaximaAnimais, 0)</dd>
+            <dt class="col-sm-7">Peso de venda por animal</dt><dd class="col-sm-5">@F.Numero(resumo.PesoVendaPorAnimalKg) kg</dd>
+        </dl>
+    </div></div></section>
+    <section class="col-lg-6"><div class="card h-100"><div class="card-body">
+        <h2 class="h4">Resumo financeiro estimado</h2>
+        <dl class="row mb-0">
+            <dt class="col-sm-7">Custo total da operação</dt><dd class="col-sm-5">@F.Moeda(resumo.Financeiro.CustoTotalReais)</dd>
+            <dt class="col-sm-7">Capital inicial</dt><dd class="col-sm-5">@F.Moeda(resumo.Financeiro.CapitalInicialReais)</dd>
+            <dt class="col-sm-7">Receita</dt><dd class="col-sm-5">@F.Moeda(resumo.Financeiro.ReceitaReais)</dd>
+            <dt class="col-sm-7">Lucro / prejuízo</dt><dd class="col-sm-5">@F.Moeda(resumo.Financeiro.LucroReais)</dd>
+            <dt class="col-sm-7">Margem sobre o custo</dt><dd class="col-sm-5">@F.Percentual(resumo.Financeiro.MargemDecimal)</dd>
+        </dl>
+    </div></div></section>
+</div>
+<section class="card mb-4"><div class="card-body">
+    <h2 class="h4">Preço de equilíbrio</h2>
+    <p class="h5">@F.Moeda(resumo.Financeiro.PrecoEquilibrioPorKgReais) por kg vivo</p>
+    <p class="mb-0">@resumo.Financeiro.ExplicacaoPrecoEquilibrio</p>
+</div></section>
+<section class="card mb-4"><div class="card-body">
+    <h2 class="h4">Cenário de queda no preço de venda</h2>
+    <p>Lucro / prejuízo estimado nesse cenário: <strong>@F.Moeda(resumo.LucroCenarioAdversoReais)</strong>.</p>
+    <p class="mb-0">Compare com o resultado de referência ao planejar a operação.</p>
+</div></section>
+<aside class="alert alert-secondary"><h2 class="h5">Limites da estimativa</h2><ul class="mb-0">@foreach (var aviso in resumo.Avisos) { <li>@aviso</li> }</ul></aside>

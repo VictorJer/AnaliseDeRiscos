@@ -35,7 +35,8 @@ public sealed class ContaTests
         Assert.AreEqual(1, claims.Count(c => c.Type == PerfisNegocio.TipoClaim));
         Assert.IsTrue(claims.Any(c => c.Type == PerfisNegocio.TipoClaim && c.Value == PerfisNegocio.Pecuarista));
         Assert.IsEmpty(await usuarios.GetRolesAsync(usuario));
-        StringAssert.Contains(await cliente.GetStringAsync("/"), "Você está conectado");
+        Assert.AreEqual("/Rebanhos", (await cliente.GetAsync("/")).Headers.Location?.OriginalString);
+        StringAssert.Contains(await cliente.GetStringAsync("/Rebanhos"), "Meus rebanhos");
     }
 
     [TestMethod]
@@ -100,8 +101,9 @@ public sealed class ContaTests
         Assert.AreEqual(HttpStatusCode.Redirect, resposta.StatusCode);
         Assert.AreEqual("/", resposta.Headers.Location?.OriginalString);
         Assert.AreEqual(HttpStatusCode.NotFound, (await cliente.GetAsync("/Conta/Sair")).StatusCode);
-        StringAssert.Contains(await cliente.GetStringAsync("/"), "Você está conectado");
-        var token = await ObterTokenAsync(cliente, "/");
+        Assert.AreEqual("/Rebanhos", (await cliente.GetAsync("/")).Headers.Location?.OriginalString);
+        StringAssert.Contains(await cliente.GetStringAsync("/Rebanhos"), "Meus rebanhos");
+        var token = await ObterTokenAsync(cliente, "/Rebanhos");
         var logout = await cliente.PostAsync("/Conta/Sair", new FormUrlEncodedContent(new Dictionary<string, string> { ["__RequestVerificationToken"] = token }));
         Assert.AreEqual(HttpStatusCode.Redirect, logout.StatusCode);
         StringAssert.Contains(await cliente.GetStringAsync("/"), "Cadastrar");

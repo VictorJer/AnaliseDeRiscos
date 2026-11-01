@@ -10,7 +10,11 @@ using ScoreRebanho.Web.Mapeamentos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(campo => $"Informe um número válido para {campo}.");
+    options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((_, campo) => $"O valor informado para {campo} é inválido.");
+});
 builder.Services.AddAutoMapper(config =>
 {
     var chave = builder.Configuration["AutoMapper:LicenseKey"];
@@ -21,6 +25,7 @@ builder.Services.AddScoped<CadastrarConta>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUsuarioAtual, UsuarioAtual>();
 builder.Services.AddScoped<CriarRebanho>();
+builder.Services.AddScoped<ConferirOcupacao>();
 builder.Services.AddScoped<ListarRebanhos>();
 builder.Services.AddScoped<ConsultarRebanho>();
 builder.Services.AddScoped<ConsultarEdicaoRebanho>();
@@ -63,6 +68,8 @@ if (!app.Environment.IsDevelopment())
 
 await app.Services.MigrarContasAsync();
 app.UseHttpsRedirection();
+app.UseRequestLocalization(new RequestLocalizationOptions()
+    .SetDefaultCulture("pt-BR").AddSupportedCultures("pt-BR").AddSupportedUICultures("pt-BR"));
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

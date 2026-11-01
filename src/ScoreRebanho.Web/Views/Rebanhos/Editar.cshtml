@@ -1,0 +1,16 @@
+@model RebanhoFormularioViewModel
+@{
+    ViewData["Title"] = "Editar rebanho";
+    ViewData["AcaoSalvar"] = "Editar";
+    ViewData["AcaoConferir"] = "ConferirEdicao";
+}
+<h1 class="mt-4">Editar rebanho</h1>
+<p class="text-secondary">Salvar recalcula a análise com as premissas vigentes e preserva os scores anteriores.</p>
+@if (Context.Response.StatusCode == 409)
+{
+    <div class="alert alert-warning" role="alert">
+        Os dados foram alterados em outra sessão. Seu preenchimento foi mantido.
+        <a asp-action="Editar" asp-route-id="@Model.Id" class="alert-link">Recarregar dados atuais</a>
+    </div>
+}
+<partial name="_Formulario" model="Model" />

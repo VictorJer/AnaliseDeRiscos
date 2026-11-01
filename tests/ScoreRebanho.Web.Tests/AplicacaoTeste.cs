@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +26,7 @@ internal sealed class AplicacaoTeste : WebApplicationFactory<Program>
         builder.ConfigureAppConfiguration((_, configuration) =>
             configuration.AddInMemoryCollection(new Dictionary<string, string?>
             {
+                ["Logging:LogLevel:Default"] = "Warning",
                 ["ConnectionStrings:Contas"] = $"Data Source={banco};Pooling=False"
             }));
     }
@@ -44,4 +45,3 @@ internal sealed class AplicacaoTeste : WebApplicationFactory<Program>
                 File.Delete(arquivo);
     }
 }
-

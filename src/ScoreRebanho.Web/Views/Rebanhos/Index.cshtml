@@ -1,0 +1,43 @@
+@model ListaRebanhosViewModel
+@{ ViewData["Title"] = "Meus rebanhos"; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4">
+    <div><h1>Meus rebanhos</h1><p class="text-secondary mb-0">Cadastre seu lote e acompanhe a análise estimada da operação.</p></div>
+    <a asp-action="Cadastrar" class="btn btn-success">Cadastrar rebanho</a>
+</div>
+@if (Model.Total == 0)
+{
+    <div class="border rounded-3 bg-light p-4 text-center">
+        <h2 class="h5">Você ainda não tem rebanhos cadastrados</h2>
+        <p>Informe os dados do terreno, do lote e do manejo para gerar sua primeira análise.</p>
+        <a asp-action="Cadastrar" class="btn btn-success">Cadastrar meu primeiro rebanho</a>
+    </div>
+}
+else
+{
+    <p>@Model.Total cadastro(s) · Página @Model.Pagina de @Model.Paginas</p>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <caption>Rebanhos da sua conta, ordenados pela última atualização.</caption>
+            <thead><tr><th scope="col">Rebanho</th><th scope="col">Propriedade</th><th scope="col">Última análise</th><th scope="col">Score</th><th scope="col">Ações</th></tr></thead>
+            <tbody>
+            @foreach (var item in Model.Itens)
+            {
+                <tr>
+                    <td class="fw-semibold">@item.Nome</td><td>@item.Propriedade</td><td>@F.Data(item.AtualizadoEmUtc)</td>
+                    <td>@item.Score/100 <span class="d-block small">@F.Risco(item.Classificacao)</span></td>
+                    <td><div class="d-flex gap-2 flex-wrap">
+                        <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">Consultar</a>
+                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Excluir</a>
+                    </div></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Paginação de rebanhos" class="d-flex gap-3 mb-4">
+        @if (Model.Pagina > 1) { <a asp-action="Index" asp-route-pagina="@(Model.Pagina - 1)" class="btn btn-outline-secondary">Anterior</a> }
+        @if (Model.Pagina < Model.Paginas) { <a asp-action="Index" asp-route-pagina="@(Model.Pagina + 1)" class="btn btn-outline-secondary">Próxima</a> }
+    </nav>
+}
+<p class="small text-secondary mt-4">O score é uma estimativa e não garante lucro ou aprovação de crédito.</p>

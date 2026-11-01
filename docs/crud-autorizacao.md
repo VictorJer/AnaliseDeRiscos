@@ -1,4 +1,4 @@
-﻿# CRUD e autorização por perfil
+# CRUD e autorização por perfil
 
 ## Casos de uso
 
@@ -20,9 +20,9 @@ ConsultarHistoricoProprio aplica a mesma autorização vigente sobre o snapshot 
 
 A memória textual das fórmulas passa a ser registrada no snapshot no momento do cálculo. Ela não é gerada novamente ao consultar o histórico. A adição é compatível com o formato JSON 1: snapshots anteriores sem esse campo continuam legíveis e não recebem fórmulas atuais inventadas.
 
-## Próxima etapa
+## Etapa MVC implementada
 
-Ainda não há rotas ou telas CRUD de rebanhos. Os controllers receberão ViewModels, usarão AutoMapper, interpretarão FluentResults e entregarão apenas o ViewModel autorizado. Escritas precisarão de POST e CSRF; exclusão precisará de confirmação. Os testes diretos desses endpoints e a verificação de HTML pertencem a essa entrega.
+As rotas e telas compartilhadas foram implementadas com ViewModels, AutoMapper, FluentResults, POST, CSRF e confirmação de exclusão. Os testes HTTP verificam autoria e conteúdo autorizado. Consulte [telas-crud.md](telas-crud.md) para rotas e verificações.
 
 A referência docs/ideias-prototipo-v6.md continua ausente. Ficam pendentes também comandos locais de Cooperativa/Administrador, alteração de senha e administração global de scores.
 
@@ -30,4 +30,4 @@ A referência docs/ideias-prototipo-v6.md continua ausente. Ficam pendentes tamb
 
 UsuarioAtual usa o principal autenticado para localizar a conta no Identity e busca os claims de perfil no store a cada operação. Um cookie com claim antigo de Cooperativa não mantém esse acesso após a conta voltar a Pecuarista. Contas inexistentes ou perfis ausentes, ambíguos ou desconhecidos não obtêm acesso pelo contrato. Administrador não substitui perfil de negócio nem autoria.
 
-Verificação desta entrega: 203 testes aprovados e build sem avisos/erros. A integração da Web cobre resolução de identidade e chamada dos casos de uso com Identity/SQLite isolados; as rotas e a verificação de conteúdo HTML continuam pendentes com as telas.
+Verificação atual: 230 testes aprovados e build sem avisos/erros. A integração da Web cobre resolução de identidade, chamadas dos casos de uso e endpoints HTTP/HTML com Identity/SQLite isolados.

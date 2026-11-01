@@ -1,0 +1,9 @@
+@model RebanhoFormularioViewModel
+@{
+    ViewData["Title"] = "Cadastrar rebanho";
+    ViewData["AcaoSalvar"] = "Cadastrar";
+    ViewData["AcaoConferir"] = "ConferirCadastro";
+}
+<h1 class="mt-4">Cadastrar rebanho</h1>
+<p class="text-secondary">Preencha os dados e confira a ocupação antes de salvar e gerar o score.</p>
+<partial name="_Formulario" model="Model" />
