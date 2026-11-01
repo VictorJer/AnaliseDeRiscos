@@ -88,3 +88,11 @@ Implementados os quatro componentes com premissas centralizadas: lotação, sani
 Verificação completa: build da solução em .local/verificacao sem avisos ou erros; 134 testes aprovados (116 Domain, 6 Application e 12 Web). Nenhuma alteração de fórmulas aprovadas ou de permissões.
 
 Ainda falta integrar as calculadoras no caso de uso de análise, gerar alertas/recomendações e registrar as premissas completas na resposta antes da persistência/histórico. Os valores derivados recebidos pelas calculadoras de domínio deverão ser produzidos pelo servidor; não são contratos HTTP. A camada Application ainda deverá traduzir entradas inválidas e estouro numérico em FluentResults. CRUD, telas de rebanhos e relatórios por perfil permanecem pendentes; a referência de interface docs/ideias-prototipo-v6.md continua ausente.
+
+## Incremento 7 — alertas e conjunto de premissas
+
+PremissasAnalise reúne as cinco partes da configuração e recusa versões divergentes ou parâmetros inválidos. AvaliadorRiscos gera códigos, explicações e recomendações determinísticas para prejuízo, superlotação, ausências sanitárias, margem baixa, prejuízo no cenário adverso, subocupação e rotação com piquetes insuficientes. Os limites reutilizam as premissas existentes; não foram alteradas fórmulas.
+
+Decisão localizada de apresentação dos alertas: prejuízo, superlotação, vacina/carrapato/vermífugo, margem, cenário adverso, subocupação e rotação. Essa ordem está coberta por testes. A referência docs/ideias-prototipo-v6.md está ausente, portanto a ordem visual detalhada do protótipo ainda deve ser conferida quando ela estiver disponível.
+
+Verificação: 126 testes de domínio passaram, incluindo 10 cenários de alertas.
