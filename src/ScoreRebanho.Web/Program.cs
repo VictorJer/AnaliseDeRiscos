@@ -1,3 +1,4 @@
+using ScoreRebanho.Web.Comandos;
 using Microsoft.AspNetCore.Identity;
 using ScoreRebanho.Application.Contas;
 using ScoreRebanho.Application.Simulacoes;
@@ -8,7 +9,21 @@ using ScoreRebanho.Infrastructure;
 using ScoreRebanho.Web;
 using ScoreRebanho.Web.Mapeamentos;
 
-var builder = WebApplication.CreateBuilder(args);
+ComandoContaLocal? comandoLocal = null;
+if (args.FirstOrDefault() == "contas")
+{
+    if (args.SequenceEqual(new[] { "contas", "ajuda" }))
+    {
+        Console.WriteLine(ComandoContaLocal.Ajuda);
+        return 0;
+    }
+    if (!ComandoContaLocal.TryParse(args, out comandoLocal))
+    {
+        Console.Error.WriteLine(ComandoContaLocal.Ajuda);
+        return 2;
+    }
+}
+var builder = WebApplication.CreateBuilder(comandoLocal is null ? args : Array.Empty<string>());
 
 builder.Services.AddControllersWithViews(options =>
 {
@@ -22,6 +37,7 @@ builder.Services.AddAutoMapper(config =>
         config.LicenseKey = chave;
 }, typeof(ContaProfile));
 builder.Services.AddScoped<CadastrarConta>();
+builder.Services.AddScoped<ExecutarComandoContaLocal>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUsuarioAtual, UsuarioAtual>();
 builder.Services.AddScoped<CriarRebanho>();
@@ -60,7 +76,25 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-var app = builder.Build();
+await using var app = builder.Build();
+
+if (comandoLocal is not null)
+{
+    await using var escopo = app.Services.CreateAsyncScope();
+    try
+    {
+        var resultado = await escopo.ServiceProvider.GetRequiredService<ExecutarComandoContaLocal>().ExecutarAsync(comandoLocal);
+        if (resultado.CodigoSaida == 0) Console.WriteLine(resultado.Mensagem);
+        else Console.Error.WriteLine(resultado.Mensagem);
+        return resultado.CodigoSaida;
+    }
+    catch (Exception erro)
+    {
+        app.Logger.LogError(erro, "Falha inesperada ao executar comando local de contas.");
+        Console.Error.WriteLine("Não foi possível executar o comando. Verifique os logs e a configuração do banco.");
+        return 1;
+    }
+}
 
 if (!app.Environment.IsDevelopment())
 {
@@ -81,5 +115,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 app.Run();
+return 0;
 
 public partial class Program { }

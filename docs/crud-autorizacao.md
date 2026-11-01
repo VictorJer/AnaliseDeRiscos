@@ -24,7 +24,7 @@ A memória textual das fórmulas passa a ser registrada no snapshot no momento d
 
 As rotas e telas compartilhadas foram implementadas com ViewModels, AutoMapper, FluentResults, POST, CSRF e confirmação de exclusão. Os testes HTTP verificam autoria e conteúdo autorizado. Consulte [telas-crud.md](telas-crud.md) para rotas e verificações.
 
-A referência docs/ideias-prototipo-v6.md continua ausente. Ficam pendentes também comandos locais de Cooperativa/Administrador e administração global de scores.
+A referência docs/ideias-prototipo-v6.md continua ausente. Os comandos locais de Cooperativa/Administrador foram implementados em [comandos-contas.md](comandos-contas.md). A administração global de scores continua pendente.
 
 ## Resolvedor da Web
 

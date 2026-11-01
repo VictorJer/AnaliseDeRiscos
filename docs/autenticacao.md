@@ -40,7 +40,7 @@ Foram adicionados testes MSTest da Application e de integração Web para cadast
 
 Neste ambiente, a restauração com APPDATA e cache de pacotes locais superou o erro de leitura da configuração do Windows, mas a conexão HTTPS ao NuGet foi bloqueada com NU1301. Build, execução das migrations, testes e inspeção visual em navegador dependem da restauração dos pacotes; não foram validados em execução.
 
-CRUD, relatórios e simulações avulsas foram implementados em incrementos posteriores. A alteração de senha está descrita abaixo. Comandos locais de habilitação de Cooperativa/Administrador continuam pendentes.
+CRUD, relatórios e simulações avulsas foram implementados em incrementos posteriores. A alteração de senha está descrita abaixo. Comandos locais de atribuição de Cooperativa/Administrador estão documentados em [comandos-contas.md](comandos-contas.md).
 
 ## Atualização da verificação
 

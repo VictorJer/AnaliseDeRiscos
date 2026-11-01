@@ -154,3 +154,7 @@ Implementados geração de score sem cadastro de rebanho, conferência, edição
 ## Incremento 15 — alteração de senha
 
 Implementada a tela autenticada com senha atual, nova senha e confirmação, usando UserManager.ChangePasswordAsync e renovação da sessão via Identity. Sem mudanças de schema ou regras de cálculo. Detalhes em [autenticacao.md](autenticacao.md). Build sem avisos/erros e 250 testes aprovados. Permanecem pendentes comandos locais de Cooperativa/Administrador, consulta administrativa global, tema e inspeção visual; a referência do protótipo continua ausente.
+
+## Incremento 16 — comandos locais de contas
+
+Implementados comandos explícitos para definir Pecuarista/Cooperativa e conceder Administrador a conta existente. Usam Identity, preservam a separação entre perfil e papel e não iniciam HTTP nem migrations. Instruções, códigos de saída e decisões em [comandos-contas.md](comandos-contas.md). Build sem avisos/erros e 266 testes aprovados, incluindo execução do DLL real sobre banco isolado. Nenhuma conta real foi alterada. Próxima etapa: consulta administrativa global de scores; tema, inspeção visual e referência do protótipo continuam pendentes.
