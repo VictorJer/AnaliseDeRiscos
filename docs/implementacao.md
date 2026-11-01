@@ -74,3 +74,9 @@ Implementada a composição de compra, manutenção, formação por insumo, rota
 Preservadas as convenções da SPEC 13: despesas usam animais iniciais; frascos sobre o volume total; aplicações incluem dia zero e último dia coincidente; verão aloca 1/5 da formação; capital inclui formação/rotação integrais e modificador; manutenção/arrendamento/suplementação ficam fora do capital. Rotação com menos de três piquetes continua gerando custo.
 
 Verificação: 78 testes de domínio aprovados, incluindo limites de aplicações, embalagens, suplementação, premissas inválidas, precisão e estouro numérico. Próximo incremento: indicadores financeiros e cenário adverso.
+
+## Incremento 5 — indicadores financeiros
+
+Implementados receita, lucro/prejuízo, margem sobre custo e preço de equilíbrio por kg vivo. A conversão para arroba reutiliza as premissas de produção. O cenário adverso reduz somente o preço em 10%, preservando peso e custo.
+
+Divisões sem denominador retornam indicador indisponível com explicação, sem inventar margem ou preço de equilíbrio. Valores negativos de entrada são recusados e prejuízo é preservado. Verificação: 88 testes de domínio aprovados. Próximo incremento: componentes e classificação do score.
