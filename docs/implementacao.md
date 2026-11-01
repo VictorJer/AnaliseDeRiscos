@@ -44,3 +44,11 @@ O documento docs/ideias-prototipo-v6.md citado pela SPEC não está disponível.
 - Testes MSTest adicionados, mas a execução foi impedida na restauração com NU1301 por bloqueio de rede ao NuGet.
 - Próximo incremento: completar os dados de entrada da simulação e suas validações; em seguida integrar cálculo e persistência antes de disponibilizar operações de salvar na interface.
 - As telas de listar, cadastrar, editar e excluir rebanhos permanecem pendentes. Não foram modificadas fórmulas ou permissões.
+
+## Incremento 2 — entradas completas da simulação
+
+DadosSimulacao reúne lotação, posse, arrendamento, pasto pronto, preço de compra, dias, raça e manejo sanitário em tipos imutáveis. A validação de lotação existente é reutilizada.
+
+Convenção explícita: terreno próprio não tem despesa de arrendamento; um valor residual não negativo é normalizado para zero. Valores negativos são recusados. Arrendado exige valor informado, permitindo zero. Preço de compra e dias devem ser positivos, conforme SPEC 13.
+
+Verificação: restauração autorizada concluída; dotnet test no projeto Domain.Tests passou com 48 testes. A compilação geral encontrou arquivos bloqueados pela aplicação Web aberta; a aplicação não foi encerrada.
