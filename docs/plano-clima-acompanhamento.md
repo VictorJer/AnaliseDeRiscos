@@ -2,7 +2,7 @@
 
 ## Situação
 
-Plano elaborado com as escolhas do usuário em 01/11/2026. As quatro etapas de implementação foram concluídas: localização opcional, mapa/busca/GPS, consulta com cache e telas de acompanhamento. Build e 325 testes MSTest passaram. A inspeção visual em navegador permanece pendente por bloqueio do Computer Use ao verificar a URL atual. Evidências, decisões técnicas adotadas e limites da verificação estão em [clima.md](clima.md). Fórmulas e premissas aprovadas permanecem vigentes.
+Plano elaborado com as escolhas do usuário em 01/11/2026. As quatro etapas de implementação foram concluídas: localização opcional, mapa/busca/GPS, consulta com cache e telas de acompanhamento. Build e 325 testes MSTest passaram. A inspeção posterior no navegador integrado do VS Code conferiu as novas telas em desktop/celular, nos temas claro/escuro, e identificou um ajuste de rolagem do mapa que foi corrigido e verificado. GPS em aparelho real, falhas de rede no navegador e execução visual sem JavaScript continuam pendentes. Evidências, decisões técnicas adotadas e limites da verificação estão em [clima.md](clima.md) e [verificacao-interface.md](verificacao-interface.md). Fórmulas e premissas aprovadas permanecem vigentes.
 
 ## Decisões aprovadas
 

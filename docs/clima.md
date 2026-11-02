@@ -50,3 +50,11 @@ Verificação final: `dotnet build ScoreRebanho.sln --artifacts-path .local/clim
 Foi iniciada e depois encerrada uma instância separada na porta 5187, com banco exclusivo em `.local/clima-preview`. A descoberta de superfícies informou host de navegador indisponível, mas identificou navegador nativo. Ao selecionar esse navegador, Computer Use encerrou a automação porque não conseguiu determinar com segurança a URL atual no Windows. Não foram realizadas ações posteriores no navegador, e nenhuma tela foi declarada visualmente aprovada.
 
 Permanecem pendentes a inspeção visual e a interação real em celular/desktop, nos dois temas, incluindo seleção no mapa, teclado e recusa de GPS. Os testes HTTP e a consulta pública da Open-Meteo não substituem essa inspeção. A aplicação original e seu banco não foram usados pela verificação.
+
+## Verificação posterior pelo VS Code
+
+A inspeção posterior conseguiu operar o navegador integrado do VS Code na instância isolada da porta 5188. Foram conferidos cartões, previsão real, formulários/mapa, temas claro/escuro e tamanhos 1366 × 768, 390 × 844 e 360 × 800. Seleção de ponto, busca com opções de municípios, remoção, seleção do centro e foco visível por Tab funcionaram. A mudança de tema permaneceu ao navegar.
+
+A rolagem sobre o mapa capturava a roda para zoom; foi corrigida com `scrollWheelZoom: false` e reconferida visualmente. Build sem avisos/erros e 325 testes MSTest passaram nesta sessão; após o ajuste, build, sintaxe JavaScript e quatro testes Web de mapa/layout passaram. O fluxo HTTP real da aplicação também foi validado com contas fictícias e Open-Meteo real, incluindo autorização e remoção do ponto.
+
+Essa inspeção supera o bloqueio anterior para as telas verificadas. GPS real, falhas de rede no navegador e execução visual com JavaScript desativado não foram validados. Evidências e delimitação do escopo em [verificacao-interface.md](verificacao-interface.md).

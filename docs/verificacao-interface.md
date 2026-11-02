@@ -1,5 +1,24 @@
 # Verificação da interface
 
+## Validação posterior no navegador integrado do VS Code — 01/11/2026
+
+A inspeção das novas telas foi realizada pelo navegador integrado do VS Code, acessado como aplicativo nativo. Essa rota funcionou apesar da indisponibilidade do host de automação de navegador independente. Foi usada exclusivamente a instância `http://127.0.0.1:5188`, com banco separado em `.local/clima-vscode-preview/validacao.db`, conta fictícia e ponto público de Lages. A instância antiga na porta 5288 não foi modificada.
+
+Verificações observadas em tela:
+
+- Acompanhamento com cartão, identificação do rebanho e ação Ver previsão.
+- Sete dias reais de previsão em desktop (1366 × 768, além de 1366 × 763 na primeira inspeção), e larguras de 390 × 844 e 360 × 800. Cartões, unidades, fonte, avisos e ações permaneceram legíveis, sem corte horizontal observado.
+- Temas claro/escuro, troca no seletor, manutenção da preferência entre páginas e abertura/fechamento do menu em tela estreita.
+- Formulário de edição e mapa real em desktop escuro e celular claro; seleção por clique preencheu o par de coordenadas com seis casas decimais.
+- Busca real de Lages, seleção explícita de Santa Catarina entre resultados de estados diferentes e posicionamento do ponto de referência.
+- Remover localização retirou o marcador e esvaziou latitude/longitude; Usar centro do mapa voltou a preencher o par; Tab avançou ao campo de latitude com foco visível.
+
+Foi observado que a roda do mouse sobre o mapa alterava o zoom ao tentar percorrer o formulário. A configuração foi ajustada para `scrollWheelZoom: false`, preservando botões de zoom. Após recompilar, reiniciar somente a instância isolada e recarregar, rolar sobre o mapa passou a percorrer a página.
+
+Verificação pelo terminal: build sem avisos/erros, sintaxe JavaScript válida e 325 testes MSTest aprovados novamente (131 Domain, 67 Application, 38 Infrastructure e 89 Web). Após o ajuste de rolagem, build e quatro testes Web de mapa/layout passaram. O fluxo HTTP real pela aplicação também aprovou cadastro fictício, busca de município, previsão de sete dias, acesso de terceiro recusado, par incompleto recusado, remoção do ponto e preservação da versão do rebanho durante a consulta da previsão.
+
+Limites: não foi solicitada a localização real do aparelho. Permissão/recusa e precisão do GPS em dispositivo real continuam pendentes. O comportamento sem JavaScript foi coberto pelo fluxo HTTP, sem desativar JavaScript no navegador desta inspeção. Sincronização entre abas, falhas de rede em navegador e o roteiro geral de todas as telas antigas continuam com suas situações próprias; esta validação não os declara concluídos.
+
 ## Incremento de localização e clima — 01/11/2026
 
 Implementados mapa opcional, busca de município/GPS, previsão de sete dias e acompanhamento. Build sem avisos/erros e 325 testes MSTest aprovados; detalhes em [clima.md](clima.md). A consulta real da previsão foi conferida com o ponto público do município de Lages.

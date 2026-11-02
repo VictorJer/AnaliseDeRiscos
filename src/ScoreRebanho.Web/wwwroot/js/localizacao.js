@@ -30,7 +30,7 @@
     try {
         if (!window.L) throw new Error("Mapa indisponível");
         const lat = ler(latitude), lon = ler(longitude), temPonto = pontoValido(lat, lon);
-        mapa = L.map("mapa-localizacao", { center: temPonto ? [lat, lon] : [-27.81, -50.32], zoom: temPonto ? 14 : 7 });
+        mapa = L.map("mapa-localizacao", { center: temPonto ? [lat, lon] : [-27.81, -50.32], zoom: temPonto ? 14 : 7, scrollWheelZoom: false });
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).on("tileerror", () => { estado.textContent = "O mapa está indisponível. Tente buscar o município, usar GPS ou informar as coordenadas."; }).addTo(mapa);
