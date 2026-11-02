@@ -39,6 +39,8 @@ builder.Services.AddAutoMapper(config =>
         config.LicenseKey = chave;
 }, typeof(ContaProfile));
 builder.Services.AdicionarConsultaMunicipios();
+builder.Services.AdicionarConsultaPrevisao();
+builder.Services.AddScoped<ScoreRebanho.Application.Clima.ConsultarPrevisaoRebanho>();
 builder.Services.AddScoped<ScoreRebanho.Application.Localizacao.BuscarMunicipios>();
 builder.Services.AddRateLimiter(options =>
 {

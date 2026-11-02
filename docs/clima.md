@@ -24,3 +24,15 @@ Referências técnicas consultadas:
 - https://operations.osmfoundation.org/policies/tiles/
 - https://open-meteo.com/en/docs/geocoding-api
 - https://open-meteo.com/en/terms
+
+## Entrega 3 — consulta meteorológica e cache
+
+A Application autoriza a consulta do rebanho e usa somente o ponto salvo. A Infrastructure consulta sete dias de mínimas/máximas de temperatura em °C, precipitação em mm e velocidade máxima diária do vento a 10 m em km/h (não rajadas). Datas e fuso vêm da fonte. A hora exibida é a conclusão da consulta ao fornecedor, não o horário de geração do modelo meteorológico.
+
+Cache em memória, limitado a 256 pontos, reutiliza somente respostas completas e válidas por menos de 30 minutos. Trocar coordenadas muda a chave; autorizar o usuário é obrigatório também nos acertos do cache. Reiniciar a aplicação perde o cache. Não há tarefa periódica nem gravação de previsões no SQLite. Resposta incompleta, unidade inesperada ou falha externa produz indisponibilidade, sem zeros ou exemplos inventados. O cancelamento do solicitante é propagado e o timeout externo é de dez segundos.
+
+O fuso é solicitado por `timezone=auto`. Datas consecutivas dos sete dias e unidades são verificadas antes de aceitar a resposta. A previsão acompanha o ponto cadastrado; não constitui alteração retroativa das análises históricas.
+
+Verificação: quatro testes Application e quatro Infrastructure aprovados, incluindo perfis, autoria, ausência de ponto, indisponibilidade, expiração no limite de 30 minutos, troca de coordenadas, unidades, dados ausentes, timeout e cancelamento. Consulta real ao endpoint de previsão com o ponto público de Lages retornou sete dias e o fuso America/Sao_Paulo. Essas consultas não usaram localização de usuário nem alteraram banco real.
+
+Documentação técnica: https://open-meteo.com/en/docs

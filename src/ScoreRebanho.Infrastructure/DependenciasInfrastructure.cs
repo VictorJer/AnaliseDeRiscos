@@ -14,6 +14,19 @@ namespace ScoreRebanho.Infrastructure;
 
 public static class DependenciasInfrastructure
 {
+    public static IServiceCollection AdicionarConsultaPrevisao(this IServiceCollection servicos)
+    {
+        servicos.AddSingleton(TimeProvider.System);
+        servicos.AddSingleton<Clima.CachePrevisoes>();
+        servicos.AddHttpClient<ScoreRebanho.Application.Clima.IConsultaPrevisao, Clima.OpenMeteoPrevisao>(cliente =>
+        {
+            cliente.BaseAddress = new Uri("https://api.open-meteo.com/");
+            cliente.Timeout = TimeSpan.FromSeconds(10);
+            cliente.DefaultRequestHeaders.UserAgent.ParseAdd("ScoreRebanho-Demonstracao/1.0");
+        });
+        return servicos;
+    }
+
     public static IServiceCollection AdicionarConsultaMunicipios(this IServiceCollection servicos)
     {
         servicos.AddHttpClient<ScoreRebanho.Application.Localizacao.IConsultaMunicipios, ScoreRebanho.Infrastructure.Localizacao.OpenMeteoMunicipios>(cliente =>
