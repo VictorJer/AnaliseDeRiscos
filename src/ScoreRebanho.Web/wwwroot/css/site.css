@@ -23,6 +23,16 @@ html {
   --bs-btn-active-border-color: var(--bs-success-text-emphasis);
 }
 
+[data-bs-theme="dark"] .btn-outline-secondary {
+  --bs-btn-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-border-color: var(--bs-secondary-text-emphasis);
+}
+
+[data-bs-theme="dark"] .btn-outline-danger {
+  --bs-btn-color: var(--bs-danger-text-emphasis);
+  --bs-btn-border-color: var(--bs-danger-text-emphasis);
+}
+
 .navbar-brand {
   white-space: normal;
 }
