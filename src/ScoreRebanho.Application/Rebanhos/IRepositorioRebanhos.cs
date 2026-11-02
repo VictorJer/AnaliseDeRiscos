@@ -7,9 +7,9 @@ namespace ScoreRebanho.Application.Rebanhos;
 public interface IRepositorioRebanhos
 {
     Task<RebanhoGravadoDto> CriarAsync(string autorId, IdentificacaoRebanho identificacao,
-        AnaliseCompletaDto analise, CancellationToken cancellationToken = default);
+        AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null);
     Task<ResultadoGravacaoRebanho> AtualizarAsync(Guid id, string autorId, Guid versaoEsperada,
-        IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default);
+        IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null);
     Task<EstadoGravacaoRebanho> ExcluirAsync(Guid id, string autorId, Guid versaoEsperada,
         CancellationToken cancellationToken = default);
     Task<RebanhoPersistidoDto?> ConsultarAsync(Guid id, string autorId, CancellationToken cancellationToken = default);

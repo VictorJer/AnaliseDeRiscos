@@ -78,21 +78,21 @@ internal sealed class CenarioRebanhos
             UltimoToken = token;
         }
 
-        public Task<RebanhoGravadoDto> CriarAsync(string autorId, IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default)
+        public Task<RebanhoGravadoDto> CriarAsync(string autorId, IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null)
         {
             Chamada(autorId, cancellationToken);
             if (FalharCriacao)
                 throw new InvalidOperationException("Defeito simulado.");
             var salvo = new RebanhoGravadoDto(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             registros[(salvo.Id, autorId)] = new(salvo.Id, identificacao.Nome, identificacao.Propriedade,
-                salvo.Versao, salvo.UltimoScoreId, analise.CalculadaEmUtc, analise.CalculadaEmUtc, analise);
+                salvo.Versao, salvo.UltimoScoreId, analise.CalculadaEmUtc, analise.CalculadaEmUtc, analise, localizacao?.Latitude, localizacao?.Longitude);
             historicos[(salvo.UltimoScoreId, autorId)] = new(salvo.UltimoScoreId, autorId, salvo.Id, identificacao.Nome,
                 identificacao.Propriedade, analise.CalculadaEmUtc, analise);
             Gravacoes++;
             return Task.FromResult(salvo);
         }
 
-        public Task<ResultadoGravacaoRebanho> AtualizarAsync(Guid id, string autorId, Guid versaoEsperada, IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default)
+        public Task<ResultadoGravacaoRebanho> AtualizarAsync(Guid id, string autorId, Guid versaoEsperada, IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null)
         {
             Chamada(autorId, cancellationToken);
             if (RespostaAtualizacao is not null)
@@ -103,7 +103,7 @@ internal sealed class CenarioRebanhos
             {
                 Nome = identificacao.Nome, Propriedade = identificacao.Propriedade,
                 Versao = salvo.Versao, UltimoScoreId = salvo.UltimoScoreId,
-                AtualizadoEmUtc = analise.CalculadaEmUtc, Analise = analise
+                AtualizadoEmUtc = analise.CalculadaEmUtc, Analise = analise, Latitude = localizacao?.Latitude, Longitude = localizacao?.Longitude
             };
             historicos[(salvo.UltimoScoreId, autorId)] = new(salvo.UltimoScoreId, autorId, id,
                 identificacao.Nome, identificacao.Propriedade, analise.CalculadaEmUtc, analise);
@@ -131,7 +131,7 @@ internal sealed class CenarioRebanhos
         {
             Chamada(autorId, cancellationToken);
             var itens = registros.Where(r => r.Key.Autor == autorId).Select(r => r.Value)
-                .Select(r => new ItemListaRebanhosDto(r.Id, r.Nome, r.Propriedade, r.AtualizadoEmUtc, r.Analise.Score.Total, r.Analise.Score.Classificacao)).ToArray();
+                .Select(r => new ItemListaRebanhosDto(r.Id, r.Nome, r.Propriedade, r.AtualizadoEmUtc, r.Analise.Score.Total, r.Analise.Score.Classificacao, r.Latitude, r.Longitude)).ToArray();
             return Task.FromResult(new PaginaRebanhosDto(pagina, 20, itens.Length, Array.AsReadOnly(itens)));
         }
 

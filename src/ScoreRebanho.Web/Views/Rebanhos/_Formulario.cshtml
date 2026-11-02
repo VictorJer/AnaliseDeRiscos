@@ -23,6 +23,22 @@
             </div>
         </div>
     </fieldset>
+    <fieldset class="card mb-4" id="localizacao">
+        <legend class="card-header h5 mb-0">Localiza??o da propriedade (opcional)</legend>
+        <div class="card-body row g-3">
+            <p class="text-body-secondary mb-0">Informe o ponto para consultar a previs?o do tempo. Deixe ambos os campos vazios para continuar sem localiza??o. Use v?rgula nos decimais.</p>
+            <div class="col-md-6">
+                <label asp-for="Latitude" class="form-label"></label>
+                <input asp-for="Latitude" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Latitude" class="text-danger-emphasis"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Longitude" class="form-label"></label>
+                <input asp-for="Longitude" class="form-control" type="text" inputmode="decimal" />
+                <span asp-validation-for="Longitude" class="text-danger-emphasis"></span>
+            </div>
+        </div>
+    </fieldset>
     @Html.EditorFor(m => m.Entradas)
     <partial name="_ConferenciaOcupacao" model="Model.Conferencia" />
     <div class="d-flex flex-wrap gap-3">

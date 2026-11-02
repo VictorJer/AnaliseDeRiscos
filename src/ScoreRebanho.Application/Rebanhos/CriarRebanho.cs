@@ -19,10 +19,13 @@ public sealed class CriarRebanho(IUsuarioAtual usuarioAtual, IRepositorioRebanho
             return Result.Fail<RebanhoGravadoDto>(identificacao.Errors);
         if (entrada.Entradas is null)
             return Result.Fail<RebanhoGravadoDto>(FalhasRebanhos.Entrada("Entradas", "Informe os dados da simulação."));
+        var localizacao = FalhasRebanhos.Localizacao(entrada.Latitude, entrada.Longitude);
+        if (localizacao.IsFailed)
+            return Result.Fail<RebanhoGravadoDto>(localizacao.Errors);
         var analise = calcular.Executar(entrada.Entradas);
         if (analise.IsFailed)
             return Result.Fail<RebanhoGravadoDto>(analise.Errors);
-        var salvo = await repositorio.CriarAsync(usuario.Value.Id, identificacao.Value, analise.Value, cancellationToken);
+        var salvo = await repositorio.CriarAsync(usuario.Value.Id, identificacao.Value, analise.Value, cancellationToken, localizacao.Value);
         return Result.Ok(salvo);
     }
 }

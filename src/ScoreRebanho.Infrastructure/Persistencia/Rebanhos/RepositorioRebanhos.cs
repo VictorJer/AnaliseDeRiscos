@@ -12,11 +12,11 @@ public sealed class RepositorioRebanhos(ContasDbContext contexto) : IRepositorio
     private const int TamanhoPagina = 20;
 
     public async Task<RebanhoGravadoDto> CriarAsync(string autorId, IdentificacaoRebanho identificacao,
-        AnaliseCompletaDto analise, CancellationToken cancellationToken = default)
+        AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null)
     {
         ArgumentNullException.ThrowIfNull(analise);
         var scoreId = Guid.NewGuid();
-        var rebanho = Rebanho.Criar(autorId, identificacao, scoreId, analise.CalculadaEmUtc);
+        var rebanho = Rebanho.Criar(autorId, identificacao, scoreId, analise.CalculadaEmUtc, localizacao);
         var score = ScoreHistoricoRegistro.Criar(scoreId, autorId, analise, rebanho.Id, identificacao);
         contexto.Add(score);
         contexto.Add(rebanho);
@@ -26,7 +26,7 @@ public sealed class RepositorioRebanhos(ContasDbContext contexto) : IRepositorio
     }
 
     public async Task<ResultadoGravacaoRebanho> AtualizarAsync(Guid id, string autorId, Guid versaoEsperada,
-        IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default)
+        IdentificacaoRebanho identificacao, AnaliseCompletaDto analise, CancellationToken cancellationToken = default, LocalizacaoRebanho? localizacao = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(autorId);
         ArgumentNullException.ThrowIfNull(identificacao);
@@ -39,7 +39,7 @@ public sealed class RepositorioRebanhos(ContasDbContext contexto) : IRepositorio
 
         var identificacaoAnterior = rebanho.Identificacao;
         var score = ScoreHistoricoRegistro.Criar(Guid.NewGuid(), autorId, analise, rebanho.Id, identificacao);
-        rebanho.Atualizar(identificacao, score.Id, analise.CalculadaEmUtc);
+        rebanho.Atualizar(identificacao, score.Id, analise.CalculadaEmUtc, localizacao);
         contexto.Add(score);
         try
         {
@@ -88,7 +88,7 @@ public sealed class RepositorioRebanhos(ContasDbContext contexto) : IRepositorio
             return null;
         var rebanho = registro.Rebanho;
         return new(rebanho.Id, rebanho.Identificacao.Nome, rebanho.Identificacao.Propriedade, rebanho.Versao,
-            rebanho.UltimoScoreId, rebanho.CriadoEmUtc, rebanho.AtualizadoEmUtc, registro.Score.LerAnalise());
+            rebanho.UltimoScoreId, rebanho.CriadoEmUtc, rebanho.AtualizadoEmUtc, registro.Score.LerAnalise(), rebanho.Latitude, rebanho.Longitude);
     }
 
     public async Task<PaginaRebanhosDto> ListarAsync(string autorId, int pagina, CancellationToken cancellationToken = default)
@@ -105,7 +105,7 @@ public sealed class RepositorioRebanhos(ContasDbContext contexto) : IRepositorio
             .Join(contexto.Set<ScoreHistoricoRegistro>().AsNoTracking(),
                 r => new { Id = r.UltimoScoreId, r.AutorId }, s => new { s.Id, s.AutorId },
                 (r, s) => new ItemListaRebanhosDto(r.Id, r.Identificacao.Nome, r.Identificacao.Propriedade,
-                    r.AtualizadoEmUtc, s.ScoreTotal, (ClassificacaoRisco)s.Classificacao))
+                    r.AtualizadoEmUtc, s.ScoreTotal, (ClassificacaoRisco)s.Classificacao, r.Latitude, r.Longitude))
             .ToListAsync(cancellationToken);
         return new(pagina, TamanhoPagina, total, itens.AsReadOnly());
     }

@@ -24,6 +24,24 @@ internal static class FalhasRebanhos
         }
     }
 
+    internal static Result<LocalizacaoRebanho?> Localizacao(decimal? latitude, decimal? longitude)
+    {
+        if (latitude is null && longitude is null)
+            return Result.Ok<LocalizacaoRebanho?>(null);
+        if (latitude is null || longitude is null)
+            return Result.Fail<LocalizacaoRebanho?>(Entrada(latitude is null ? "Latitude" : "Longitude", "Informe latitude e longitude ou deixe ambas vazias."));
+        try
+        {
+            return Result.Ok<LocalizacaoRebanho?>(new(latitude.Value, longitude.Value));
+        }
+        catch (ArgumentOutOfRangeException erro)
+        {
+            var campo = erro.ParamName == "latitude" ? "Latitude" : "Longitude";
+            return Result.Fail<LocalizacaoRebanho?>(Entrada(campo, campo == "Latitude"
+                ? "A latitude deve estar entre -90 e 90 graus." : "A longitude deve estar entre -180 e 180 graus."));
+        }
+    }
+
     internal static Result<RebanhoGravadoDto> Gravacao(ResultadoGravacaoRebanho resultado) => resultado.Estado switch
     {
         EstadoGravacaoRebanho.Sucesso when resultado.Rebanho is not null => Result.Ok(resultado.Rebanho),

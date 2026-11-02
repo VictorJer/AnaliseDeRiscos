@@ -394,3 +394,11 @@ A implementação deve aplicar Clean Code nas quatro camadas existentes:
 - Testes focados no comportamento de negócio, nas permissões e na persistência atômica, preservados durante refatorações.
 
 A revisão de código deve verificar essas diretrizes e as dependências entre camadas. Clean Code não altera fórmulas, premissas, permissões ou escopo aprovados. As orientações detalhadas de implementação estão em AGENTS.md.
+
+## 19. Amplia??o aprovada ? localiza??o e acompanhamento meteorol?gico
+
+Conforme escolhas do usu?rio, localiza??o e integra??o meteorol?gica passam a integrar esta entrega, especializando as exclus?es anteriores. Cada rebanho pode ter um ponto opcional (latitude/longitude), selecionado em mapa, busca de munic?pio ou GPS mediante a??o expl?cita. Registros sem ponto continuam v?lidos. N?o h? contorno de ?rea nem cadastro separado de propriedades.
+
+Acompanhamento lista somente rebanhos pr?prios em cart?es e oferece Ver previs?o. Os detalhes consultam sete dias de temperatura m?nima/m?xima, precipita??o e vento para o ponto salvo. Sem localiza??o, orientar sua inclus?o na edi??o. Open-Meteo ser? usada na demonstra??o, com atribui??o da fonte. A consulta acontece ao abrir detalhes e resultados bem-sucedidos s?o reutilizados por at? 30 minutos; exibir momento da consulta. Falhas n?o geram dados fict?cios e n?o impedem o c?lculo do score.
+
+Autoria ? validada no servidor para todos os perfis, inclusive Administrador. Alterar localiza??o pelo CRUD preserva as regras de concorr?ncia e de gera??o de hist?rico. Previs?es n?o substituem snapshots hist?ricos, nem alteram f?rmulas, score, mortalidade ou GMD. Alertas clim?ticos, diagn?stico geogr?fico, mercado e IA permanecem fora desta entrega. Plano e crit?rios de aceite: docs/plano-clima-acompanhamento.md.

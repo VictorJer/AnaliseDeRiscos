@@ -23,6 +23,8 @@ public sealed class ItemListaRebanhosViewModel
     public string Nome { get; set; } = "";
     public string Propriedade { get; set; } = "";
     public DateTimeOffset AtualizadoEmUtc { get; set; }
+    public decimal? Latitude { get; set; }
+    public decimal? Longitude { get; set; }
     public int Score { get; set; }
     public string Classificacao { get; set; } = "";
 }

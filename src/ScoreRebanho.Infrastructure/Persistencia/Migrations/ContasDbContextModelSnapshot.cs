@@ -230,6 +230,12 @@ namespace ScoreRebanho.Infrastructure.Persistencia.Migrations
                     b.Property<long>("CriadoEmUtc")
                         .HasColumnType("INTEGER");
 
+                    b.Property<decimal?>("Latitude")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Longitude")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("UltimoScoreId")
                         .HasColumnType("TEXT");
 

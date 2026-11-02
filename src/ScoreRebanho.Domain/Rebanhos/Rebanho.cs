@@ -5,6 +5,8 @@ public sealed class Rebanho
     public Guid Id { get; private set; }
     public string AutorId { get; private set; } = "";
     public IdentificacaoRebanho Identificacao { get; private set; } = null!;
+    public decimal? Latitude { get; private set; }
+    public decimal? Longitude { get; private set; }
     public Guid UltimoScoreId { get; private set; }
     public Guid Versao { get; private set; }
     public DateTimeOffset CriadoEmUtc { get; private set; }
@@ -13,7 +15,7 @@ public sealed class Rebanho
     private Rebanho() { }
 
     public static Rebanho Criar(string autorId, IdentificacaoRebanho identificacao,
-        Guid scoreId, DateTimeOffset calculadoEm)
+        Guid scoreId, DateTimeOffset calculadoEm, LocalizacaoRebanho? localizacao = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(autorId);
         ArgumentNullException.ThrowIfNull(identificacao);
@@ -23,15 +25,18 @@ public sealed class Rebanho
         return new()
         {
             Id = Guid.NewGuid(), AutorId = autorId, Identificacao = identificacao,
+            Latitude = localizacao?.Latitude, Longitude = localizacao?.Longitude,
             UltimoScoreId = scoreId, Versao = Guid.NewGuid(), CriadoEmUtc = data, AtualizadoEmUtc = data
         };
     }
 
-    public void Atualizar(IdentificacaoRebanho identificacao, Guid scoreId, DateTimeOffset calculadoEm)
+    public void Atualizar(IdentificacaoRebanho identificacao, Guid scoreId, DateTimeOffset calculadoEm, LocalizacaoRebanho? localizacao = null)
     {
         ArgumentNullException.ThrowIfNull(identificacao);
         if (scoreId == Guid.Empty)
             throw new ArgumentException("Informe o identificador do score.", nameof(scoreId));
+        Latitude = localizacao?.Latitude;
+        Longitude = localizacao?.Longitude;
         Identificacao = identificacao;
         UltimoScoreId = scoreId;
         AtualizadoEmUtc = calculadoEm.ToUniversalTime();

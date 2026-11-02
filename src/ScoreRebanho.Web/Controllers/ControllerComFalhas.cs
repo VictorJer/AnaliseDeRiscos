@@ -20,7 +20,7 @@ public abstract class ControllerComFalhas : Controller
         foreach (var erro in erros)
         {
             var campo = erro.Metadata.GetValueOrDefault("Campo") as string ?? "";
-            if (campo.Length > 0 && campo is not ("Nome" or "Propriedade" or "Pagina" or "Entradas"))
+            if (campo.Length > 0 && campo is not ("Nome" or "Propriedade" or "Pagina" or "Entradas" or "Latitude" or "Longitude"))
                 campo = "Entradas." + campo;
             ModelState.AddModelError(campo, erro.Message);
         }

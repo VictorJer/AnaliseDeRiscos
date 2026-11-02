@@ -17,6 +17,12 @@ public sealed class RebanhoFormularioViewModel
     public string Propriedade { get; set; } = "";
     [Required(ErrorMessage = "Informe os dados da simulação.")]
     public SimulacaoViewModel Entradas { get; set; } = new();
+    [Range(typeof(decimal), "-90", "90", ErrorMessage = "A latitude deve estar entre -90 e 90 graus.")]
+    [Display(Name = "Latitude (graus)")]
+    public decimal? Latitude { get; set; }
+    [Range(typeof(decimal), "-180", "180", ErrorMessage = "A longitude deve estar entre -180 e 180 graus.")]
+    [Display(Name = "Longitude (graus)")]
+    public decimal? Longitude { get; set; }
     [BindNever]
     public ConferenciaOcupacaoViewModel? Conferencia { get; set; }
 }

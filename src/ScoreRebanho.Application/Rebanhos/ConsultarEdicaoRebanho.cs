@@ -14,6 +14,6 @@ public sealed class ConsultarEdicaoRebanho(IUsuarioAtual usuarioAtual, IReposito
         if (consulta.IsFailed)
             return Result.Fail<DadosEdicaoRebanhoDto>(consulta.Errors);
         var rebanho = consulta.Value.Rebanho;
-        return Result.Ok(new DadosEdicaoRebanhoDto(rebanho.Id, rebanho.Versao, rebanho.Nome, rebanho.Propriedade, rebanho.Analise.Entradas));
+        return Result.Ok(new DadosEdicaoRebanhoDto(rebanho.Id, rebanho.Versao, rebanho.Nome, rebanho.Propriedade, rebanho.Analise.Entradas, rebanho.Latitude, rebanho.Longitude));
     }
 }

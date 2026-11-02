@@ -279,9 +279,32 @@ public sealed class RepositorioRebanhosTests
         await contexto.SaveChangesAsync();
         await contexto.Database.MigrateAsync();
         Assert.IsNotNull(await contexto.Users.SingleOrDefaultAsync(u => u.Id == "preservado"));
-        Assert.HasCount(2, (await contexto.Database.GetAppliedMigrationsAsync()).ToArray());
+        CollectionAssert.AreEqual(contexto.Database.GetMigrations().ToArray(), (await contexto.Database.GetAppliedMigrationsAsync()).ToArray());
         Assert.IsFalse(contexto.Database.HasPendingModelChanges());
     }
+    [TestMethod]
+    public async Task MigrationPreservaRebanhoAntigoSemLocalizacao()
+    {
+        await using var contexto = new ContasDbContextFactory().CreateDbContext([]);
+        await contexto.Database.OpenConnectionAsync();
+        var migrador = contexto.GetService<Microsoft.EntityFrameworkCore.Migrations.IMigrator>();
+        await migrador.MigrateAsync("20261101052810_PersistirRebanhosEScores");
+        contexto.Users.Add(new Microsoft.AspNetCore.Identity.IdentityUser { Id = "autor", UserName = "autor@example.com" });
+        await contexto.SaveChangesAsync();
+        var id = Guid.NewGuid();
+        var scoreId = Guid.NewGuid();
+        var json = JsonSerializer.Serialize(Analise());
+        await contexto.Database.ExecuteSqlInterpolatedAsync($"INSERT INTO ScoresHistoricos (Id, AutorId, CalculadoEmUtc, VersaoPremissas, VersaoFormato, ScoreTotal, Classificacao, AnaliseJson) VALUES ({scoreId}, {"autor"}, {Data.UtcTicks}, {"1.0"}, {1}, {80}, {0}, {json})");
+        await contexto.Database.ExecuteSqlInterpolatedAsync($"INSERT INTO Rebanhos (Id, AutorId, Nome, Propriedade, UltimoScoreId, Versao, CriadoEmUtc, AtualizadoEmUtc) VALUES ({id}, {"autor"}, {"Antigo"}, {"Fazenda"}, {scoreId}, {Guid.NewGuid()}, {Data.UtcTicks}, {Data.UtcTicks})");
+        await contexto.Database.MigrateAsync();
+        var rebanho = await new ScoreRebanho.Infrastructure.Persistencia.Rebanhos.RepositorioRebanhos(contexto).ConsultarAsync(id, "autor");
+        Assert.IsNotNull(rebanho);
+        Assert.AreEqual("Antigo", rebanho.Nome);
+        Assert.IsNull(rebanho.Latitude);
+        Assert.IsNull(rebanho.Longitude);
+        Assert.AreEqual(json, JsonSerializer.Serialize(rebanho.Analise));
+    }
+
     private static Task<int> ContarHistoricosAsync(IServiceProvider servicos) =>
         servicos.GetRequiredService<ContasDbContext>().Database.SqlQueryRaw<int>("SELECT COUNT(*) AS Value FROM ScoresHistoricos").SingleAsync();
 }
