@@ -6,7 +6,7 @@ namespace ScoreRebanho.Application.Clima;
 
 public sealed record ConsultarPrevisaoDto(Guid Id);
 public sealed record DiaPrevisaoDto(DateOnly Data, decimal TemperaturaMinimaCelsius, decimal TemperaturaMaximaCelsius,
-    decimal PrecipitacaoMilimetros, decimal VentoMaximoQuilometrosHora);
+    decimal PrecipitacaoMilimetros, decimal VentoMaximoQuilometrosHora, int? CodigoTempo = null);
 public sealed record PrevisaoDto(DateTimeOffset ConsultadaEmUtc, string FusoHorario, IReadOnlyList<DiaPrevisaoDto> Dias);
 public sealed record PrevisaoRebanhoDto(Guid Id, string Nome, string Propriedade, decimal Latitude, decimal Longitude, PrevisaoDto Previsao);
 

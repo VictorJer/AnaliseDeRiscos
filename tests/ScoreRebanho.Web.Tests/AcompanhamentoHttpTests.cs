@@ -32,6 +32,10 @@ public sealed class AcompanhamentoHttpTests
         StringAssert.Contains(html, "10,0 °C");
         StringAssert.Contains(html, "km/h");
         StringAssert.Contains(html, "Open-Meteo");
+        StringAssert.Contains(html, "Tempestade");
+        StringAssert.Contains(html, "Céu limpo");
+        StringAssert.Contains(html, "icone-tempo");
+        StringAssert.Contains(html, "aria-hidden=\"true\"");
         Assert.DoesNotContain("custos-detalhados", html);
         Assert.DoesNotContain("componentes-score", html);
         Assert.AreEqual(-27.81m, fonte.Latitude);
@@ -129,7 +133,7 @@ public sealed class AcompanhamentoHttpTests
         public Task<PrevisaoDto?> ConsultarAsync(decimal latitude, decimal longitude, CancellationToken cancellationToken = default)
         {
             Chamadas++; Latitude = latitude; Longitude = longitude;
-            var dias = Enumerable.Range(0, 7).Select(i => new DiaPrevisaoDto(new DateOnly(2026, 11, 1).AddDays(i), 10, 25, 2, 20)).ToArray();
+            var dias = Enumerable.Range(0, 7).Select(i => new DiaPrevisaoDto(new DateOnly(2026, 11, 1).AddDays(i), 10, 25, 2, 20, i == 0 ? 95 : 0)).ToArray();
             return Task.FromResult(Indisponivel ? null : new PrevisaoDto(DateTimeOffset.UtcNow, "America/Sao_Paulo", Array.AsReadOnly(dias)));
         }
     }

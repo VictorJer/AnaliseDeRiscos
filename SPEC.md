@@ -401,4 +401,6 @@ Conforme escolhas do usuário, localização e integração meteorológica passa
 
 Acompanhamento lista somente rebanhos próprios em cartões e oferece Ver previsão. Os detalhes consultam sete dias de temperatura mínima/máxima, precipitação e vento para o ponto salvo. Sem localização, orientar sua inclusão na edição. Open-Meteo será usada na demonstração, com atribuição da fonte. A consulta acontece ao abrir detalhes e resultados bem-sucedidos são reutilizados por até 30 minutos; exibir momento da consulta. Falhas não geram dados fictícios e não impedem o cálculo do score.
 
+Os cartões diários incluem ícone e descrição em português para sol, nuvens, chuva, tempestade, neve ou neblina, conforme o código meteorológico da fonte. O código diário da Open-Meteo resume a condição mais intensa prevista no dia. Código ausente ou desconhecido exibe “Condição não informada”, preservando os demais dados válidos.
+
 Autoria é validada no servidor para todos os perfis, inclusive Administrador. Alterar localização pelo CRUD preserva as regras de concorrência e de geração de histórico. Previsões não substituem snapshots históricos, nem alteram fórmulas, score, mortalidade ou GMD. Alertas climáticos, diagnóstico geográfico, mercado e IA permanecem fora desta entrega. Plano e critérios de aceite: docs/plano-clima-acompanhamento.md.

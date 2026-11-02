@@ -15,7 +15,7 @@ public sealed class OpenMeteoPrevisao(HttpClient cliente, CachePrevisoes cache, 
         if (cache.Obter(latitude, longitude) is { } salva) return salva;
         try
         {
-            var url = FormattableString.Invariant($"v1/forecast?latitude={latitude}&longitude={longitude}&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,wind_speed_10m_max&forecast_days=7&temperature_unit=celsius&precipitation_unit=mm&wind_speed_unit=kmh&timezone=auto");
+            var url = FormattableString.Invariant($"v1/forecast?latitude={latitude}&longitude={longitude}&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,wind_speed_10m_max,weather_code&forecast_days=7&temperature_unit=celsius&precipitation_unit=mm&wind_speed_unit=kmh&timezone=auto");
             var resposta = await cliente.GetFromJsonAsync<Resposta>(url, cancellationToken);
             var previsao = Converter(resposta);
             if (previsao is not null) cache.Salvar(latitude, longitude, previsao);
@@ -41,6 +41,8 @@ public sealed class OpenMeteoPrevisao(HttpClient cliente, CachePrevisoes cache, 
         if (dados.Time?.Length != 7 || dados.Min?.Length != 7 || dados.Max?.Length != 7
             || dados.Chuva?.Length != 7 || dados.Vento?.Length != 7) return null;
         var dias = new List<DiaPrevisaoDto>(7);
+        var codigos = string.Equals(unidades.GetValueOrDefault("weather_code"), "wmo code", StringComparison.OrdinalIgnoreCase)
+            && dados.Codigos?.Length == 7 ? dados.Codigos : null;
         for (var i = 0; i < 7; i++)
         {
             if (!DateOnly.TryParseExact(dados.Time[i], "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
@@ -49,7 +51,7 @@ public sealed class OpenMeteoPrevisao(HttpClient cliente, CachePrevisoes cache, 
                 || dados.Min[i] is not { } minima || dados.Max[i] is not { } maxima || minima > maxima
                 || dados.Chuva[i] is not { } chuva || chuva < 0
                 || dados.Vento[i] is not { } vento || vento < 0) return null;
-            dias.Add(new(data, minima, maxima, chuva, vento));
+            dias.Add(new(data, minima, maxima, chuva, vento, codigos?[i]));
         }
         return new(relogio.GetUtcNow(), resposta.Timezone, dias.AsReadOnly());
     }
@@ -60,5 +62,6 @@ public sealed class OpenMeteoPrevisao(HttpClient cliente, CachePrevisoes cache, 
         [property: JsonPropertyName("temperature_2m_min")] decimal?[]? Min,
         [property: JsonPropertyName("temperature_2m_max")] decimal?[]? Max,
         [property: JsonPropertyName("precipitation_sum")] decimal?[]? Chuva,
-        [property: JsonPropertyName("wind_speed_10m_max")] decimal?[]? Vento);
+        [property: JsonPropertyName("wind_speed_10m_max")] decimal?[]? Vento,
+        [property: JsonPropertyName("weather_code")] int?[]? Codigos);
 }

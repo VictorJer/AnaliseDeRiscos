@@ -43,6 +43,8 @@ public sealed class PrevisaoViewModel
 
 public sealed class DiaPrevisaoViewModel
 {
+    public int? CodigoTempo { get; set; }
+    public CondicaoTempoViewModel Condicao => CondicaoTempoViewModel.DoCodigo(CodigoTempo);
     public DateOnly Data { get; set; }
     public decimal TemperaturaMinimaCelsius { get; set; }
     public decimal TemperaturaMaximaCelsius { get; set; }

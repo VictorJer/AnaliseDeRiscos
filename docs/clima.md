@@ -58,3 +58,11 @@ A inspeção posterior conseguiu operar o navegador integrado do VS Code na inst
 A rolagem sobre o mapa capturava a roda para zoom; foi corrigida com `scrollWheelZoom: false` e reconferida visualmente. Build sem avisos/erros e 325 testes MSTest passaram nesta sessão; após o ajuste, build, sintaxe JavaScript e quatro testes Web de mapa/layout passaram. O fluxo HTTP real da aplicação também foi validado com contas fictícias e Open-Meteo real, incluindo autorização e remoção do ponto.
 
 Essa inspeção supera o bloqueio anterior para as telas verificadas. GPS real, falhas de rede no navegador e execução visual com JavaScript desativado não foram validados. Evidências e delimitação do escopo em [verificacao-interface.md](verificacao-interface.md).
+
+## Ícones da previsão diária
+
+Os sete cartões exibem SVGs locais de sol, sol entre nuvens, nuvens, chuva, tempestade, neve ou neblina, acompanhados de descrição em português. O SVG é decorativo para leitores de tela; a descrição permanece como texto acessível. Cores têm ajustes para os temas claro e escuro.
+
+A consulta inclui `weather_code`, com unidade WMO validada. Conforme a [documentação da Open-Meteo](https://open-meteo.com/en/docs), o código diário representa a condição mais intensa prevista no dia. Códigos ausentes, desconhecidos ou com unidade/tamanho de série inválidos mostram “Condição não informada”, sem inventar céu limpo nem descartar as demais métricas válidas. As fórmulas do score permanecem iguais.
+
+Verificação desta entrega: build da solução sem avisos ou erros; **335 testes MSTest aprovados** (131 Domain, 67 Application, 39 Infrastructure e 98 Web), incluindo condições meteorológicas, ausência de códigos e renderização HTTP para ambos os perfis. Consulta real pela aplicação retornou sete cartões com ícones. A prévia isolada no VS Code foi inspecionada em 1374 × 844 e 390 × 844, no tema escuro, com chuva e tempestades retornadas para um ponto público de Lages. As outras famílias de ícones foram verificadas por testes automatizados, sem substituir os dados reais por condições fictícias na interface.

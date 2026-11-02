@@ -70,6 +70,15 @@
 .selo-risco { display: inline-block; color: var(--score-cor); background: var(--score-fundo); border-radius: 2rem; padding: .35rem .8rem; font-size: .85rem; font-weight: 650; }
 .cartao-acompanhamento { border-top: 3px solid #5f9268; }
 .cartao-dia h2 { color: var(--app-tinta); }
+.condicao-tempo { min-height: 78px; }
+.tempo-sol { fill: #f5c34b; stroke: #b77a08; }
+.tempo-nuvem { fill: #d6e3eb; stroke: #708c9e; }
+.tempo-agua { stroke: #3292c5; }
+.tempo-raio { fill: #f5c34b; stroke: #b77a08; }
+.tempo-neblina { stroke: #83979f; }
+[data-bs-theme="dark"] .tempo-sol, [data-bs-theme="dark"] .tempo-raio { stroke: #ffd776; }
+[data-bs-theme="dark"] .tempo-agua { stroke: #71c4f2; }
+[data-bs-theme="dark"] .tempo-neblina { stroke: #b6cbd3; }
 .cartao-dia dt { font-size: .78rem; font-weight: 500; color: var(--bs-secondary-color); }
 .cartao-dia dd { font-size: 1.05rem; font-weight: 600; margin-bottom: 1rem; }
 .numero-passo { display: inline-flex; width: 2.3rem; height: 2.3rem; align-items: center; justify-content: center; border-radius: .7rem; color: var(--app-tinta); background: var(--app-suave); font-weight: 750; }

@@ -11,6 +11,10 @@
     {
         <div class="col"><article class="card cartao-dia h-100" data-dia="@dia.Data.ToString("yyyy-MM-dd")"><div class="card-body">
             <h2 class="h5"><time datetime="@dia.Data.ToString("yyyy-MM-dd")">@dia.Data.ToString("ddd, dd/MM")</time></h2>
+            <div class="condicao-tempo d-flex align-items-center gap-3 my-3">
+                <partial name="_IconeTempo" model="dia.Condicao" />
+                <p class="fw-semibold mb-0">@dia.Condicao.Descricao</p>
+            </div>
             <dl class="mb-0">
                 <dt>Mínima / máxima</dt><dd>@F.Numero(dia.TemperaturaMinimaCelsius, 1) °C / @F.Numero(dia.TemperaturaMaximaCelsius, 1) °C</dd>
                 <dt>Precipitação no dia</dt><dd>@F.Numero(dia.PrecipitacaoMilimetros, 1) mm</dd>
@@ -20,6 +24,7 @@
     }
 </div>
 <aside class="alert alert-secondary">
+    <p>O ícone resume a condição mais intensa prevista no dia, conforme o código meteorológico da fonte.</p>
     <p>Previsões são estimativas e podem mudar. Vento máximo representa velocidade a 10 m de altura, não rajadas. A precipitação inclui chuva e outras formas previstas.</p>
     <p>Os dados podem ser reutilizados por até 30 minutos. O horário acima identifica a consulta à fonte, não a geração do modelo meteorológico.</p>
     <p class="mb-0">Fonte: <a href="https://open-meteo.com/">Open-Meteo</a>, dados sob <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Esta previsão não modifica o score da análise.</p>
