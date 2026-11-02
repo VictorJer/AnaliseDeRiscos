@@ -2,7 +2,7 @@
 @{ ViewData["Title"] = "Meus rebanhos"; }
 <div class="painel-destaque d-flex flex-wrap justify-content-between align-items-center gap-4 p-4 p-lg-5 mb-4">
     <div><p class="rotulo-secao texto-apoio mb-2">Sua operação, seu planejamento</p><h1>Meus rebanhos</h1><p class="texto-apoio mb-0">Cadastre seu lote e acompanhe a análise estimada da operação.</p></div>
-    <div class="d-flex flex-wrap gap-2"><a asp-action="Cadastrar" class="btn btn-light">Cadastrar rebanho</a><a asp-controller="Simulacoes" asp-action="Nova" class="btn btn-outline-light">Nova simulação</a></div>
+    <a asp-action="Cadastrar" class="btn btn-light">Cadastrar rebanho</a>
 </div>
 @if (Model.Total == 0)
 {
