@@ -24,9 +24,25 @@
         </div>
     </fieldset>
     <fieldset class="card mb-4" id="localizacao">
-        <legend class="card-header h5 mb-0">Localiza??o da propriedade (opcional)</legend>
+        <legend class="card-header h5 mb-0">Localização da propriedade (opcional)</legend>
         <div class="card-body row g-3">
-            <p class="text-body-secondary mb-0">Informe o ponto para consultar a previs?o do tempo. Deixe ambos os campos vazios para continuar sem localiza??o. Use v?rgula nos decimais.</p>
+            <p class="text-body-secondary mb-0">Selecione um ponto para consultar a previsão do tempo. Você pode continuar sem localização. Também é possível informar as coordenadas manualmente, com vírgula nos decimais.</p>
+            <div class="col-12" data-localizacao data-busca-url="@Url.Action("Municipios", "Localizacao")">
+                <div data-controles-mapa hidden>
+                    <label for="busca-municipio" class="form-label">Buscar município no Brasil</label>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <input id="busca-municipio" type="search" class="form-control flex-grow-1 w-auto" maxlength="100" placeholder="Ex.: Lages" autocomplete="off" />
+                        <button type="button" class="btn btn-outline-success" data-buscar>Buscar município</button>
+                        <button type="button" class="btn btn-outline-secondary" data-gps>Usar minha localização</button>
+                        <button type="button" class="btn btn-outline-secondary" data-limpar>Remover localização</button>
+                    </div>
+                    <div data-resultados class="list-group mb-2" aria-label="Municípios encontrados"></div>
+                    <p data-estado class="small mb-2" role="status" aria-live="polite"></p>
+                    <div id="mapa-localizacao" class="mapa-localizacao border rounded" aria-label="Mapa da propriedade. Use as setas para navegar e o botão Usar centro do mapa para selecionar um ponto."></div>
+                    <button type="button" class="btn btn-outline-success btn-sm mt-2" data-centro>Usar centro do mapa</button>
+                    <p class="small text-body-secondary mt-2 mb-0">Clique no mapa ou navegue com as setas e selecione seu centro. Buscar um município usa seu ponto de referência; ajuste para a propriedade. Mapa: OpenStreetMap. Busca: Open-Meteo e GeoNames. O GPS só é solicitado ao clicar no botão.</p>
+                </div>
+            </div>
             <div class="col-md-6">
                 <label asp-for="Latitude" class="form-label"></label>
                 <input asp-for="Latitude" class="form-control" type="text" inputmode="decimal" />

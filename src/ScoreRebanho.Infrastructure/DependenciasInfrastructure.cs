@@ -14,6 +14,17 @@ namespace ScoreRebanho.Infrastructure;
 
 public static class DependenciasInfrastructure
 {
+    public static IServiceCollection AdicionarConsultaMunicipios(this IServiceCollection servicos)
+    {
+        servicos.AddHttpClient<ScoreRebanho.Application.Localizacao.IConsultaMunicipios, ScoreRebanho.Infrastructure.Localizacao.OpenMeteoMunicipios>(cliente =>
+        {
+            cliente.BaseAddress = new Uri("https://geocoding-api.open-meteo.com/");
+            cliente.Timeout = TimeSpan.FromSeconds(10);
+            cliente.DefaultRequestHeaders.UserAgent.ParseAdd("ScoreRebanho-Demonstracao/1.0");
+        });
+        return servicos;
+    }
+
     public static IdentityBuilder AdicionarPersistenciaContas(this IServiceCollection servicos,
         string conexao, Action<IdentityOptions> configurarIdentity)
     {

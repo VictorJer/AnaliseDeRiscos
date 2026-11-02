@@ -38,6 +38,19 @@ builder.Services.AddAutoMapper(config =>
     if (!string.IsNullOrWhiteSpace(chave))
         config.LicenseKey = chave;
 }, typeof(ContaProfile));
+builder.Services.AdicionarConsultaMunicipios();
+builder.Services.AddScoped<ScoreRebanho.Application.Localizacao.BuscarMunicipios>();
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("consultas-externas", contexto =>
+        System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter(
+            contexto.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? contexto.Connection.RemoteIpAddress?.ToString() ?? "anonimo",
+            _ => new System.Threading.RateLimiting.FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 20, Window = TimeSpan.FromMinutes(1), QueueLimit = 0
+            }));
+});
 builder.Services.AddScoped<CadastrarConta>();
 builder.Services.AddScoped<ExecutarComandoContaLocal>();
 builder.Services.AddHttpContextAccessor();
@@ -114,6 +127,7 @@ app.UseRequestLocalization(new RequestLocalizationOptions()
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",

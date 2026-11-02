@@ -11,6 +11,7 @@ namespace ScoreRebanho.Web.Tests;
 
 internal sealed class AplicacaoTeste : WebApplicationFactory<Program>
 {
+    internal Action<IServiceCollection>? ConfigurarServicos { get; init; }
     private readonly string banco = Path.Combine(Path.GetTempPath(), $"score-rebanho-{Guid.NewGuid():N}.db");
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -22,6 +23,7 @@ internal sealed class AplicacaoTeste : WebApplicationFactory<Program>
             services.RemoveAll<IDbContextOptionsConfiguration<ContasDbContext>>();
             services.AddDbContext<ContasDbContext>(options =>
                 options.UseSqlite($"Data Source={banco};Pooling=False"));
+            ConfigurarServicos?.Invoke(services);
         });
         builder.ConfigureAppConfiguration((_, configuration) =>
             configuration.AddInMemoryCollection(new Dictionary<string, string?>

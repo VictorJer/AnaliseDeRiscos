@@ -11,6 +11,8 @@ public sealed class RebanhosProfile : Profile
 {
     public RebanhosProfile()
     {
+        CreateMap<BuscaMunicipiosViewModel, ScoreRebanho.Application.Localizacao.BuscarMunicipiosDto>();
+        CreateMap<ScoreRebanho.Application.Localizacao.MunicipioDto, MunicipioViewModel>();
         CreateMap<SimulacaoViewModel, EntradaSimulacaoDto>();
         CreateMap<EntradaSimulacaoDto, SimulacaoViewModel>();
         CreateMap<RebanhoFormularioViewModel, CriarRebanhoDto>();

@@ -1,0 +1,10 @@
+.mapa-localizacao {
+    height: 360px;
+    isolation: isolate;
+    background: var(--bs-tertiary-bg);
+}
+
+.mapa-localizacao:focus-visible {
+    outline: 3px solid var(--bs-primary);
+    outline-offset: 2px;
+}
