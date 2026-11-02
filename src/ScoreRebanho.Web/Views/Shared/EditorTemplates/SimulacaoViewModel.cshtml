@@ -1,10 +1,10 @@
 @model SimulacaoViewModel
-    <fieldset class="card mb-4">
+    <fieldset class="card mb-4" data-terreno-pastagem>
         <legend class="card-header h5 mb-0">1. Terreno e pastagem</legend>
         <div class="card-body row g-3">
             <div class="col-md-4">
                 <label asp-for="Posse" class="form-label"></label>
-                <select asp-for="Posse" class="form-select"><option value="">Selecione</option><option value="1">Próprio</option><option value="2">Arrendado</option></select>
+                <select asp-for="Posse" class="form-select" data-posse><option value="">Selecione</option><option value="1">Próprio</option><option value="2">Arrendado</option></select>
                 <span asp-validation-for="Posse" class="text-danger-emphasis"></span>
             </div>
             <div class="col-md-4">
@@ -17,7 +17,7 @@
                 <input asp-for="AreaHectares" class="form-control" type="text" inputmode="decimal" />
                 <span asp-validation-for="AreaHectares" class="text-danger-emphasis"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" data-arrendamento>
                 <label asp-for="ArrendamentoMensalReais" class="form-label"></label>
                 <input asp-for="ArrendamentoMensalReais" class="form-control" type="text" inputmode="decimal" />
                 <span asp-validation-for="ArrendamentoMensalReais" class="text-danger-emphasis"></span>

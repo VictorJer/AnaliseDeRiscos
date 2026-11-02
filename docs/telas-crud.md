@@ -22,6 +22,12 @@ O formulário funciona sem JavaScript, com campos agrupados e duas ações: conf
 
 Relatórios têm ViewModels e Razor Views distintos. O resumo Pecuarista inclui os indicadores essenciais e alertas da SPEC 17; a Cooperativa recebe também composição do score, produção, custos, produtos/doses, entradas, parâmetros e fórmulas originais. A escolha é feita pela representação autorizada pela Application, nunca por parâmetros HTTP. Informações restritas não são embutidas no HTML do resumo.
 
+## Arrendamento mensal condicionado à posse
+
+No formulário compartilhado pelo CRUD e pela simulação avulsa, JavaScript apresenta Arrendamento mensal apenas quando Posse do terreno está em Arrendado. Sem seleção ou com Próprio, o campo fica oculto e desabilitado para envio, preservando o valor digitado caso o usuário volte a Arrendado. Sem JavaScript, o campo permanece disponível com as instruções existentes. A validação autoritativa e os cálculos continuam no servidor, sem alteração de regras ou premissas.
+
+Verificação desta mudança: build da solução sem avisos/erros; sintaxe do script válida; 32 testes MSTest Web aprovados nos fluxos de layout, rebanhos e simulações. Um diagnóstico JavaScript com DOM simulado verificou estado inicial, alternância, desabilitação e preservação do valor. A prévia real da simulação no navegador integrado do VS Code confirmou campo inicialmente oculto, apresentação ao escolher Arrendado, ocultação em Próprio e recuperação do valor ao voltar. Foram usados somente dados fictícios na instância isolada.
+
 ## Verificação
 
 Build da solução em .local/verificacao concluído sem avisos/erros. Suíte MSTest completa: 230 aprovados (129 Domain, 48 Application, 13 Infrastructure e 40 Web).
