@@ -1,6 +1,7 @@
 @model ScoreRebanho.Web.ViewModels.Acompanhamento.PrevisaoRebanhoViewModel
 @{ ViewData["Title"] = "Previsão do tempo"; }
-<div class="my-4">
+<div class="cabecalho-pagina p-4 p-lg-5 mb-4">
+    <p class="rotulo-secao text-body-secondary mb-2">Sete dias para organizar o manejo</p>
     <h1>Previsão do tempo</h1><h2 class="h4 text-break">@Model.Nome</h2><p class="text-body-secondary text-break">@Model.Propriedade</p>
     <p class="small">Ponto cadastrado: @F.Numero(Model.Latitude, 6), @F.Numero(Model.Longitude, 6) graus.</p>
     <p>Dados consultados em <strong>@F.Data(Model.Previsao.ConsultadaEmUtc)</strong>. Datas da previsão no fuso @Model.Previsao.FusoHorario.</p>
@@ -8,7 +9,7 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 mb-4">
     @foreach (var dia in Model.Previsao.Dias)
     {
-        <div class="col"><article class="card h-100" data-dia="@dia.Data.ToString("yyyy-MM-dd")"><div class="card-body">
+        <div class="col"><article class="card cartao-dia h-100" data-dia="@dia.Data.ToString("yyyy-MM-dd")"><div class="card-body">
             <h2 class="h5"><time datetime="@dia.Data.ToString("yyyy-MM-dd")">@dia.Data.ToString("ddd, dd/MM")</time></h2>
             <dl class="mb-0">
                 <dt>Mínima / máxima</dt><dd>@F.Numero(dia.TemperaturaMinimaCelsius, 1) °C / @F.Numero(dia.TemperaturaMaximaCelsius, 1) °C</dd>

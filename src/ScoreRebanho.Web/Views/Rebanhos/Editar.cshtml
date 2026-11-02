@@ -4,8 +4,12 @@
     ViewData["AcaoSalvar"] = "Editar";
     ViewData["AcaoConferir"] = "ConferirEdicao";
 }
-<h1 class="mt-4">Editar rebanho</h1>
-<p class="text-body-secondary">Salvar recalcula a análise com as premissas vigentes e preserva os scores anteriores.</p>
+<div class="cabecalho-pagina p-4 p-lg-5 mb-4">
+    <p class="rotulo-secao text-body-secondary mb-2">Atualize seu planejamento</p>
+    <h1>Editar rebanho</h1>
+    <p class="text-body-secondary mb-0">Salvar recalcula a análise com as premissas vigentes e preserva os scores anteriores.</p>
+</div>
+<partial name="_EtapasSimulacao" />
 @if (Context.Response.StatusCode == 409)
 {
     <div class="alert alert-warning" role="alert">

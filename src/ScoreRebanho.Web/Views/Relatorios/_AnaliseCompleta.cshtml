@@ -1,9 +1,12 @@
 @model AnaliseCompletaViewModel
 @{ var analise = Model; }
-<section class="card border-success mb-4"><div class="card-body">
+<section class="card destaque-score mb-4" data-risco="@analise.Score.Classificacao"><div class="card-body p-4 p-lg-5">
     <p class="small text-body-secondary">@F.Data(analise.CalculadaEmUtc)</p>
-    <h2 class="h4">Score do rebanho</h2><p class="display-4 fw-bold mb-1">@analise.Score.Total<span class="fs-5 text-body-secondary">/100</span></p>
-    <p class="h5">@F.Risco(analise.Score.Classificacao)</p><p class="mb-0">@analise.ExplicacaoResumida</p>
+    <div class="d-flex flex-wrap align-items-center gap-4">
+        <div class="score-numero"><strong>@analise.Score.Total</strong><span class="ms-1">/100</span></div>
+        <div class="flex-grow-1"><h2 class="h4 mb-3">Score do rebanho</h2><p class="selo-risco mb-0">@F.Risco(analise.Score.Classificacao)</p></div>
+    </div>
+    <p class="mt-4 mb-0">@analise.ExplicacaoResumida</p>
 </div></section>
 <partial name="~/Views/Relatorios/_Alertas.cshtml" model="analise.Alertas" />
 <section id="componentes-score" class="my-4">

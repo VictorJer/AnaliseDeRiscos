@@ -1,19 +1,27 @@
 @{ ViewData["Title"] = "Início"; }
-<section class="py-5" aria-labelledby="apresentacao-titulo">
-    <div class="row justify-content-center"><div class="col-lg-10 col-xl-8">
-        <div class="bg-body-tertiary border rounded-4 p-4 p-md-5 text-center shadow-sm">
-            <span class="badge bg-success mb-3">Planejamento para a pecuária de corte</span>
-            <h1 id="apresentacao-titulo" class="display-5 fw-bold mb-3">Score do Rebanho</h1>
-            <p class="lead mb-3">Mais clareza para planejar o seu rebanho.</p>
-            <p class="text-body-secondary mb-4">Uma aplicação para pecuaristas e cooperativas avaliarem operações de gado de corte.
-                Com os dados do terreno, dos animais e do manejo, você poderá estimar a capacidade do pasto,
-                os custos e o resultado financeiro, além de entender os principais riscos por meio de um score de 0 a 100.</p>
-            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                <a asp-controller="Conta" asp-action="Cadastrar" class="btn btn-success btn-lg px-5">Cadastrar</a>
-                <a asp-controller="Conta" asp-action="Entrar" class="btn btn-outline-success btn-lg px-5">Entrar</a>
+<section aria-labelledby="apresentacao-titulo">
+    <div class="painel-destaque p-4 p-lg-5 mb-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <p class="rotulo-secao texto-apoio mb-3">Planejamento para a pecuária de corte</p>
+                <h1 id="apresentacao-titulo" class="display-4 fw-bold mb-4">Mais clareza para<br class="d-none d-md-block" /> planejar o seu rebanho.</h1>
+                <p class="lead texto-apoio mb-4">Conheça a capacidade do pasto, estime os custos e entenda os riscos antes de investir na operação.</p>
+                <div class="d-grid d-sm-flex gap-3">
+                    <a asp-controller="Conta" asp-action="Cadastrar" class="btn btn-light btn-lg px-4">Cadastrar</a>
+                    <a asp-controller="Conta" asp-action="Entrar" class="btn btn-outline-light btn-lg px-4">Entrar</a>
+                </div>
+                <p class="texto-apoio small mt-4 mb-0">Para pecuaristas e cooperativas. Os mesmos cálculos, com relatórios adequados a cada perfil.</p>
+            </div>
+            <div class="col-lg-5">
+                <div class="card text-body"><div class="card-body p-4">
+                    <p class="rotulo-secao text-body-secondary mb-2">Do campo ao planejamento</p>
+                    <h2 class="h4 mb-4">O que sua análise apresenta</h2>
+                    <div class="d-flex gap-3 mb-4"><span class="numero-passo flex-shrink-0">01</span><div><h3 class="h6 mb-1">Pasto e capacidade</h3><p class="small text-body-secondary mb-0">Dimensionamento do lote para a área disponível.</p></div></div>
+                    <div class="d-flex gap-3 mb-4"><span class="numero-passo flex-shrink-0">02</span><div><h3 class="h6 mb-1">Custos e viabilidade</h3><p class="small text-body-secondary mb-0">Estimativas para organizar os recursos da operação.</p></div></div>
+                    <div class="d-flex gap-3"><span class="numero-passo flex-shrink-0">03</span><div><h3 class="h6 mb-1">Score e recomendações</h3><p class="small text-body-secondary mb-0">Fatores de risco explicados para apoiar suas decisões.</p></div></div>
+                </div></div>
             </div>
         </div>
-        <p class="small text-body-secondary text-center mt-4 mb-0">O score é uma estimativa para apoiar o planejamento.
-            Não garante lucro, segurança da operação ou aprovação de crédito.</p>
-    </div></div>
+    </div>
+    <p class="small text-body-secondary text-center px-3 mb-0">O score é uma estimativa para apoiar o planejamento. Não garante lucro, segurança da operação ou aprovação de crédito.</p>
 </section>

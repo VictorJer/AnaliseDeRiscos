@@ -4,8 +4,12 @@
     ViewData["AcaoSalvar"] = "Cadastrar";
     ViewData["AcaoConferir"] = "ConferirCadastro";
 }
-<h1 class="mt-4">Cadastrar rebanho</h1>
-<p class="text-body-secondary">Preencha os dados e confira a ocupação antes de salvar e gerar o score.</p>
+<div class="cabecalho-pagina p-4 p-lg-5 mb-4">
+    <p class="rotulo-secao text-body-secondary mb-2">Um novo lote começa com planejamento</p>
+    <h1>Cadastrar rebanho</h1>
+    <p class="text-body-secondary mb-0">Preencha os dados e confira a ocupação antes de salvar e gerar o score.</p>
+</div>
+<partial name="_EtapasSimulacao" />
 <partial name="_Formulario" model="Model" />
 
 @section Scripts {

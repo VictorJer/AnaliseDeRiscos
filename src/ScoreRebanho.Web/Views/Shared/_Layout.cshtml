@@ -9,17 +9,31 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @await RenderSectionAsync("Styles", required: false)
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/apresentacao.css" asp-append-version="true" />
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Score do Rebanho</a>
+<body class="app-shell d-flex flex-column min-vh-100">
+    <a href="#conteudo-principal" class="visually-hidden-focusable position-absolute top-0 start-0 btn btn-success m-2 z-3">Ir para o conteúdo</a>
+    <header class="app-header border-bottom">
+        <nav class="navbar navbar-expand-xl py-3" aria-label="Navegação principal">
+            <div class="container-xxl flex-wrap">
+                <div class="d-flex align-items-center justify-content-between w-100 gap-3">
+                <a class="navbar-brand d-inline-flex align-items-center gap-2 m-0" asp-area="" asp-controller="Home" asp-action="Index"><partial name="_Marca" /></a>
+                <span class="d-none d-md-block small text-body-secondary">Pecuária de corte · Região serrana</span>
+                <div class="d-flex align-items-center gap-3">
+                    <div id="preferencia-tema" hidden>
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="tema" class="small d-none d-sm-block">Tema</label>
+                            <select id="tema" class="form-select form-select-sm w-auto" aria-label="Tema da interface">
+                                <option value="system">Sistema</option><option value="light">Claro</option><option value="dark">Escuro</option>
+                            </select>
+                        </div>
+                    </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navegacao-principal" aria-controls="navegacao-principal"
                         aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div id="navegacao-principal" class="navbar-collapse collapse d-lg-inline-flex justify-content-between flex-wrap gap-3">
+                </div></div>
+                <div id="navegacao-principal" class="navbar-collapse collapse justify-content-between flex-wrap gap-3 pt-3 w-100">
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
@@ -39,19 +53,9 @@
                         </li>
                     </ul>
                     <div class="d-flex flex-wrap gap-2 align-items-center">
-                        <div id="preferencia-tema" hidden>
-                            <div class="d-flex gap-2 align-items-center">
-                                <label for="tema" class="small">Tema</label>
-                                <select id="tema" class="form-select form-select-sm w-auto">
-                                    <option value="system">Sistema</option>
-                                    <option value="light">Claro</option>
-                                    <option value="dark">Escuro</option>
-                                </select>
-                            </div>
-                        </div>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <span class="small text-body-secondary text-break">Olá, @User.Identity.Name</span>
+                            <span class="usuario-nav small text-body-secondary text-truncate" title="@User.Identity.Name">Olá, @User.Identity.Name</span>
                             <a asp-controller="Conta" asp-action="AlterarSenha" class="btn btn-outline-success btn-sm">Alterar senha</a>
                             <form asp-controller="Conta" asp-action="Sair" method="post">
                                 <button type="submit" class="btn btn-outline-success btn-sm">Sair</button>
@@ -67,15 +71,16 @@
             </div>
         </nav>
     </header>
-    <div class="container flex-grow-1">
-        <main role="main" class="pb-3">
+    <div class="container-xxl flex-grow-1">
+        <main id="conteudo-principal" role="main" class="app-main py-4 py-lg-5">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top text-body-secondary mt-auto py-3">
-        <div class="container flex-grow-1">
-            &copy; 2026 - Score do Rebanho - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+    <footer class="app-footer border-top text-body-secondary mt-auto py-4">
+        <div class="container-xxl d-flex flex-wrap justify-content-between align-items-center gap-2 small">
+            <span>&copy; 2026 · Score do Rebanho <span class="mx-2">/</span> Planejamento no campo.</span>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

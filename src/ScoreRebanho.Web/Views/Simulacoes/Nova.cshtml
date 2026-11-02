@@ -2,8 +2,12 @@
 @{
     ViewData["Title"] = "Simulação avulsa";
 }
-<h1 class="my-4">Simulação avulsa</h1>
-<p>Informe os dados para estimar a operação sem cadastrar um rebanho. Cada cálculo válido gera uma nova análise histórica.</p>
+<div class="cabecalho-pagina p-4 p-lg-5 mb-4">
+    <p class="rotulo-secao text-body-secondary mb-2">Explore uma nova operação</p>
+    <h1>Simulação avulsa</h1>
+    <p class="text-body-secondary mb-0">Informe os dados para estimar a operação sem cadastrar um rebanho. Cada cálculo válido gera uma nova análise histórica.</p>
+</div>
+<partial name="_EtapasSimulacao" />
 <form asp-controller="Simulacoes" asp-action="Gerar" method="post" class="pb-4">
     <div asp-validation-summary="All" class="text-danger-emphasis" role="alert"></div>
     @Html.EditorFor(m => m.Entradas)

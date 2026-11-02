@@ -1,7 +1,7 @@
 @model ListaScoresAdministrativosViewModel
 @{ ViewData["Title"] = "Administração de scores"; }
-<h1 class="my-4">Administração de scores</h1>
-<p>Históricos de todos os usuários, do mais recente para o mais antigo. Consulta sem edição ou exclusão.</p>
+<div class="cabecalho-pagina p-4 p-lg-5 mb-4"><p class="rotulo-secao text-body-secondary mb-2">Consulta administrativa</p><h1>Administração de scores</h1>
+<p class="text-body-secondary mb-0">Históricos de todos os usuários, do mais recente para o mais antigo. Consulta sem edição ou exclusão.</p></div>
 @if (Model.Itens.Count == 0)
 {
     <p class="alert alert-info">Nenhum score nesta página.</p>

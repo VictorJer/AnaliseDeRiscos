@@ -1,5 +1,9 @@
 # Estado da implementação
 
+## Incremento 23 — apresentação com Bootstrap
+
+Reformulados layout compartilhado, página inicial, cabeçalhos de formulários/listagens, destaque do score, acompanhamento e telas de contas com Bootstrap e CSS específico pequeno. Mantidos modo escuro, fluxos, mensagens de validação, autorização e fórmulas. Build sem avisos/erros e 325 testes MSTest aprovados; inspeção visual na instância isolada pelo navegador integrado do VS Code, em desktop/celular. Detalhes e limites em [apresentacao.md](apresentacao.md). O CSS local preexistente não foi incluído nesta entrega.
+
 ## Incremento 22 — localização e acompanhamento meteorológico
 
 Implementados localização opcional por rebanho, migration compatível com registros anteriores, mapa Leaflet/OpenStreetMap, busca de município pela Open-Meteo/GeoNames, GPS mediante ação explícita, previsão de sete dias no servidor e cache em memória de até 30 minutos. Acompanhamento lista cartões próprios paginados e abre detalhes da previsão, com orientação para registros sem localização e tratamento de indisponibilidade. A ampliação aprovada está na SPEC 19. Não foram alteradas fórmulas nem permissões de relatórios.

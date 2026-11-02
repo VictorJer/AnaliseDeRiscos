@@ -1,5 +1,9 @@
 # Verificação da interface
 
+## Reformulação da apresentação com Bootstrap — 01/11/2026
+
+Atualizados layout compartilhado, marca, cores, cartões, campos, tabelas e hierarquia de início, formulários, relatórios e acompanhamento. Build sem avisos/erros e 325 testes MSTest aprovados novamente. A inspeção no navegador integrado do VS Code cobriu desktop, 360 × 800 e 390 × 844, com telas em claro/escuro e navegação responsiva. Escopo, telas efetivamente observadas e limites em [apresentacao.md](apresentacao.md). Nenhuma fórmula, permissão ou dado real foi alterado.
+
 ## Validação posterior no navegador integrado do VS Code — 01/11/2026
 
 A inspeção das novas telas foi realizada pelo navegador integrado do VS Code, acessado como aplicativo nativo. Essa rota funcionou apesar da indisponibilidade do host de automação de navegador independente. Foi usada exclusivamente a instância `http://127.0.0.1:5188`, com banco separado em `.local/clima-vscode-preview/validacao.db`, conta fictícia e ponto público de Lages. A instância antiga na porta 5288 não foi modificada.

@@ -1,0 +1,82 @@
+.app-shell {
+  --app-fundo: #f3f6f0;
+  --app-superficie: #fff;
+  --app-suave: #eaf0e6;
+  --app-borda: #dce5d7;
+  --app-tinta: #214b34;
+  --bs-primary: #286345;
+  --bs-primary-rgb: 40, 99, 69;
+  --bs-border-color: var(--app-borda);
+  background: var(--app-fundo);
+}
+[data-bs-theme="dark"] .app-shell {
+  --app-fundo: #111c16;
+  --app-superficie: #1b2a21;
+  --app-suave: #23372a;
+  --app-borda: #344a3b;
+  --app-tinta: #b0dbb9;
+}
+.app-header, .app-footer { background: var(--app-superficie); }
+.marca-simbolo { width: 42px; height: 42px; border-radius: 13px; background: #245c3d; color: #fff; }
+.marca-nome { color: var(--app-tinta); font-size: 1.12rem; letter-spacing: -.03em; }
+.usuario-nav { max-width: 16rem; }
+.app-header .nav-link { padding-inline: .8rem; border-radius: .6rem; font-size: .9rem; }
+.app-header .nav-link:hover, .app-header .nav-link:focus-visible { background: var(--app-suave); }
+.app-main h1 { font-weight: 750; letter-spacing: -.045em; }
+.app-main h2, .app-main legend { letter-spacing: -.025em; }
+.app-main .card {
+  --bs-card-bg: var(--app-superficie);
+  --bs-card-border-color: var(--app-borda);
+  --bs-card-border-radius: 1rem;
+  --bs-card-cap-bg: var(--app-suave);
+  box-shadow: 0 4px 18px rgb(15 42 24 / 4%);
+}
+.app-main .card-body { padding: 1.4rem; }
+.app-main .card-header { padding: .95rem 1.4rem; font-weight: 650; }
+.app-shell .btn { border-radius: .65rem; font-weight: 600; }
+.app-shell .btn-success {
+  --bs-btn-bg: #286345;
+  --bs-btn-border-color: #286345;
+  --bs-btn-hover-bg: #1c5035;
+  --bs-btn-hover-border-color: #1c5035;
+  --bs-btn-active-bg: #17452d;
+  --bs-btn-active-border-color: #17452d;
+}
+.app-shell .form-control, .app-shell .form-select { border-color: var(--app-borda); border-radius: .6rem; }
+.app-main .form-control { padding: .65rem .85rem; }
+.app-main .form-select { padding-block: .65rem; padding-left: .85rem; }
+.app-main .form-label { font-weight: 600; font-size: .9rem; }
+.app-main .form-check-input:checked { background-color: #286345; border-color: #286345; }
+.app-main .table-responsive { border: 1px solid var(--app-borda); border-radius: 1rem; background: var(--app-superficie); }
+.app-main .table { --bs-table-bg: var(--app-superficie); margin-bottom: 0; }
+.app-main .table > :not(caption) > * > * { padding: 1rem; }
+.app-main .table thead th { background: var(--app-suave); font-size: .8rem; font-weight: 650; }
+.app-main .table caption { padding-inline: 1rem; }
+.app-main .alert { border-radius: .85rem; }
+.cabecalho-pagina { border: 1px solid var(--app-borda); border-radius: 1.25rem; background: var(--app-superficie); }
+.rotulo-secao { font-size: .72rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+.painel-destaque { color: #fff; background: linear-gradient(115deg, #183c2a, #326346); border-radius: 1.4rem; }
+.painel-destaque h1, .painel-destaque h2 { color: #fff; }
+.painel-destaque .card h2 { color: var(--bs-body-color); }
+.painel-destaque .texto-apoio { color: #dcebdc; }
+.painel-destaque .btn-outline-light { --bs-btn-hover-color: #214b34; }
+.passo-formulario { border-left: 3px solid var(--app-borda); padding-left: .9rem; }
+.passo-formulario b { color: var(--app-tinta); }
+.destaque-score { --score-cor: var(--bs-success-text-emphasis); --score-fundo: var(--bs-success-bg-subtle); }
+.destaque-score[data-risco="Moderado"] { --score-cor: var(--bs-warning-text-emphasis); --score-fundo: var(--bs-warning-bg-subtle); }
+.destaque-score[data-risco="Alto"], .destaque-score[data-risco="MuitoAlto"] { --score-cor: var(--bs-danger-text-emphasis); --score-fundo: var(--bs-danger-bg-subtle); }
+.score-numero { min-width: 136px; padding: 1rem 1.4rem; border-radius: 1rem; color: var(--score-cor); background: var(--score-fundo); }
+.score-numero strong { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; letter-spacing: -.055em; }
+.selo-risco { display: inline-block; color: var(--score-cor); background: var(--score-fundo); border-radius: 2rem; padding: .35rem .8rem; font-size: .85rem; font-weight: 650; }
+.cartao-acompanhamento { border-top: 3px solid #5f9268; }
+.cartao-dia h2 { color: var(--app-tinta); }
+.cartao-dia dt { font-size: .78rem; font-weight: 500; color: var(--bs-secondary-color); }
+.cartao-dia dd { font-size: 1.05rem; font-weight: 600; margin-bottom: 1rem; }
+.numero-passo { display: inline-flex; width: 2.3rem; height: 2.3rem; align-items: center; justify-content: center; border-radius: .7rem; color: var(--app-tinta); background: var(--app-suave); font-weight: 750; }
+@media (max-width: 575.98px) {
+  .marca-nome { max-width: 7rem; font-size: .95rem; line-height: 1.2; }
+  .marca-simbolo { width: 36px; height: 36px; }
+  .app-main .card-body { padding: 1.1rem; }
+  .app-main .card-header { padding: .9rem 1.1rem; }
+  .score-numero { min-width: 110px; }
+}
