@@ -1,5 +1,11 @@
 # Estado da implementação
 
+## Incremento 22 — localização e acompanhamento meteorológico
+
+Implementados localização opcional por rebanho, migration compatível com registros anteriores, mapa Leaflet/OpenStreetMap, busca de município pela Open-Meteo/GeoNames, GPS mediante ação explícita, previsão de sete dias no servidor e cache em memória de até 30 minutos. Acompanhamento lista cartões próprios paginados e abre detalhes da previsão, com orientação para registros sem localização e tratamento de indisponibilidade. A ampliação aprovada está na SPEC 19. Não foram alteradas fórmulas nem permissões de relatórios.
+
+Build isolado sem avisos/erros e 325 testes MSTest aprovados (131 Domain, 67 Application, 38 Infrastructure e 89 Web). Sintaxe JavaScript validada e endpoint real conferido com ponto público de Lages. Inspeção visual permanece pendente: Computer Use encerrou a seleção do navegador por não conseguir determinar a URL atual. A instância isolada foi encerrada; a aplicação original e seu banco foram preservados. Detalhes em [clima.md](clima.md) e [plano-clima-acompanhamento.md](plano-clima-acompanhamento.md).
+
 ## Primeira etapa
 
 - Solução .NET 10 e quatro camadas com referências direcionadas.

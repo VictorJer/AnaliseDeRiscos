@@ -1,0 +1,40 @@
+@model ScoreRebanho.Web.ViewModels.Acompanhamento.PaginaAcompanhamentoViewModel
+@{ ViewData["Title"] = "Acompanhamento"; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4">
+    <div><h1>Acompanhamento</h1><p class="text-body-secondary mb-0">Consulte o tempo previsto para a localização dos seus rebanhos.</p></div>
+    <a asp-controller="Rebanhos" asp-action="Cadastrar" class="btn btn-success">Cadastrar rebanho</a>
+</div>
+@if (Model.Total == 0)
+{
+    <div class="border rounded-3 bg-body-tertiary p-4">
+        <h2 class="h5">Você ainda não tem rebanhos cadastrados</h2>
+        <p class="mb-0">Cadastre um rebanho e adicione sua localização para acompanhar a previsão.</p>
+    </div>
+}
+else
+{
+    <p>@Model.Total rebanho(s) · Página @Model.Pagina de @Model.Paginas</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+        @foreach (var item in Model.Itens)
+        {
+            <div class="col"><article class="card h-100" data-rebanho-id="@item.Id"><div class="card-body d-flex flex-column align-items-start">
+                <h2 class="h4 text-break">@item.Nome</h2><p class="text-body-secondary text-break">@item.Propriedade</p>
+                @if (item.TemLocalizacao)
+                {
+                    <p>Localização cadastrada.</p>
+                    <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-success mt-auto" aria-label="Ver previsão de @item.Nome">Ver previsão</a>
+                }
+                else
+                {
+                    <p>Adicione a localização para consultar o tempo previsto.</p>
+                    <a asp-controller="Rebanhos" asp-action="Editar" asp-route-id="@item.Id" asp-fragment="localizacao" class="btn btn-outline-success mt-auto">Adicionar localização para ver a previsão</a>
+                }
+            </div></article></div>
+        }
+    </div>
+    <nav aria-label="Paginação do acompanhamento" class="d-flex flex-wrap gap-3 mb-4">
+        @if (Model.Pagina > 1) { <a asp-action="Index" asp-route-pagina="@(Model.Pagina - 1)" class="btn btn-outline-secondary">Anterior</a> }
+        @if (Model.Pagina < Model.Paginas) { <a asp-action="Index" asp-route-pagina="@(Model.Pagina + 1)" class="btn btn-outline-secondary">Próxima</a> }
+    </nav>
+}
+<p class="small text-body-secondary mt-4">A previsão é consultada quando você abre os detalhes. Dados válidos podem ser reutilizados por até 30 minutos.</p>

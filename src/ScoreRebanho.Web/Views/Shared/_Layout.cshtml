@@ -24,6 +24,7 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item"><a class="nav-link" asp-controller="Rebanhos" asp-action="Index">Meus rebanhos</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Acompanhamento" asp-action="Index">Acompanhamento</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Simulacoes" asp-action="Nova">Nova simulação</a></li>
                             @if (User.IsInRole(PapeisContas.Administrador))
                             {

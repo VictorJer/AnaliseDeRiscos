@@ -1,0 +1,30 @@
+@model ScoreRebanho.Web.ViewModels.Acompanhamento.PrevisaoRebanhoViewModel
+@{ ViewData["Title"] = "Previsão do tempo"; }
+<div class="my-4">
+    <h1>Previsão do tempo</h1><h2 class="h4 text-break">@Model.Nome</h2><p class="text-body-secondary text-break">@Model.Propriedade</p>
+    <p class="small">Ponto cadastrado: @F.Numero(Model.Latitude, 6), @F.Numero(Model.Longitude, 6) graus.</p>
+    <p>Dados consultados em <strong>@F.Data(Model.Previsao.ConsultadaEmUtc)</strong>. Datas da previsão no fuso @Model.Previsao.FusoHorario.</p>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 mb-4">
+    @foreach (var dia in Model.Previsao.Dias)
+    {
+        <div class="col"><article class="card h-100" data-dia="@dia.Data.ToString("yyyy-MM-dd")"><div class="card-body">
+            <h2 class="h5"><time datetime="@dia.Data.ToString("yyyy-MM-dd")">@dia.Data.ToString("ddd, dd/MM")</time></h2>
+            <dl class="mb-0">
+                <dt>Mínima / máxima</dt><dd>@F.Numero(dia.TemperaturaMinimaCelsius, 1) °C / @F.Numero(dia.TemperaturaMaximaCelsius, 1) °C</dd>
+                <dt>Precipitação no dia</dt><dd>@F.Numero(dia.PrecipitacaoMilimetros, 1) mm</dd>
+                <dt>Vento máximo</dt><dd class="mb-0">@F.Numero(dia.VentoMaximoQuilometrosHora, 1) km/h</dd>
+            </dl>
+        </div></article></div>
+    }
+</div>
+<aside class="alert alert-secondary">
+    <p>Previsões são estimativas e podem mudar. Vento máximo representa velocidade a 10 m de altura, não rajadas. A precipitação inclui chuva e outras formas previstas.</p>
+    <p>Os dados podem ser reutilizados por até 30 minutos. O horário acima identifica a consulta à fonte, não a geração do modelo meteorológico.</p>
+    <p class="mb-0">Fonte: <a href="https://open-meteo.com/">Open-Meteo</a>, dados sob <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Esta previsão não modifica o score da análise.</p>
+</aside>
+<div class="d-flex flex-wrap gap-3">
+    <a asp-action="Index" class="btn btn-outline-success">Voltar ao acompanhamento</a>
+    <a asp-action="Detalhes" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Consultar novamente</a>
+    <a asp-controller="Rebanhos" asp-action="Editar" asp-route-id="@Model.Id" asp-fragment="localizacao" class="btn btn-outline-secondary">Editar localização</a>
+</div>

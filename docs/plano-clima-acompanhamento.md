@@ -2,7 +2,7 @@
 
 ## Situação
 
-Plano elaborado com as escolhas do usuário em 01/11/2026. Este documento registra o escopo selecionado e a sequência de implementação; não declara as funcionalidades implementadas. Não altera as fórmulas ou premissas aprovadas.
+Plano elaborado com as escolhas do usuário em 01/11/2026. As quatro etapas de implementação foram concluídas: localização opcional, mapa/busca/GPS, consulta com cache e telas de acompanhamento. Build e 325 testes MSTest passaram. A inspeção visual em navegador permanece pendente por bloqueio do Computer Use ao verificar a URL atual. Evidências, decisões técnicas adotadas e limites da verificação estão em [clima.md](clima.md). Fórmulas e premissas aprovadas permanecem vigentes.
 
 ## Decisões aprovadas
 

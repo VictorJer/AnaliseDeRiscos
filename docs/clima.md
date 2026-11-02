@@ -36,3 +36,17 @@ O fuso é solicitado por `timezone=auto`. Datas consecutivas dos sete dias e uni
 Verificação: quatro testes Application e quatro Infrastructure aprovados, incluindo perfis, autoria, ausência de ponto, indisponibilidade, expiração no limite de 30 minutos, troca de coordenadas, unidades, dados ausentes, timeout e cancelamento. Consulta real ao endpoint de previsão com o ponto público de Lages retornou sete dias e o fuso America/Sao_Paulo. Essas consultas não usaram localização de usuário nem alteraram banco real.
 
 Documentação técnica: https://open-meteo.com/en/docs
+
+## Entrega 4 — acompanhamento e detalhes
+
+A navegação autenticada oferece Acompanhamento. Os cartões paginados de 20 em 20 mostram somente os rebanhos do autor. Sem localização, a ação abre a edição na seção correspondente; com localização, Ver previsão abre os sete dias em cartões. A listagem não consulta o fornecedor meteorológico. A página detalhada informa temperatura mínima/máxima, precipitação, vento máximo, ponto, fuso, horário da consulta, atribuição e limites da estimativa.
+
+Pecuarista e Cooperativa recebem o mesmo acompanhamento meteorológico. Administrador continua restrito aos próprios rebanhos nessa interface. Nenhum custo ou componente reservado do relatório é enviado por essas telas. Requisições com coordenadas, autoria ou perfil manipulados não substituem a localização salva nem a autorização. Falhas meteorológicas retornam página explicativa com opção de tentar novamente; falta de ponto orienta sua inclusão.
+
+Verificação final: `dotnet build ScoreRebanho.sln --artifacts-path .local/clima --no-restore` concluído sem avisos ou erros. `dotnet test ScoreRebanho.sln --artifacts-path .local/clima --no-restore` aprovado com **325 testes MSTest**: 131 Domain, 67 Application, 38 Infrastructure e 89 Web. A suíte Web usa SQLite isolado e as novas consultas externas são simuladas. `node --check` aprovou localizacao.js. Nenhuma alteração foi feita no CSS local preexistente.
+
+## Limite da inspeção visual
+
+Foi iniciada e depois encerrada uma instância separada na porta 5187, com banco exclusivo em `.local/clima-preview`. A descoberta de superfícies informou host de navegador indisponível, mas identificou navegador nativo. Ao selecionar esse navegador, Computer Use encerrou a automação porque não conseguiu determinar com segurança a URL atual no Windows. Não foram realizadas ações posteriores no navegador, e nenhuma tela foi declarada visualmente aprovada.
+
+Permanecem pendentes a inspeção visual e a interação real em celular/desktop, nos dois temas, incluindo seleção no mapa, teclado e recusa de GPS. Os testes HTTP e a consulta pública da Open-Meteo não substituem essa inspeção. A aplicação original e seu banco não foram usados pela verificação.

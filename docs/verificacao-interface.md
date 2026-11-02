@@ -1,5 +1,11 @@
 # Verificação da interface
 
+## Incremento de localização e clima — 01/11/2026
+
+Implementados mapa opcional, busca de município/GPS, previsão de sete dias e acompanhamento. Build sem avisos/erros e 325 testes MSTest aprovados; detalhes em [clima.md](clima.md). A consulta real da previsão foi conferida com o ponto público do município de Lages.
+
+Uma instância separada com banco exclusivo foi iniciada para inspeção e encerrada após o bloqueio. A descoberta informou host de navegador indisponível; a tentativa pelo navegador nativo foi encerrada pelo Computer Use porque não foi possível determinar a URL atual no Windows com segurança. Não houve interação posterior nem validação visual das novas telas. O roteiro abaixo continua pendente e deve incluir seleção do ponto, busca, GPS recusado, remoção da localização e acompanhamento nos dois temas.
+
 ## Situação em 01/11/2026
 
 A inspeção visual/dinâmica em navegador permanece bloqueada. A descoberta de superfícies retornou `The browser access host is unavailable`; o runtime nativo de Windows retornou `Computer Use native pipe is unavailable` com erro 2 (arquivo/canal não encontrado). Nenhuma página foi capturada ou operada nessa tentativa. Não houve rejeição de autorização nem falta de confirmação de URL nesta execução: o bloqueio atual é a indisponibilidade dos serviços de automação.
